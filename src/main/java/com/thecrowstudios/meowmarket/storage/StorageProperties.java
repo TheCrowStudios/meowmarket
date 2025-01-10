@@ -1,4 +1,4 @@
-package com.thecrowstudios.meowmarket;
+package com.thecrowstudios.meowmarket.storage;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

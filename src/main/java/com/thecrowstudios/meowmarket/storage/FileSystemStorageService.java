@@ -1,4 +1,4 @@
-package com.thecrowstudios.meowmarket;
+package com.thecrowstudios.meowmarket.storage;
 
 import java.io.IOException;
 import java.io.InputStream;

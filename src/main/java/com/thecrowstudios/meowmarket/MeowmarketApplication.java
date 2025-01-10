@@ -6,6 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
+import com.thecrowstudios.meowmarket.storage.StorageProperties;
+import com.thecrowstudios.meowmarket.storage.StorageService;
+
 @SpringBootApplication
 @EnableConfigurationProperties(StorageProperties.class)
 public class MeowmarketApplication {

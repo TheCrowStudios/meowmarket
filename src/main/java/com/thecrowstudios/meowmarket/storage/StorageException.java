@@ -1,4 +1,4 @@
-package com.thecrowstudios.meowmarket;
+package com.thecrowstudios.meowmarket.storage;
 
 public class StorageException extends RuntimeException {
     public StorageException(String message) {

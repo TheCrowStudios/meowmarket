@@ -1,0 +1,10 @@
+services:
+  mysql:
+    image: 'mysql:latest'
+    environment:
+      - 'MYSQL_DATABASE=meowmarketdb'
+      - 'MYSQL_PASSWORD=meowmeow'
+      - 'MYSQL_ROOT_PASSWORD=meowmeow'
+      - 'MYSQL_USER=crowie'
+    ports:
+      - '3306'

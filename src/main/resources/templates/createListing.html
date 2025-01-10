@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div th:if="${message}"><h2 th:text="${message}"></h2></div>
+    <div class="upload-container">
+        <form method="POST" enctype="multipart/form-data" action="/createListing">
+            <table>
+                <tr>
+                    <label class="upload-label">
+                        <svg class="upload-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                            <rect x="40" y="40" width="120" height="120" fill="#e0e0e0" stroke="#666" stroke-width="4"
+                                rx="8" />
+                            <path d="M100 90v50M80 110l20-20 20 20" fill="none" stroke="#666" stroke-width="4"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <input type="file" class="upload-input" name="images" accept="image/">
+                    </label>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="upload">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <div>
+        <ul>
+            <li th:each="file: ${files}">
+                <a th:href="${file}" th:text="${file}"></a>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

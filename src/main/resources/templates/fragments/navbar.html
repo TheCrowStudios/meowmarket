@@ -1,0 +1,14 @@
+<nav th:fragment="navbar" class="p-4 flex flex-col">
+    <a href="/">
+        <h1 class="text-center text-5xl font-bold text-slate-100">UKHoodCarParts</h1>
+    </a>
+    <div class="flex flex-row justify-between text-primary text-xl hover:text-white transition-all duration-300">
+        <a href="/category/obd-readers">OBD Readers</a>
+        <a href="/contact">Contact</a>
+        <a href="/cart" class="flex flex-row gap-4">
+            <img src="/images/shopping-cart.svg" alt="" class="w-6">
+            <span class="text-secondary">Cart</span>
+            <span th:text="${itemsInCart} + ' '" class="bg-highlight rounded-3xl min-w-8 text-center"></span>
+        </a>
+    </div>
+</nav>

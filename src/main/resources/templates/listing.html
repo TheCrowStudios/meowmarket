@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Document</title>
+    <script>
+        function setActiveImage(url) {
+            const main = document.getElementById('img-main');
+            main.src = url;
+        }
+    </script>
+</head>
+
+<body class="body">
+    <main class="main">
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+        <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4 mt-4">
+            <div class="flex flex-row gap-4">
+                <div class="flex flex-col w-2/12 gap-2" id="side-images">
+                    <img th:each="image : ${listing.images}" th:src="@{'/upload-dir/' + ${image.imageUrl}}" alt="" th:attr="onmouseover=|setActiveImage('/upload-dir/${image.imageUrl}')|">
+                </div>
+                <div class="w-10/12">
+                    <img th:src="@{'/upload-dir/' + ${listing.images[0].imageUrl}}" alt="listing.title" id="img-main">
+                </div>
+            </div>
+            <div class="flex flex-col">
+                <h3 th:text="${listing.title}" class="font-bold text-primary text-3xl">listing title</h3>
+                <p th:text="${listing.description}" class="text-primary text-lg">Decription</p>
+                <span class="flex-grow"></span>
+                <div class="flex flex-row gap-4">
+                    <span class="flex-grow"></span>
+                    <form action="/purchase/create-checkout-session" method="POST">
+                        <button type="submit" id="checkout-button" class="bg-highlight text-primary font-bold hover:bg-red-200 transition-all duration-200 p-4 pl-6 pr-6 rounded">Buy Now</button>
+                    </form>
+
+                    <form action="/purchase/create-checkout-session" method="POST">
+                        <button type="submit" id="checkout-button" class="bg-highlight text-primary font-bold hover:bg-red-200 transition-all duration-200 p-4 pl-6 pr-6 rounded">Add To Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="mt-8">
+            <h1 class="text-primary font-bold text-3xl">Description</h1>
+            <div th:utext="${listing.longDescription}"></div>
+        </div>
+    </main>
+</body>
+
+</html>

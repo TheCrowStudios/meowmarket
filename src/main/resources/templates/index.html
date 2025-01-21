@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Document</title>
+</head>
+
+<body class="body">
+    <main class="main">
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+        <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 p-4">
+            <a th:each="listing : ${listings}" th:href="@{'/listings/' + ${listing.id}}"
+                class="hover:scale-105 transition-all duration-300">
+                <img th:src="@{'/upload-dir/' + ${listing.images.get(0).imageUrl}}" th:alt="${listing.title}"
+                    class="hover:opacity-80 transition-all duration-300 cursor-pointer">
+                <div class="flex flex-row">
+                    <h3 th:text="${listing.title}" class="text-primary text-center text-xl text-left">listing title
+                    </h3>
+                    <span class="flex-grow"></span>
+                    <h3 th:text="'£' + ${#numbers.formatDecimal(listing.price, 2, 2)}" class="text-slate-300 text-xl">listing price</h3>
+                </div>
+            </a>
+        </div>
+    </main>
+</body>
+
+</html>

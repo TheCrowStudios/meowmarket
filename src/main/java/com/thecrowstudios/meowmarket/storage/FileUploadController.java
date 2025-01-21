@@ -28,7 +28,7 @@ public class FileUploadController {
         this.storageService = storageService;
     }
 
-    @GetMapping("/uploadedFiles")
+    @GetMapping("/listingImages")
     public String listUploadedFiles(Model model) throws IOException {
         model.addAttribute("files", storageService.loadAll().map(
                 path -> MvcUriComponentsBuilder
@@ -49,8 +49,8 @@ public class FileUploadController {
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 
-    @PostMapping("/uploadFiles")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+    @PostMapping("/createListing")
+    public String handleFileUpload(@RequestParam("images") MultipartFile file, RedirectAttributes redirectAttributes) {
         storageService.store(file);
         redirectAttributes.addFlashAttribute("message", "you uploaded " + file.getOriginalFilename() + "!");
 
@@ -67,15 +67,5 @@ public class FileUploadController {
         model.addAttribute("id", id);
         model.addAttribute(null, model);
         return "listing";
-    }
-
-    @GetMapping("/createListing")
-    public String createListing() {
-        return "createListing";
-    }
-
-    @PostMapping("/createListing")
-    public String uploadListing() {
-        return "createListing";
     }
 }

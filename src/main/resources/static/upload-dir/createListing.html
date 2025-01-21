@@ -11,7 +11,7 @@
 <body>
     <div th:if="${message}"><h2 th:text="${message}"></h2></div>
     <div class="upload-container">
-        <form method="POST" enctype="multipart/form-data" formaction="/uploadFiles">
+        <form method="POST" enctype="multipart/form-data" action="/createListing">
             <table>
                 <tr>
                     <label class="upload-label">
@@ -27,7 +27,7 @@
                 <tr>
                     <td></td>
                     <td>
-                        <input type="submit" value="upload" >
+                        <input type="submit" value="upload">
                     </td>
                 </tr>
             </table>

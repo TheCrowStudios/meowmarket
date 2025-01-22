@@ -1,0 +1,15 @@
+<div th:fragment="index-listing">
+    <a th:href="@{'/listings/' + ${listing.id}}"
+        class="hover:scale-105 hover:text-highlight transition-all duration-300">
+        <img th:src="@{'/upload-dir/' + ${listing.images.get(0).imageUrl}}" th:alt="${listing.title}"
+            class="hover:opacity-80 transition-all duration-300 cursor-pointer">
+        <div class="flex flex-row">
+            <h3 th:text="${listing.title}" class="text-xl text-left">listing title
+            </h3>
+            <span class="flex-grow"></span>
+            <h3 th:text="'£' + ${#numbers.formatDecimal(listing.price, 2, 2)}" class="text-slate-300 text-xl">listing
+                price
+            </h3>
+        </div>
+    </a>
+</div>

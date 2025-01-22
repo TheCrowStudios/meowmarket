@@ -11,7 +11,7 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class ListingImage {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
     
     private String imageUrl;

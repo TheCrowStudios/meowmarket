@@ -20,24 +20,29 @@
             container.appendChild(div);
         }
     </script>
+    <script defer src="/scripts/create-listing.js"></script>
 </head>
 
 <body class="body">
     <main class="main text-primary">
-        <form th:action="@{/listings/create}" th:object="${listingDTO}" method="POST" enctype="multipart/form-data" class="flex flex-col w-full p-4 gap-4">
+        <form th:action="@{/listings/create}" th:object="${listingDTO}" method="POST" enctype="multipart/form-data"
+            class="flex flex-col w-full p-4 gap-4">
             <div class="form-div">
                 <label>Title:</label>
                 <input class="form-input" type="text" th:field="*{title}" required>
             </div>
 
             <div class="form-div">
-                <label>Description:</label>
-                <textarea class="form-input" type="text" th:field="*{description}" required></textarea>
+                <label>Category:</label>
+                <select class="form-input" th:field="*{category}">
+                    <option th:each="category : ${T(com.thecrowstudios.meowmarket.Listing.ItemCategory).values()}"
+                        th:value="${category}" th:text="${#strings.replace(category, '_', ' ')}"></option>
+                </select>
             </div>
 
             <div class="form-div">
-                <label>Long description:</label>
-                <textarea class="form-input" type="text" th:field="*{longDescription}" required></textarea>
+                <label>Description:</label>
+                <textarea class="form-input" type="text" th:field="*{description}" required></textarea>
             </div>
 
             <div class="form-div">
@@ -52,12 +57,22 @@
 
             <div id="image-container" class="form-div">
                 <div>
-                    <input class="form-input" type="file" name="images" accept="image/*" required>
+                    <input class="form-input" type="file" name="images" accept="image/*" required multiple>
                     <button type="button" onclick="this.parentElement.remove()">Remove</button>
                 </div>
             </div>
 
             <button type="button" onclick="addImageField()">Add another image</button>
+
+            <div class="flex flex-col h-screen">
+                <div class="flex flex-row g-4">
+                    <label>Long description:</label>
+                    <button onclick="togglePreview()" class="bg-highlight text-primary pl-4 pr-4">toggle preview</button>
+                </div>
+                <textarea id="longDescription" class="form-input w-full h-full" type="text" th:field="*{longDescription}"
+                    required></textarea>
+                    <div id="preview" class="hidden !text-primary bg-slate-50"></div>
+            </div>
 
             <div>
                 <button type="submit">Create Listing</button>

@@ -8,3 +8,16 @@ services:
       - 'MYSQL_USER=crowie'
     ports:
       - '3306'
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    links: 
+    - mysql:db
+    ports:
+    - "8081:80"
+    environment:
+      MYSQL_ROOT_PASSWORD: meowmeow
+      PMA_HOST: mysql
+      PMA_USER: crowie
+      PMA_PASSWORD: meowmeow

@@ -11,18 +11,29 @@
 <body class="body">
     <main class="main">
         <div th:replace="~{fragments/navbar :: navbar}"></div>
-        <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 p-4">
-            <a th:each="listing : ${listings}" th:href="@{'/listings/' + ${listing.id}}"
-                class="hover:scale-105 transition-all duration-300">
-                <img th:src="@{'/upload-dir/' + ${listing.images.get(0).imageUrl}}" th:alt="${listing.title}"
-                    class="hover:opacity-80 transition-all duration-300 cursor-pointer">
-                <div class="flex flex-row">
-                    <h3 th:text="${listing.title}" class="text-primary text-center text-xl text-left">listing title
-                    </h3>
-                    <span class="flex-grow"></span>
-                    <h3 th:text="'£' + ${#numbers.formatDecimal(listing.price, 2, 2)}" class="text-slate-300 text-xl">listing price</h3>
+        <div class="mt-4">
+            <div class="flex flex-row gap-4">
+                <span class="flex-grow border-solid border-b-2 -translate-y-1/2"></span>
+                <h3 class="font-bold">Newest In Stock</h3>
+                <span class="flex-grow border-solid border-b-2 -translate-y-1/2"></span>
+            </div>
+            <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 p-4">
+                <div th:each="listing : ${newListings}">
+                    <div th:replace="~{fragments/index-listing :: index-listing}"></div>
                 </div>
-            </a>
+            </div>
+        </div>
+        <div class="mt-4">
+            <div class="flex flex-row gap-4">
+                <span class="flex-grow border-solid border-b-2 -translate-y-1/2"></span>
+                <h3 class="font-bold">OBD Readers</h3>
+                <span class="flex-grow border-solid border-b-2 -translate-y-1/2"></span>
+            </div>
+            <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 p-4">
+                <div th:each="listing : ${listings}">
+                    <div th:replace="~{fragments/index-listing :: index-listing}"></div>
+                </div>
+            </div>
         </div>
     </main>
 </body>

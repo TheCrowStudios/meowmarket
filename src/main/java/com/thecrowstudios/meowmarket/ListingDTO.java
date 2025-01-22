@@ -4,10 +4,13 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.thecrowstudios.meowmarket.Listing.ItemCategory;
+
 public class ListingDTO {
     private String title;
     private String description;
     private String longDescription;
+    private ItemCategory category;
     private double price;
     private Integer quantityInStock;
     private List<MultipartFile> images;
@@ -34,6 +37,14 @@ public class ListingDTO {
 
     public void setLongDescription(String longDescription) {
         this.longDescription = longDescription;
+    }
+
+    public ItemCategory getCategory() {
+        return this.category;
+    }
+
+    public void setCategory(ItemCategory category) {
+        this.category = category;
     }
 
     public double getPrice() {

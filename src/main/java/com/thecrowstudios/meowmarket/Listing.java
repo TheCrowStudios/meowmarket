@@ -20,7 +20,7 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Listing {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
     private String title;
@@ -141,5 +141,13 @@ public class Listing {
 
     public void setImages(List<ListingImage> images) {
         this.images = images;
+    }
+
+    public List<CartItem> getCartItems() {
+        return this.cartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
     }
 }

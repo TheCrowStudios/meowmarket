@@ -14,7 +14,7 @@
         <div class="flex flex-col gap-4">
             <div th:each="cartItem : ${cartItems}" class="flex flex-row gap-4">
                 <a th:href="'/listings/' + ${cartItem.id.listing.id}" class="w-2/12">
-                    <img th:src="'/upload-dir/' + ${cartItem.id.listing.images[0].imageUrl}"
+                    <img th:src="'/upload-dir/' + ${cartItem.id.listing.images.get(0).imageUrl}"
                         th:alt="${cartItem.id.listing.title}">
                 </a>
                 <a th:href="'/listings/' + ${cartItem.id.listing.id}">

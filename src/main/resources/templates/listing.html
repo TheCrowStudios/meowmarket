@@ -12,6 +12,7 @@
             main.src = url;
         }
     </script>
+    <script defer src="/scripts/cart.js"></script>
 </head>
 
 <body class="body">
@@ -20,7 +21,8 @@
         <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4 mt-4">
             <div class="flex flex-row gap-4">
                 <div class="flex flex-col w-2/12 gap-2" id="side-images">
-                    <img th:each="image : ${listing.images}" th:src="@{'/upload-dir/' + ${image.imageUrl}}" alt="" th:attr="onmouseover=|setActiveImage('/upload-dir/${image.imageUrl}')|">
+                    <img th:each="image : ${listing.images}" th:src="@{'/upload-dir/' + ${image.imageUrl}}" alt=""
+                        th:attr="onmouseover=|setActiveImage('/upload-dir/${image.imageUrl}')|">
                 </div>
                 <div class="w-10/12">
                     <img th:src="@{'/upload-dir/' + ${listing.images[0].imageUrl}}" alt="listing.title" id="img-main">
@@ -33,12 +35,13 @@
                 <div class="flex flex-row gap-4">
                     <span class="flex-grow"></span>
                     <form action="/purchase/create-checkout-session" method="POST">
-                        <button type="submit" id="checkout-button" class="bg-highlight text-primary font-bold hover:bg-red-200 transition-all duration-200 p-4 pl-6 pr-6 rounded">Buy Now</button>
+                        <button type="submit" id="checkout-button"
+                            class="bg-highlight text-primary font-bold hover:bg-red-200 transition-all duration-200 p-4 pl-6 pr-6 rounded">Buy
+                            Now</button>
                     </form>
 
-                    <form action="/purchase/create-checkout-session" method="POST">
-                        <button type="submit" id="checkout-button" class="bg-highlight text-primary font-bold hover:bg-red-200 transition-all duration-200 p-4 pl-6 pr-6 rounded">Add To Cart</button>
-                    </form>
+                    <button id="checkout-button" th:attr="onclick=|addToCart(${listing.id})|"
+                        class="bg-highlight text-primary font-bold hover:bg-red-200 transition-all duration-200 p-4 pl-6 pr-6 rounded">Add To Cart</button>
                 </div>
             </div>
         </div>

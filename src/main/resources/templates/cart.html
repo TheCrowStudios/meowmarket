@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Document</title>
+</head>
+
+<body class="body">
+    <main class="main">
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+        <div class="flex flex-col gap-4">
+            <div th:each="cartItem : ${cartItems}" class="flex flex-row gap-4">
+                <a th:href="'/listings/' + ${cartItem.id.listing.id}" class="w-2/12">
+                    <img th:src="'/upload-dir/' + ${cartItem.id.listing.images[0].imageUrl}"
+                        th:alt="${cartItem.id.listing.title}">
+                </a>
+                <a th:href="'/listings/' + ${cartItem.id.listing.id}">
+                    <h3 th:text="${cartItem.id.listing.title}" class="text-primary text-xl">listing title</h3>
+                </a>
+                <span class="flex-grow"></span>
+                <div class="flex flex-column">
+                    <button>Remove</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

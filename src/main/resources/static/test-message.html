@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <script src="/scripts/cart.js"></script>
+    <title>Document</title>
+</head>
+
+<body class="body">
+    <main class="main">
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+        <div class="opacity-100"></div>
+
+        <button onclick="showMessage('item added to cart! :3')">show message</button>
+    </main>
+</body>
+
+</html>

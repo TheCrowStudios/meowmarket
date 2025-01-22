@@ -45,6 +45,9 @@ public class Listing {
     @OneToMany(mappedBy = "listing", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ListingImage> images = new ArrayList<>();
 
+    @OneToMany(mappedBy = "id.listing", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<CartItem> cartItems = new ArrayList<>();
+
     public enum ItemCategory {
         OBD_READERS, STEERING_WHEELS
     }

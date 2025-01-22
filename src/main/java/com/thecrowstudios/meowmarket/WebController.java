@@ -21,6 +21,9 @@ public class WebController {
     @Autowired
     private ListingRepository listingRepository;
 
+    @Autowired
+    private CartService cartService;
+
     @GetMapping("/")
     public String home(Model model) {
         List<Listing> listings = new ArrayList<Listing>();
@@ -29,6 +32,14 @@ public class WebController {
         model.addAttribute("itemsInCart", 1);
 
         return "index";
+    }
+
+    @GetMapping("/cart")
+    public String cart(Model model) {
+        List<CartItem> cartItems = cartService.getCartItems();
+        model.addAttribute("cartItems", cartItems);
+
+        return "cart";
     }
 
     // @GetMapping("/createListing")

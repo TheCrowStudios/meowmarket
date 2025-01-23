@@ -26,6 +26,10 @@ public class CartService {
         cartItemRepository.save(cartItem);
     }
 
+    public Integer getCartItemCount() {
+        return getCartItems().size();
+    }
+
     public List<CartItem> getCartItems() {
         return cartItemRepository.findById_SessionId(httpSession.getId());
     }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Document</title>
+</head>
+
+<body class="body">
+    <main class="main">
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+        <div class="flex flex-row">
+            <span class="text-secondary mt-4">Category:
+                <span th:text="${category}" class="text-primary font-bold mt-4">category string</span>
+            </span>
+        </div>
+        <div>
+            <p class="text-primary font-light">
+                Take control of your vehicle's health with our comprehensive selection of OBD (On-Board Diagnostics)
+                scanners. These essential diagnostic tools connect directly to your car's computer system, giving you
+                real-time insights into your vehicle's performance and helping you identify potential issues before they
+                become costly repairs.</p>
+        </div>
+        <div>
+            <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mt-4">
+                <div th:each="listing : ${listings}">
+                    <div th:replace="~{fragments/index-listing :: index-listing}"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

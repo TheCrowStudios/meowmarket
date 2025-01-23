@@ -1,11 +1,17 @@
 <nav th:fragment="navbar" class="p-4 flex flex-col">
     <a href="/">
-        <h1 class="text-center text-5xl font-bold text-slate-100">UKHoodCarParts</h1>
+        <div class="text-center text-5xl font-bold flex flex-row w-fit">
+            <h1 class="text-highlight">UK</h1>
+            <h1 class="text-slate-100">
+                AutoParts
+            </h1>
+        </div>
     </a>
-    <div class="flex flex-row justify-between text-primary text-xl hover:text-white transition-all duration-300">
-        <a href="/category/obd-readers">OBD Readers</a>
-        <a href="/contact">Contact</a>
-        <a href="/cart" class="flex flex-row gap-4">
+    <div class="flex flex-row justify-between text-primary text-xl mt-2 text-center">
+        <a href="/category/obd_readers" class="hover:text-highlight transition-all duration-300">OBD Readers</a>
+        <a href="/category/steering_wheels" class="hover:text-highlight transition-all duration-300">Steering wheels</a>
+        <a href="/contact" class="hover:text-highlight transition-all duration-300">Contact</a>
+        <a href="/cart" class="flex flex-row gap-4 hover:text-highlight transition-all duration-300">
             <img src="/images/shopping-cart.svg" alt="" class="w-6">
             <span class="text-secondary">Cart</span>
             <span th:text="${itemsInCart} + ' '" class="bg-highlight rounded-3xl min-w-8 text-center"></span>

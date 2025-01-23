@@ -27,6 +27,7 @@ public class Listing {
     
     private String description;
     
+    @Column(length = 65555)
     private String longDescription;
 
     @Enumerated(EnumType.STRING)

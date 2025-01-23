@@ -32,7 +32,7 @@ public class WebController {
         listingRepository.findAllByDateCreated().stream().limit(4).forEach(newListings::add);
         model.addAttribute("listings", listings);
         model.addAttribute("newListings", listings);
-        model.addAttribute("itemsInCart", 1);
+        model.addAttribute("itemsInCart", cartService.getCartItemCount());
 
         return "index";
     }

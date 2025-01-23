@@ -19,35 +19,36 @@
     <main class="main">
         <div th:replace="~{fragments/navbar :: navbar}"></div>
         <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4 mt-4">
-            <div class="flex flex-row gap-4">
-                <div class="flex flex-col w-2/12 gap-2" id="side-images">
-                    <img th:each="image : ${listing.images}" th:src="@{'/upload-dir/' + ${image.imageUrl}}" alt=""
+            <div class="flex flex-row gap-4 w-full">
+                <div class="flex flex-col w-2/12 max-h-full gap-2 overflow-x-auto" id="side-images">
+                    <img th:each="image : ${listing.images}" th:src="@{'/upload-dir/' + ${image.imageUrl}}" alt="${listing.title}"
                         th:attr="onmouseover=|setActiveImage('/upload-dir/${image.imageUrl}')|">
                 </div>
-                <div class="w-10/12">
-                    <img th:src="@{'/upload-dir/' + ${listing.images[0].imageUrl}}" alt="listing.title" id="img-main">
+                <div class="w-full">
+                    <img th:src="@{'/upload-dir/' + ${listing.images[0].imageUrl}}" alt="${listing.title}" id="img-main">
                 </div>
             </div>
             <div class="flex flex-col">
                 <h3 th:text="${listing.title}" class="font-bold text-primary text-3xl">listing title</h3>
-                <p th:text="${listing.description}" class="text-primary text-lg">Decription</p>
+                <p th:utext="${#strings.replace(listing.description, '&#10;', '<br>')}" class="text-primary text-lg">Decription</p>
                 <span class="flex-grow"></span>
                 <div class="flex flex-row gap-4">
                     <span class="flex-grow"></span>
-                    <form action="/purchase/create-checkout-session" method="POST">
+                    <form th:action="@{/purchase/create-checkout-session/} + ${listing.id}" method="POST">
                         <button type="submit" id="checkout-button"
                             class="bg-highlight text-primary font-bold hover:bg-red-200 transition-all duration-200 p-4 pl-6 pr-6 rounded">Buy
                             Now</button>
                     </form>
 
                     <button id="checkout-button" th:attr="onclick=|addToCart(${listing.id})|"
-                        class="bg-highlight text-primary font-bold hover:bg-red-200 transition-all duration-200 p-4 pl-6 pr-6 rounded">Add To Cart</button>
+                        class="bg-highlight text-primary font-bold hover:bg-red-200 transition-all duration-200 p-4 pl-6 pr-6 rounded">Add
+                        To Cart</button>
                 </div>
             </div>
         </div>
         <div class="mt-8">
             <h1 class="text-primary font-bold text-3xl">Description</h1>
-            <div th:utext="${listing.longDescription}"></div>
+            <div th:utext="${listing.longDescription}" class="bg-slate-50 flex flex-column justify-center items-center p-4 mt-4"></div>
         </div>
     </main>
 </body>

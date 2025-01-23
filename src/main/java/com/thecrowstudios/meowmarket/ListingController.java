@@ -30,6 +30,9 @@ public class ListingController {
     @Autowired
     private ListingRepository listingRepository;
 
+    @Autowired
+    private CartService cartService;
+
     @Value("${upload.path}")
     private String uploadPath;
 
@@ -38,7 +41,7 @@ public class ListingController {
         // TODO - retrieve listing from database
         Listing listing = listingRepository.findByIdWithImages(Integer.parseInt(id)).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         model.addAttribute("listing", listing);
-        model.addAttribute("itemsInCart", 1);
+        model.addAttribute("itemsInCart", cartService.getCartItemCount());
         return "listing";
     }
 
@@ -53,6 +56,8 @@ public class ListingController {
         Listing listing = new Listing();
         listing.setTitle(listingDTO.getTitle());
         listing.setDescription(listingDTO.getDescription());
+        listing.setLongDescription(listingDTO.getLongDescription());
+        listing.setCategory(listingDTO.getCategory());
         listing.setPrice(listingDTO.getPrice());
         listing.setQuantityInStock(listingDTO.getQuantityInStock());
 

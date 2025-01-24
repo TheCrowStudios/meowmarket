@@ -12,7 +12,52 @@
     <main class="main">
         <div th:replace="~{fragments/navbar :: navbar}"></div>
 
-        <form th:action="@{/api/auth/register}" th:object="${userRegistrationDTO}" method="POST"></form>
+        <form th:action="@{/api/auth/register}" th:object="${userRegistrationDTO}" method="POST" class="flex flex-col w-full p-4 gap-4 justify-center items-center text-center">
+            <div class="form-div">
+                <label>Username</label>
+                <input class="form-input" type="text" th:field="*{username}" required>
+            </div>
+
+            <div class="form-div">
+                <label>Email</label>
+                <input class="form-input" type="text" th:field="*{email}" required>
+            </div>
+
+            <div class="form-div">
+                <label>Password</label>
+                <input class="form-input" type="password" th:field="*{password}" required>
+            </div>
+
+            <div class="form-div">
+                <label>Confirm password</label>
+                <input class="form-input" type="password" required>
+            </div>
+
+
+            <div class="form-div">
+                <label>House number</label>
+                <input class="form-input" type="text" th:field="*{houseNumber}" required>
+            </div>
+
+            <div class="form-div">
+                <label>Street name</label>
+                <input class="form-input" type="text" th:field="*{houseNumber}" required>
+            </div>
+
+            <div class="form-div">
+                <label>City</label>
+                <input class="form-input" type="text" th:field="*{houseNumber}" required>
+            </div>
+
+            <div class="form-div">
+                <label>Post Code</label>
+                <input class="form-input" type="text" th:field="*{postCode}" required>
+            </div>
+
+            <div>
+                <button type="submit" class="button-highlight">Sign Up</button>
+            </div>
+        </form>
     </main>
 </body>
 

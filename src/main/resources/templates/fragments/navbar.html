@@ -14,7 +14,7 @@
         <a href="/cart" class="flex flex-row gap-4 hover:text-highlight transition-all duration-300">
             <img src="/images/shopping-cart.svg" alt="" class="w-6">
             <span class="text-secondary">Cart</span>
-            <span th:text="${itemsInCart} + ' '" class="bg-highlight rounded-3xl min-w-8 text-center"></span>
+            <span th:text="${@cartService.getCartItemCount()} + ' '" class="bg-highlight rounded-3xl min-w-8 text-center"></span>
         </a>
     </div>
 </nav>

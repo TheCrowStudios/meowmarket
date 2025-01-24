@@ -32,10 +32,14 @@
     }
 
     .form-div {
-        @apply flex flex-row justify-between;
+        @apply flex flex-col;
     }
 
     .form-input {
-        @apply w-96 text-tertiary;
+        @apply w-96 text-tertiary rounded bg-zinc-200 p-1;
+    }
+
+    .button-highlight {
+        @apply bg-highlight text-primary font-bold hover:bg-red-200 transition-all duration-200 p-4 pl-6 pr-6 rounded;
     }
 }

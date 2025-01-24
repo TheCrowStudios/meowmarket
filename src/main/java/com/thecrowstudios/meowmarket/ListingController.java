@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -30,9 +27,6 @@ public class ListingController {
     @Autowired
     private ListingRepository listingRepository;
 
-    @Autowired
-    private CartService cartService;
-
     @Value("${upload.path}")
     private String uploadPath;
 
@@ -41,7 +35,6 @@ public class ListingController {
         // TODO - retrieve listing from database
         Listing listing = listingRepository.findByIdWithImages(Integer.parseInt(id)).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         model.addAttribute("listing", listing);
-        model.addAttribute("itemsInCart", cartService.getCartItemCount());
         return "listing";
     }
 

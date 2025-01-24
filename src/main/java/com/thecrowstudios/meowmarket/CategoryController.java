@@ -17,15 +17,11 @@ public class CategoryController {
     @Autowired
     private ListingRepository listingRepository;
 
-    @Autowired
-    private CartService cartService;
-
     @GetMapping("/{category}")
     public String showCategory(@PathVariable String category, Model model) {
         List<Listing> listings = listingRepository.findByCategory(ItemCategory.valueOf(category.toUpperCase()));
         model.addAttribute("listings", listings);
         model.addAttribute("category", category.toString().replace("_", " ").toUpperCase());
-        model.addAttribute("itemsInCart", cartService.getCartItemCount());
         return "category";
     }
 }

@@ -20,8 +20,7 @@ public class CartItem {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @Column(nullable = true, updatable = false)
-    @ManyToOne
+    @ManyToOne(optional = true)
     private User user;
 
     public CartItem() {

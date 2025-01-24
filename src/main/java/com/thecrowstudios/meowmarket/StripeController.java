@@ -2,7 +2,6 @@ package com.thecrowstudios.meowmarket;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.stripe.Stripe;
 import com.stripe.model.checkout.Session;
-import com.stripe.param.PriceCreateParams;
-import com.stripe.param.PriceListParams;
 import com.stripe.param.checkout.SessionCreateParams;
 
 @Controller
@@ -24,7 +21,6 @@ public class StripeController {
 
     @PostMapping("/create-checkout-session/{listingId}")
     public String createCheckoutSession(@PathVariable Integer listingId) {
-        Integer id;
         Listing listing;
 
         try {

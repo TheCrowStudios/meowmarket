@@ -8,6 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.thecrowstudios.meowmarket.cart.CartItem;
+import com.thecrowstudios.meowmarket.cart.CartService;
+import com.thecrowstudios.meowmarket.listings.Listing;
+import com.thecrowstudios.meowmarket.listings.ListingRepository;
+
 @Controller
 public class WebController {
     @Autowired

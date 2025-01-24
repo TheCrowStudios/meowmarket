@@ -1,4 +1,4 @@
-package com.thecrowstudios.meowmarket;
+package com.thecrowstudios.meowmarket.listings;
 
 import java.util.List;
 import java.util.Optional;

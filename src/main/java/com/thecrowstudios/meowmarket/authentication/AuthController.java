@@ -1,4 +1,4 @@
-package com.thecrowstudios.meowmarket;
+package com.thecrowstudios.meowmarket.authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

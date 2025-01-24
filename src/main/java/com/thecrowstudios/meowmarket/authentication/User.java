@@ -1,8 +1,10 @@
-package com.thecrowstudios.meowmarket;
+package com.thecrowstudios.meowmarket.authentication;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import com.thecrowstudios.meowmarket.cart.CartItem;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

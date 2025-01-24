@@ -1,4 +1,4 @@
-package com.thecrowstudios.meowmarket;
+package com.thecrowstudios.meowmarket.listings;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

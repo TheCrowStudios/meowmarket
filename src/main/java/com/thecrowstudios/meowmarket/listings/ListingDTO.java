@@ -1,10 +1,10 @@
-package com.thecrowstudios.meowmarket;
+package com.thecrowstudios.meowmarket.listings;
 
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.thecrowstudios.meowmarket.Listing.ItemCategory;
+import com.thecrowstudios.meowmarket.listings.Listing.ItemCategory;
 
 public class ListingDTO {
     private String title;

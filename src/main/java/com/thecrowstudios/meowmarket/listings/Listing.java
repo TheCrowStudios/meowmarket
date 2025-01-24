@@ -1,10 +1,12 @@
-package com.thecrowstudios.meowmarket;
+package com.thecrowstudios.meowmarket.listings;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.thecrowstudios.meowmarket.cart.CartItem;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

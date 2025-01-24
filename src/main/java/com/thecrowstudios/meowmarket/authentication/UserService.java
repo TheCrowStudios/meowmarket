@@ -1,4 +1,4 @@
-package com.thecrowstudios.meowmarket;
+package com.thecrowstudios.meowmarket.authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,6 +10,9 @@ import jakarta.servlet.http.HttpSession;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private AddressRepository addressRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -32,6 +35,7 @@ public class UserService {
 
         user.setAddress(address);
 
+        addressRepository.save(address);
         return userRepository.save(user);
     }
 }

@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.thecrowstudios.meowmarket.Listing.ItemCategory;
+import com.thecrowstudios.meowmarket.listings.Listing;
+import com.thecrowstudios.meowmarket.listings.ListingRepository;
+import com.thecrowstudios.meowmarket.listings.Listing.ItemCategory;
 
 @Controller
 @RequestMapping("/category")

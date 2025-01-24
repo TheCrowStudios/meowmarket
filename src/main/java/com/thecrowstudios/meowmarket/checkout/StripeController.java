@@ -1,4 +1,4 @@
-package com.thecrowstudios.meowmarket;
+package com.thecrowstudios.meowmarket.checkout;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.stripe.Stripe;
 import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
+import com.thecrowstudios.meowmarket.listings.Listing;
+import com.thecrowstudios.meowmarket.listings.ListingRepository;
 
 @Controller
 @RequestMapping("/purchase")

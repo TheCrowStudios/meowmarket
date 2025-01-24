@@ -1,6 +1,8 @@
-package com.thecrowstudios.meowmarket;
+package com.thecrowstudios.meowmarket.cart;
 
 import java.io.Serializable;
+
+import com.thecrowstudios.meowmarket.listings.Listing;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;

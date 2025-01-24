@@ -1,4 +1,4 @@
-package com.thecrowstudios.meowmarket;
+package com.thecrowstudios.meowmarket.cart;
 
 public class CartRequestDTO {
     private Integer listingId;

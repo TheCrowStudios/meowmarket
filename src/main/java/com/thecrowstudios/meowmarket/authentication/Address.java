@@ -1,37 +1,36 @@
-package com.thecrowstudios.meowmarket;
+package com.thecrowstudios.meowmarket.authentication;
 
-public class UserRegistrationDTO {
-    private String username;
-    private String password;
-    private String email;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+public class Address {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(nullable = false)
     private String houseNumber;
+
+    @Column(nullable = false)
     private String streetName;
+
+    @Column(nullable = false)
     private String city;
+
+    @Column(nullable = false)
     private String postCode;
 
 
-    public String getUsername() {
-        return this.username;
+    public Integer getId() {
+        return this.id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getHouseNumber() {

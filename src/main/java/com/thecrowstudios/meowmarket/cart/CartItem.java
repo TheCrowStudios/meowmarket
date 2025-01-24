@@ -1,8 +1,11 @@
-package com.thecrowstudios.meowmarket;
+package com.thecrowstudios.meowmarket.cart;
 
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.thecrowstudios.meowmarket.authentication.User;
+import com.thecrowstudios.meowmarket.listings.Listing;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;

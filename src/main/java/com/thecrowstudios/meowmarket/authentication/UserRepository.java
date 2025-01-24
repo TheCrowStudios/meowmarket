@@ -1,4 +1,4 @@
-package com.thecrowstudios.meowmarket;
+package com.thecrowstudios.meowmarket.authentication;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

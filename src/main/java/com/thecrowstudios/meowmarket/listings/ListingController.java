@@ -1,4 +1,4 @@
-package com.thecrowstudios.meowmarket;
+package com.thecrowstudios.meowmarket.listings;
 
 import java.io.IOException;
 import java.nio.file.Files;

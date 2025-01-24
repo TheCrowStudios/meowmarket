@@ -1,4 +1,4 @@
-package com.thecrowstudios.meowmarket;
+package com.thecrowstudios.meowmarket.authentication;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

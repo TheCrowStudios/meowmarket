@@ -26,16 +26,32 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
         user.setEmail(userRegistrationDTO.getEmail());
         user.setSession(httpSession.getId());
+        user.setRole(UserRole.USER);
 
-        Address address = new Address();
-        address.setHouseNumber(userRegistrationDTO.getHouseNumber());
-        address.setStreetName(userRegistrationDTO.getStreetName());
-        address.setCity(userRegistrationDTO.getCity());
-        address.setPostCode(userRegistrationDTO.getPostCode());
-
-        user.setAddress(address);
-
-        addressRepository.save(address);
         return userRepository.save(user);
+    }
+    
+    public User validLogin(UserLoginDTO userLoginDTO) {
+        User user = userRepository.findByEmail(userLoginDTO.getEmail()).orElse(null);
+        if (user == null) return null; // no user with email
+        if (passwordEncoder.matches(userLoginDTO.getPassword(), user.getPassword())) return user; // passwords match
+        
+        return null;
+    }
+
+    public void login(User user) {
+        userRepository.login(httpSession.getId(), user.getId());
+    }
+
+    public Boolean loggedIn() {
+        String session = httpSession.getId();
+
+        User user = userRepository.findBySession(session).orElse(null);
+        if (user != null) return true;
+        return false;
+    }
+
+    public void logout() {
+        userRepository.clearSession(httpSession.getId());
     }
 }

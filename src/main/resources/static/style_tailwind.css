@@ -39,6 +39,10 @@
         @apply w-96 text-tertiary rounded bg-zinc-200 p-1;
     }
 
+    .form-error {
+        @apply text-left text-red-500;
+    }
+
     .button-highlight {
         @apply bg-highlight text-primary font-bold hover:bg-red-200 transition-all duration-200 p-4 pl-6 pr-6 rounded;
     }

@@ -1,4 +1,5 @@
 <nav th:fragment="navbar" class="p-4 flex flex-col">
+    <script src="/scripts/auth.js"></script>
     <a href="/">
         <div class="text-center text-5xl font-bold flex flex-row w-fit">
             <h1 class="text-highlight">UK</h1>
@@ -11,10 +12,27 @@
         <a href="/category/obd_readers" class="hover:text-highlight transition-all duration-300">OBD Readers</a>
         <a href="/category/steering_wheels" class="hover:text-highlight transition-all duration-300">Steering wheels</a>
         <a href="/contact" class="hover:text-highlight transition-all duration-300">Contact</a>
-        <a href="/cart" class="flex flex-row gap-4 hover:text-highlight transition-all duration-300">
+        <a href="/cart" class="flex flex-row gap-4 hover:text-highlight transition-all duration-300 text-secondary">
             <img src="/images/shopping-cart.svg" alt="" class="w-6">
-            <span class="text-secondary">Cart</span>
-            <span th:text="${@cartService.getCartItemCount()} + ' '" class="bg-highlight rounded-3xl min-w-8 text-center"></span>
+            <span>Cart</span>
+            <span th:text="${@cartService.getCartItemCount()} + ' '"
+                class="bg-highlight rounded-3xl min-w-8 text-center text-white"></span>
+        </a>
+        <div th:if="${#authorization.isAuthenticated()}" class="w-fit">
+            <a href="/cart"
+                class="flex flex-row justify-center gap-4 hover:text-highlight transition-all duration-300 text-secondary">
+                <img src="/images/account.svg" alt="" class="w-6">
+                <span>Account</span>
+                <div id="user-dropdown" class="flex flex-col bg-white mt-2 text-tertiary rounded absolute w-fit shadow-xl">
+                    <a href="/orders" class="hover:bg-slate-200 hover:rounded w-full">Orders</a>
+                    <a onclick="logout()" class="hover:bg-slate-200 hover:rounded pl-4 pr-4 w-full">Log out</a>
+                </div>
+            </a>
+        </div>
+        <a th:if="${#authorization.isAuthenticated()}" href="/login"
+            class="flex flex-row gap-4 hover:text-highlight transition-all duration-300 text-secondary">
+            <img src="/images/account.svg" alt="" class="w-6">
+            <span>Sign Up/Login</span>
         </a>
     </div>
 </nav>

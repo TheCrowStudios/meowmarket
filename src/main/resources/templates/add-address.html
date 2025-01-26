@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Document</title>
+</head>
+
+<body class="body">
+    <main class="main">
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+        <form th:action="@{/api/address/add}" th:object="${addAdressDTO}" method="POST" class="flex flex-col w-full p-4 gap-4 justify-center items-center text-center">
+            <div class="form-div">
+                <label>House number</label>
+                <input class="form-input" type="text" th:field="*{houseNumber}" required>
+            </div>
+
+            <div class="form-div">
+                <label>Street name</label>
+                <input class="form-input" type="text" th:field="*{houseNumber}" required>
+            </div>
+
+            <div class="form-div">
+                <label>City</label>
+                <input class="form-input" type="text" th:field="*{houseNumber}" required>
+            </div>
+
+            <div class="form-div">
+                <label>Post Code</label>
+                <input class="form-input" type="text" th:field="*{postCode}" required>
+            </div>
+
+            <div>
+                <button type="submit" class="button-highlight">Sign Up</button>
+            </div>
+        </form>
+    </main>
+</body>
+
+</html>

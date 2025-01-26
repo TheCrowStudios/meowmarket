@@ -30,7 +30,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @OneToOne
@@ -40,7 +40,7 @@ public class User {
     private String session;
 
     @Enumerated(EnumType.STRING)
-    private Set<UserRole> roles;
+    private UserRole role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<CartItem> cartItems  = new ArrayList<>();
@@ -91,5 +91,21 @@ public class User {
 
     public void setSession(String session) {
         this.session = session;
+    }
+
+    public UserRole getRole() {
+        return this.role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
+    public List<CartItem> getCartItems() {
+        return this.cartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
     }
 }

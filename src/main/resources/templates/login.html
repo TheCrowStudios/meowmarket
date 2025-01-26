@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <script defer src="verify-registration-form.js"></script>
+    <title>Document</title>
+</head>
+
+<body class="body">
+    <main class="main">
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+        <form th:action="@{/api/auth/login}" th:object="${userLoginDTO}" method="POST"
+            class="flex flex-col w-full p-4 gap-4 justify-center items-center text-center">
+
+            <div class="form-div">
+                <label>Email</label>
+                <input class="form-input" type="text" th:field="*{email}" required>
+                <span th:if="${emailError}" th:text="${emailError}" class="form-error"></span>
+            </div>
+
+            <div class="form-div">
+                <label>Password</label>
+                <input class="form-input" type="password" th:field="*{password}" onchange="verifyPassword()" required>
+                <span th:if="${passwordError}" th:text="${passwordError}" class="form-error"></span>
+            </div>
+
+            <span>Don't have an account? Register <a href="/register" class="text-highlight hover:text-red-500 transition-all duration-300 underline">here</a>!</span>
+
+            <div>
+                <button type="submit" class="button-highlight">Log In</button>
+            </div>
+        </form>
+
+        <div th:if="${errors}">
+            <div th:each="error : ${errors}">
+                <span th:text="${error.field + ': ' + error.defaultMessage}"></span>
+            </div>
+        </div>
+
+        <div th:if="${error}">
+            <span th:text="${error}" class="text-red-500"></span>
+        </div>
+    </main>
+</body>
+
+</html>

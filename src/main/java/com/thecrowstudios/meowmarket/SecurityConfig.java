@@ -14,11 +14,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable()) // TODO - not recommended for production?
-        .authorizeHttpRequests(
-                authz -> authz.requestMatchers("/listings/create").hasRole("ADMIN")
-                .requestMatchers("/listings/new").hasRole("ADMIN")
-                .anyRequest().permitAll());
-        
+                .authorizeHttpRequests(
+                        authz -> authz.requestMatchers("/listings/create").hasRole("ADMIN")
+                                .requestMatchers("/listings/new").hasRole("ADMIN")
+                                .anyRequest().permitAll());
+
         return http.build();
     }
 

@@ -13,7 +13,7 @@
     <main class="main">
         <div th:replace="~{fragments/navbar :: navbar}"></div>
 
-        <form th:action="@{/api/auth/login}" th:object="${userLoginDTO}" method="POST"
+        <form th:action="@{/login}" th:object="${userLoginDTO}" method="POST"
             class="flex flex-col w-full p-4 gap-4 justify-center items-center text-center">
 
             <div class="form-div">

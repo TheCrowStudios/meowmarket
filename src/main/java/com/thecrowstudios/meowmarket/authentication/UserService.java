@@ -1,6 +1,8 @@
 package com.thecrowstudios.meowmarket.authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +13,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
     private AddressRepository addressRepository;
 
     @Autowired
@@ -21,6 +22,9 @@ public class UserService {
     private HttpSession httpSession;
 
     public User registerNewUser(UserRegistrationDTO userRegistrationDTO) {
+        if (userRepository.existsByUsername(userRegistrationDTO.getUsername())) throw new RuntimeException("Username is already in use");
+        if (userRepository.existsByEmail(userRegistrationDTO.getEmail())) throw new RuntimeException("Email is already in use");
+
         User user = new User();
         user.setUsername(userRegistrationDTO.getUsername());
         user.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
@@ -44,6 +48,11 @@ public class UserService {
     }
 
     public Boolean loggedIn() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication != null && authentication.isAuthenticated() && !authentication.getName().equals("anonymousUser");
+    }
+
+    public Boolean loggedInSession() {
         String session = httpSession.getId();
 
         User user = userRepository.findBySession(session).orElse(null);

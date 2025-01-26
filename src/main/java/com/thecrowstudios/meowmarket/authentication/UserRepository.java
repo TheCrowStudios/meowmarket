@@ -14,6 +14,10 @@ import jakarta.transaction.Transactional;
 public interface UserRepository extends CrudRepository<User, Integer> {
     Optional<User> findBySession(String session);
 
+    Boolean existsByUsername(String username);
+
+    Boolean existsByEmail(String email);
+
     Optional<User> findByUsername(String username);
 
     Optional<User> findByEmail(String email);

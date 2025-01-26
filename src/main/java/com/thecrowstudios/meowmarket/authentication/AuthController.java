@@ -1,18 +1,10 @@
 package com.thecrowstudios.meowmarket.authentication;
 
-import java.net.URI;
-import java.net.http.HttpHeaders;
-import java.util.Collections;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,7 +22,7 @@ public class AuthController {
     private UserService userService;
 
     @Autowired
-    AuthenticationManagerBuilder authenticationManagerBuilder;
+    AuthenticationManager authenticationManager;
 
     @Valid
     @PostMapping("/login")
@@ -41,7 +33,7 @@ public class AuthController {
                     userLoginDTO.getEmail(),
                     userLoginDTO.getPassword());
 
-            Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authToken); // verifies
+            Authentication authentication = authenticationManager.authenticate(authToken); // verifies
                                                                                                               // token
 
             SecurityContextHolder.getContext().setAuthentication(authentication); // makes user's authentication details

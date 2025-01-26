@@ -21,23 +21,11 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    AuthenticationManager authenticationManager;
-
     @Valid
     @PostMapping("/login")
     public String login(@Valid @ModelAttribute UserLoginDTO userLoginDTO, BindingResult bindingResult, Model model) {
         try {
-            System.out.println("Login attempt");
-            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                    userLoginDTO.getEmail(),
-                    userLoginDTO.getPassword());
-
-            Authentication authentication = authenticationManager.authenticate(authToken); // verifies
-                                                                                                              // token
-
-            SecurityContextHolder.getContext().setAuthentication(authentication); // makes user's authentication details
-                                                                                  // available application wide
+            userService.login(userLoginDTO);
             return "redirect:/";
         } catch (Exception e) {
             System.out.println("Login error: " + e.getMessage());

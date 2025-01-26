@@ -13,8 +13,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    private AddressRepository addressRepository;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -35,27 +33,17 @@ public class UserService {
         return userRepository.save(user);
     }
     
-    public User validLogin(UserLoginDTO userLoginDTO) {
-        User user = userRepository.findByEmail(userLoginDTO.getEmail()).orElse(null);
-        if (user == null) return null; // no user with email
-        if (passwordEncoder.matches(userLoginDTO.getPassword(), user.getPassword())) return user; // passwords match
-        
-        return null;
-    }
+    public void login(UserLoginDTO userLoginDTO) {
+        User user = userRepository.findByEmail(userLoginDTO.getEmail()).orElseThrow(() -> new RuntimeException("Incorrect email or password"));
+        if (!passwordEncoder.matches(userLoginDTO.getPassword(), user.getPassword())) new RuntimeException("Incorrect email or password"); // check if passwords match
 
-    public void login(User user) {
         userRepository.login(httpSession.getId(), user.getId());
     }
 
     public Boolean loggedIn() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication != null && authentication.isAuthenticated() && !authentication.getName().equals("anonymousUser");
-    }
-
-    public Boolean loggedInSession() {
         String session = httpSession.getId();
 
-        User user = userRepository.findBySession(session).orElse(null);
+        User user = userRepository.findBySession(session).orElse(null); // TODO - use an exists or whatever its called
         if (user != null) return true;
         return false;
     }

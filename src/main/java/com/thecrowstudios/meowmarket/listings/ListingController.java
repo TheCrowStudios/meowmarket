@@ -21,11 +21,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.thecrowstudios.meowmarket.authentication.UserService;
+
 @Controller
 @RequestMapping("/listings")
 public class ListingController {
     @Autowired
     private ListingRepository listingRepository;
+
+    @Autowired
+    private UserService userService;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -41,11 +46,14 @@ public class ListingController {
     @GetMapping("/new")
     public String showCreateForm(Model model) {
         model.addAttribute("listingDTO", new ListingDTO());
-        return "create-listing";
+        if (userService.isAdmin()) return "create-listing";
+        return "redirect:/";
     }
 
     @PostMapping(path="/create")
     public String addNewListing (@ModelAttribute ListingDTO listingDTO) throws IOException {
+        if (!userService.isAdmin()) return "redirect:/";
+        
         Listing listing = new Listing();
         listing.setTitle(listingDTO.getTitle());
         listing.setDescription(listingDTO.getDescription());

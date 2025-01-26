@@ -35,7 +35,7 @@
             <div class="form-div">
                 <label>Category:</label>
                 <select class="form-input" th:field="*{category}">
-                    <option th:each="category : ${T(com.thecrowstudios.meowmarket.Listing.ItemCategory).values()}"
+                    <option th:each="category : ${T(com.thecrowstudios.meowmarket.listings.Listing.ItemCategory).values()}"
                         th:value="${category}" th:text="${#strings.replace(category, '_', ' ')}"></option>
                 </select>
             </div>

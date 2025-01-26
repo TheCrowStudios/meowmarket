@@ -51,4 +51,19 @@ public class UserService {
     public void logout() {
         userRepository.clearSession(httpSession.getId());
     }
+
+    public User getUser() {
+        return userRepository.findBySession(httpSession.getId()).orElseThrow(() -> new RuntimeException("User is not authenticated"));
+    }
+
+    public boolean isAdmin() {
+        try {
+            User user = getUser();
+            
+            if (user.getRole() == UserRole.ADMIN) return true;
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

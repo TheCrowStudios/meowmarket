@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.stripe.Stripe;
 import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
+import com.stripe.param.checkout.SessionCreateParams.ShippingAddressCollection;
+import com.stripe.param.checkout.SessionCreateParams.ShippingAddressCollection.AllowedCountry;
 import com.thecrowstudios.meowmarket.listings.Listing;
 import com.thecrowstudios.meowmarket.listings.ListingRepository;
 
@@ -43,13 +45,16 @@ public class StripeController {
                                 .setQuantity(1L)
                                 .setPriceData(
                                         SessionCreateParams.LineItem.PriceData.builder().setCurrency("gbp")
-                                                .setUnitAmountDecimal(new BigDecimal(listing.getPrice() * 100).setScale(2, RoundingMode.HALF_UP))
+                                                .setUnitAmountDecimal(new BigDecimal(listing.getPrice() * 100)
+                                                        .setScale(2, RoundingMode.HALF_UP))
                                                 .setProductData(
                                                         SessionCreateParams.LineItem.PriceData.ProductData.builder()
                                                                 .setName(listing.getTitle())
                                                                 .build())
                                                 .build())
                                 .build())
+                .setShippingAddressCollection(ShippingAddressCollection.builder().addAllowedCountry(AllowedCountry.GB)
+                        .addAllowedCountry(AllowedCountry.IE).addAllowedCountry(AllowedCountry.IM).build())
                 .build();
 
         try {

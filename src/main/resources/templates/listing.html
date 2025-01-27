@@ -21,22 +21,41 @@
         <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4 mt-4">
             <div class="flex flex-row gap-4 w-full">
                 <div class="flex flex-col w-2/12 max-h-full gap-2 overflow-x-auto" id="side-images">
-                    <img th:each="image : ${listing.images}" th:src="@{'/upload-dir/' + ${image.imageUrl}}" alt="${listing.title}"
-                        th:attr="onmouseover=|setActiveImage('/upload-dir/${image.imageUrl}')|">
+                    <img th:each="image : ${listing.images}" th:src="@{'/upload-dir/' + ${image.imageUrl}}"
+                        alt="${listing.title}" th:attr="onmouseover=|setActiveImage('/upload-dir/${image.imageUrl}')|">
                 </div>
                 <div class="w-full">
-                    <img th:src="@{'/upload-dir/' + ${listing.images[0].imageUrl}}" alt="${listing.title}" id="img-main">
+                    <img th:src="@{'/upload-dir/' + ${listing.images[0].imageUrl}}" alt="${listing.title}"
+                        id="img-main">
                 </div>
             </div>
-            <div class="flex flex-col">
+            <div class="flex flex-col gap-4">
                 <h3 th:text="${listing.title}" class="font-bold text-primary text-3xl">listing title</h3>
-                <p th:utext="${#strings.replace(listing.description, '&#10;', '<br>')}" class="text-primary text-lg">Decription</p>
+                <div class="flex flex-row gap-4 text-center items-center">
+                    <span th:text="'£' + ${#numbers.formatDecimal(listing.price, 2, 2)}"
+                        class="text-highlight text-3xl cursor-default">Our price</span>
+                    <span th:if="${listing.originalPrice}"
+                        th:text="'£' + ${#numbers.formatDecimal(listing.originalPrice, 2, 2)}"
+                        class="text-slate-300 text-xl style line-through cursor-default">Original price</span>
+                    <span th:if="${listing.originalPrice}"
+                        th:text="'Save ' + ${#numbers.formatDecimal((listing.originalPrice / listing.price * 100 - 100), 0, 0)} + '%'"
+                        class="bg-highlight pl-2 pr-2 pt-1 pb-1 rounded cursor-default">Discount</span>
+                </div>
+                <div class="flex flex-row gap-4">
+                    <img src="/images/delivery.svg" alt="" class="w-8">
+                    <span class="text-slate-300 cursor-default">3 Day Delivery</span>
+                </div>
+                <div class="flex flex-row mt-4 mb-4">
+                    <span class="flex-grow border-solid border-b-2 -translate-y-1/2"></span>
+                </div>
+                <p th:utext="${#strings.replace(listing.description, '&#10;', '<br>')}" class="text-primary text-lg">
+                    Description</p>
+                <br>
                 <span class="flex-grow"></span>
                 <div class="flex flex-row gap-4">
                     <span class="flex-grow"></span>
                     <form th:action="@{/purchase/create-checkout-session/} + ${listing.id}" method="POST">
-                        <button type="submit" id="checkout-button"
-                            class="button-highlight">Buy
+                        <button type="submit" id="checkout-button" class="button-highlight">Buy
                             Now</button>
                     </form>
 
@@ -46,9 +65,9 @@
                 </div>
             </div>
         </div>
-        <div class="mt-8">
+        <div class="mt-8 w-full flex flex-col">
             <h1 class="text-primary font-bold text-3xl">Description</h1>
-            <div th:utext="${listing.longDescription}" class="bg-slate-50 flex flex-column justify-center items-center p-4 mt-4"></div>
+            <div th:utext="${listing.longDescription}" class="flex flex-col justify-center p-4 mt-4"></div>
         </div>
     </main>
 </body>

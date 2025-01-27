@@ -35,7 +35,11 @@ public class Listing {
     @Enumerated(EnumType.STRING)
     private ItemCategory category;
 
+    @Column(nullable=false, updatable = false)
     private Double price;
+
+    @Column(nullable=true, updatable = false)
+    private Double originalPrice;
 
     private Integer quantityInStock;
 
@@ -108,6 +112,14 @@ public class Listing {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Double getOriginalPrice() {
+        return this.originalPrice;
+    }
+
+    public void setOriginalPrice(Double originalPrice) {
+        this.originalPrice = originalPrice;
     }
 
     public Integer getQuantityInStock() {

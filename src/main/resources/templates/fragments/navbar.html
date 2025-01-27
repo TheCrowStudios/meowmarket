@@ -1,4 +1,4 @@
-<nav th:fragment="navbar" class="p-4 flex flex-col">
+<nav th:fragment="navbar" class="p-4 flex flex-col z-10">
     <script src="/scripts/auth.js"></script>
     <a href="/">
         <div class="text-center text-5xl font-bold flex flex-row w-fit">
@@ -18,16 +18,24 @@
             <span th:text="${@cartService.getCartItemCount()} + ' '"
                 class="bg-highlight rounded-3xl min-w-8 text-center text-white"></span>
         </a>
-        <div th:if="${@userService.loggedIn()}" class="w-fit">
-            <a href="/cart"
-                class="flex flex-row justify-center gap-4 hover:text-highlight transition-all duration-300 text-secondary">
-                <img src="/images/account.svg" alt="" class="w-6">
-                <span>Account</span>
-                <div id="user-dropdown" class="flex flex-col bg-white mt-2 text-tertiary rounded absolute w-fit shadow-xl">
-                    <a href="/orders" class="hover:bg-slate-200 hover:rounded w-full">Orders</a>
-                    <a onclick="logout()" class="hover:bg-slate-200 hover:rounded pl-4 pr-4 w-full">Log out</a>
-                </div>
-            </a>
+        <div th:if="${@userService.loggedIn()}"
+            class="w-fit group gap-4 hover:text-highlight text-secondary">
+            <div class="flex flex-row justify-center">
+                <a href="/account" class="flex flex-row gap-4">
+                    <img src="/images/account.svg" alt="" class="w-6">
+                    Account
+                </a>
+            </div>
+
+            <div class="group-hover:block hidden absolute h-auto">
+                <ul id="user-dropdown" class="bg-white text-tertiary text-left rounded shadow-xl top-0 px-6 py-8">
+                    <li><a href="/orders"
+                            class="hover:rounded hover:text-highlight w-full">Orders</a></li>
+                    <li><a onclick="logout()" class="hover:rounded hover:text-highlight w-full cursor-pointer">Log
+                            out</a>
+                    </li>
+                </ul>
+            </div>
         </div>
         <a th:if="${!@userService.loggedIn()}" href="/login"
             class="flex flex-row gap-4 hover:text-highlight transition-all duration-300 text-secondary">

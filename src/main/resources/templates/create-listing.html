@@ -25,8 +25,9 @@
 
 <body class="body">
     <main class="main text-primary">
-        <form th:action="@{/listings/create}" th:object="${listingDTO}" method="POST" enctype="multipart/form-data"
+        <form th:action="@{/listings/} + ${endpoint}" th:object="${listingDTO}" method="POST" enctype="multipart/form-data"
             class="flex flex-col w-full p-4 gap-4">
+            <input type="hidden" th:field="*{id}">
             <div class="form-div">
                 <label>Title:</label>
                 <input class="form-input" type="text" th:field="*{title}" required>

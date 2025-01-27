@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.thecrowstudios.meowmarket.listings.Listing.ItemCategory;
 
 public class ListingDTO {
+    private Integer id;
     private String title;
     private String description;
     private String longDescription;
@@ -14,6 +15,14 @@ public class ListingDTO {
     private double price;
     private Integer quantityInStock;
     private List<MultipartFile> images;
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return this.title;

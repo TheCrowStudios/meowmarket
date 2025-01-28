@@ -60,9 +60,9 @@ public class CartService {
 
     public List<CartItem> getCartItems() {
         if (userService.loggedIn())
-            return cartItemRepository.findAllByUserId(userService.getUser().getId());
+            return cartItemRepository.findAllByUser_Id(userService.getUser().getId());
 
-        return cartItemRepository.findAllBySessionId(httpSession.getId());
+        return cartItemRepository.findAllBySession(httpSession.getId());
     }
 
     public void removeCartItem(Integer listingId) {
@@ -70,7 +70,7 @@ public class CartService {
     }
 
     public void clearCart() {
-        cartItemRepository.deleteAllById_SessionId(httpSession.getId());
+        cartItemRepository.deleteAllBySession(httpSession.getId());
     }
 
     public boolean isItemInCart(Integer listingId) {

@@ -7,10 +7,10 @@ import org.springframework.data.repository.CrudRepository;
 import jakarta.transaction.Transactional;
 
 public interface CartItemRepository extends CrudRepository<CartItem, Integer> {
-    List<CartItem> findAllByUserId(Integer userId);
+    List<CartItem> findAllByUser_Id(Integer userId);
 
-    List<CartItem> findAllBySessionId(String sessionId);
+    List<CartItem> findAllBySession(String sessionId);
 
     @Transactional
-    void deleteAllById_SessionId(String sessionId);
+    void deleteAllBySession(String sessionId);
 }

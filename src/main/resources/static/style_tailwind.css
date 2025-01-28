@@ -4,7 +4,7 @@
 
 @layer components {
     .body {
-        @apply bg-zinc-700 flex justify-center h-screen;
+        @apply bg-zinc-700 flex flex-row justify-center h-screen;
     }
 
     .main {

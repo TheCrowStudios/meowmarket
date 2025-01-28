@@ -35,7 +35,7 @@ public class UserService {
     
     public void login(UserLoginDTO userLoginDTO) {
         User user = userRepository.findByEmail(userLoginDTO.getEmail()).orElseThrow(() -> new RuntimeException("Incorrect email or password"));
-        if (!passwordEncoder.matches(userLoginDTO.getPassword(), user.getPassword())) new RuntimeException("Incorrect email or password"); // check if passwords match
+        if (!passwordEncoder.matches(userLoginDTO.getPassword(), user.getPassword())) throw new RuntimeException("Incorrect email or password"); // check if passwords match
 
         userRepository.login(httpSession.getId(), user.getId());
     }

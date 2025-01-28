@@ -5,6 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.thecrowstudios.meowmarket.authentication.User;
+import com.thecrowstudios.meowmarket.authentication.UserService;
+import com.thecrowstudios.meowmarket.listings.Listing;
+import com.thecrowstudios.meowmarket.listings.ListingRepository;
+
 import jakarta.servlet.http.HttpSession;
 
 @Service
@@ -13,17 +18,40 @@ public class CartService {
     private CartItemRepository cartItemRepository;
 
     @Autowired
+    private ListingRepository listingRepository;
+
+    @Autowired
     private HttpSession httpSession;
 
-    public void addOrUpdateCartItem(Integer listingId, Integer quantity) {
-        String sessionId = httpSession.getId();
-        CartItemId cartItemId = new CartItemId(sessionId, listingId);
+    @Autowired
+    private UserService userService;
 
-        CartItem cartItem = cartItemRepository.findById(cartItemId)
-                .orElse(new CartItem(sessionId, listingId, quantity));
-        
-        cartItem.setQuantity(quantity);
-        cartItemRepository.save(cartItem);
+    /*
+     * adds an item to cart based on session or user account
+     */
+    public void addOrUpdateCartItem(Integer listingId, Integer quantity) {
+        Listing listing = listingRepository.findById(listingId)
+                .orElseThrow(() -> new RuntimeException("No listing with id " + listingId));
+
+        // TODO - use cookies instead of session
+        if (userService.loggedIn()) {
+            User user = userService.getUser();
+
+            CartItem cartItem = new CartItem();
+            cartItem.setListing(listing);
+            cartItem.setUser(user);
+            cartItem.setQuantity(quantity);
+
+            cartItemRepository.save(cartItem);
+        } else {
+            CartItem cartItem = new CartItem();
+            cartItem.setListing(listing);
+            cartItem.setSession(httpSession.getId());
+            
+            cartItem.setQuantity(quantity);
+
+            cartItemRepository.save(cartItem);
+        }
     }
 
     public Integer getCartItemCount() {
@@ -31,12 +59,14 @@ public class CartService {
     }
 
     public List<CartItem> getCartItems() {
-        return cartItemRepository.findById_SessionId(httpSession.getId());
+        if (userService.loggedIn())
+            return cartItemRepository.findAllByUserId(userService.getUser().getId());
+
+        return cartItemRepository.findAllBySessionId(httpSession.getId());
     }
 
     public void removeCartItem(Integer listingId) {
-        CartItemId cartItemId = new CartItemId(httpSession.getId(), listingId);
-        cartItemRepository.deleteById(cartItemId);
+        // TODO - this
     }
 
     public void clearCart() {
@@ -44,7 +74,7 @@ public class CartService {
     }
 
     public boolean isItemInCart(Integer listingId) {
-        CartItemId cartItemId = new CartItemId(httpSession.getId(), listingId);
-        return cartItemRepository.existsById(cartItemId);
+        // TODO - this
+        return false;
     }
 }

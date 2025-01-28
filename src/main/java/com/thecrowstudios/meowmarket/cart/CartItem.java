@@ -8,14 +8,29 @@ import com.thecrowstudios.meowmarket.authentication.User;
 import com.thecrowstudios.meowmarket.listings.Listing;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
 public class CartItem {
-    @EmbeddedId
-    private CartItemId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "listing_id")
+    private Listing listing;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = true)
+    private User user;
+
+    @Column(nullable = true)
+    private String session;
 
     private Integer quantity;
 
@@ -23,27 +38,14 @@ public class CartItem {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @ManyToOne(optional = true)
-    private User user;
-
     public CartItem() {
     }
 
-    public CartItem(String sessionId, Listing listing, Integer quantity) {
-        this.id = new CartItemId(sessionId, listing.getId());
-        this.quantity = quantity;
-    }
-
-    public CartItem(String sessionId, Integer listingId, Integer quantity) {
-        this.id = new CartItemId(sessionId, listingId);
-        this.quantity = quantity;
-    }
-
-    public CartItemId getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(CartItemId id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -61,5 +63,29 @@ public class CartItem {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Listing getListing() {
+        return this.listing;
+    }
+
+    public void setListing(Listing listing) {
+        this.listing = listing;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getSession() {
+        return this.session;
+    }
+
+    public void setSession(String session) {
+        this.session = session;
     }
 }

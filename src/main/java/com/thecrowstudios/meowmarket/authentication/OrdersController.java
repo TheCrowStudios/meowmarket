@@ -6,20 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class AuthFormController {
+public class OrdersController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/login")
-    public String getLogin(Model model) {
-        if (userService.loggedIn()) return "redirect:/";
-        model.addAttribute("userLoginDTO", new UserLoginDTO());
-        return "login";
-    }
-
-    @GetMapping("/account")
-    public String account() {
+    @GetMapping("/orders")
+    public String orders(Model model) {
         if (!userService.loggedIn()) return "redirect:/login";
-        return "account";
+        return "orders";
     }
 }

@@ -12,6 +12,24 @@
             main.src = url;
         }
     </script>
+    <script>
+        function scrollCarousel(direction) {
+            const carousel = document.getElementById('carousel');
+            const scrollAmount = carousel.offsetWidth;
+
+            if (direction === 'left') {
+                carousel.scrollBy({
+                    left: -scrollAmount,
+                    behavior: 'smooth'
+                });
+            } else if (direction === 'right') {
+                carousel.scrollBy({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                })
+            }
+        }
+    </script>
     <script defer src="/scripts/cart.js"></script>
 </head>
 
@@ -20,13 +38,34 @@
         <div th:replace="~{fragments/navbar :: navbar}"></div>
         <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4 mt-4">
             <div class="flex flex-row gap-4 w-full">
-                <div class="flex flex-col w-2/12 max-h-full gap-2 overflow-x-auto" id="side-images">
+                <div class="max-md:hidden flex flex-col w-2/12 max-h-full gap-2 overflow-x-auto" id="side-images">
                     <img th:each="image : ${listing.images}" th:src="@{'/upload-dir/' + ${image.imageUrl}}"
                         alt="${listing.title}" th:attr="onmouseover=|setActiveImage('/upload-dir/${image.imageUrl}')|">
                 </div>
-                <div class="w-full">
-                    <img th:src="@{'/upload-dir/' + ${listing.images[0].imageUrl}}" alt="${listing.title}"
-                        id="img-main">
+                <div class="w-full max-md:snap-center max-md:overflow-hidden max-md:overflow-x-auto max-md:snap-x max-md:snap-mandatory max-md:scroll-smooth flex flex-row"
+                    id="carousel">
+                    <div class="max-md:hidden w-full h-auto flex-shrink-0" id="img-main">
+                        <img th:src="@{'/upload-dir/' + ${listing.images[0].imageUrl}}" alt="${listing.title}">
+                    </div>
+                    <img th:each="image : ${listing.images}" th:src="@{'/upload-dir/' + ${image.imageUrl}}"
+                        alt="${listing.title}" th:attr="onmouseover=|setActiveImage('/upload-dir/${image.imageUrl}')|"
+                        class="md:hidden flex-shrink-0 snap-center">
+                    <button onclick="scrollCarousel('left')"
+                        class="md:hidden absolute left-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p/2 rounded-lg shadow">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" fill="#000000" stroke-width="2"
+                                d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button onclick="scrollCarousel('right')"
+                        class="md:hidden absolute right-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p/2 rounded-lg shadow">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" fill="#000000" stroke-width="2"
+                                d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
                 </div>
             </div>
             <div class="flex flex-col gap-4">
@@ -43,7 +82,7 @@
                 </div>
                 <div class="flex flex-row gap-4">
                     <img src="/images/delivery.svg" alt="" class="w-8">
-                    <span class="text-slate-300 cursor-default">3 Day Delivery</span>
+                    <span class="text-slate-300 cursor-default">3 Day Tracked Delivery</span>
                 </div>
                 <div class="flex flex-row mt-4 mb-4">
                     <span class="flex-grow border-solid border-b-2 -translate-y-1/2"></span>

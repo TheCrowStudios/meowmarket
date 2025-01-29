@@ -33,10 +33,8 @@ public class CartService {
         Listing listing = listingRepository.findById(listingId)
                 .orElseThrow(() -> new RuntimeException("No listing with id " + listingId));
 
-        // TODO - use cookies instead of session
-        if (userService.loggedIn()) {
-            User user = userService.getUser();
-
+        User user = userService.getUser();
+        if (user != null) {
             CartItem cartItem = new CartItem();
             cartItem.setListing(listing);
             cartItem.setUser(user);
@@ -59,7 +57,8 @@ public class CartService {
     }
 
     public List<CartItem> getCartItems() {
-        if (userService.loggedIn())
+        User user = userService.getUser();
+        if (user != null)
             return cartItemRepository.findAllByUser_Id(userService.getUser().getId());
 
         return cartItemRepository.findAllBySession(httpSession.getId());

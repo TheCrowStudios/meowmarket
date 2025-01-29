@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.thecrowstudios.meowmarket.authentication.UserService;
@@ -27,7 +26,7 @@ import com.thecrowstudios.meowmarket.authentication.UserService;
 @RequestMapping("/listings")
 public class ListingController {
     @Autowired
-    ListingService listingService;
+    private ListingService listingService;
 
     @Autowired
     private ListingRepository listingRepository;

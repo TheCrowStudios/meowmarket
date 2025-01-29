@@ -1,69 +1,85 @@
 package com.thecrowstudios.meowmarket.authentication;
 
+import java.util.Collection;
+import java.util.Collections;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import jakarta.servlet.http.HttpSession;
-
 @Service
 public class UserService {
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private HttpSession httpSession;
-
     public User registerNewUser(UserRegistrationDTO userRegistrationDTO) {
-        if (userRepository.existsByUsername(userRegistrationDTO.getUsername())) throw new RuntimeException("Username is already in use");
-        if (userRepository.existsByEmail(userRegistrationDTO.getEmail())) throw new RuntimeException("Email is already in use");
+        if (userRepository.existsByUsername(userRegistrationDTO.getUsername()))
+            throw new RuntimeException("Username is already in use");
+        if (userRepository.existsByEmail(userRegistrationDTO.getEmail()))
+            throw new RuntimeException("Email is already in use");
 
         User user = new User();
         user.setUsername(userRegistrationDTO.getUsername());
         user.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
         user.setEmail(userRegistrationDTO.getEmail());
-        user.setSession(httpSession.getId());
         user.setRole(UserRole.USER);
 
         return userRepository.save(user);
     }
-    
+
     public void login(UserLoginDTO userLoginDTO) {
-        User user = userRepository.findByEmail(userLoginDTO.getEmail()).orElseThrow(() -> new RuntimeException("Incorrect email or password"));
-        if (!passwordEncoder.matches(userLoginDTO.getPassword(), user.getPassword())) throw new RuntimeException("Incorrect email or password"); // check if passwords match
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(userLoginDTO.getEmail(), userLoginDTO.getPassword()));
 
-        userRepository.login(httpSession.getId(), user.getId());
-    }
-
-    public Boolean loggedIn() {
-        String session = httpSession.getId();
-
-        User user = userRepository.findBySession(session).orElse(null); // TODO - use an exists or whatever its called
-        if (user != null) return true;
-        return false;
+        SecurityContext context = SecurityContextHolder.createEmptyContext();
+        context.setAuthentication(authentication);
+        SecurityContextHolder.setContext(context);
     }
 
     public void logout() {
-        userRepository.clearSession(httpSession.getId());
+        SecurityContextHolder.clearContext();
     }
 
     public User getUser() {
-        return userRepository.findBySession(httpSession.getId()).orElseThrow(() -> new RuntimeException("User is not authenticated"));
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            String email = authentication.getName();
+            System.out.println("Authenticated user email: " + email);
+            return userRepository.findByEmail(email).orElse(null);
+        }
+
+        System.out.println("No authenticated user found");
+        return null;
     }
 
     public boolean isAdmin() {
-        try {
-            User user = getUser();
-            
-            if (user.getRole() == UserRole.ADMIN) return true;
-            return false;
-        } catch (Exception e) {
-            return false;
+        User user = getUser();
+        return user != null && user.getRole() == UserRole.ADMIN;
+    }
+
+    public Collection<? extends GrantedAuthority> getCurrentUserAuthorities() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            System.out.println("Current authentication: " + authentication);
+            System.out.println("Authentication authorities: " + authentication.getAuthorities());
+            return authentication.getAuthorities();
         }
+        return Collections.emptyList();
     }
 }

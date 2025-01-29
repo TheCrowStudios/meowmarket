@@ -18,7 +18,7 @@
             <span th:text="${@cartService.getCartItemCount()} + ' '"
                 class="bg-highlight rounded-3xl min-w-8 text-center text-primary"></span>
         </a>
-        <div th:if="${@userService.loggedIn()}"
+        <div th:if="${@userService.getUser() != null}"
             class="w-fit group gap-4 hover:text-highlight text-primary">
             <div class="flex flex-row justify-center">
                 <a href="/account" class="flex flex-row gap-4">
@@ -37,7 +37,7 @@
                 </ul>
             </div>
         </div>
-        <a th:if="${!@userService.loggedIn()}" href="/login"
+        <a th:if="${@userService.getUser() == null}" href="/api/auth/login"
             class="flex flex-row gap-4 hover:text-highlight transition-all duration-300 text-primary">
             <img src="/images/account.svg" alt="" class="w-6">
             <span>Sign Up/Login</span>

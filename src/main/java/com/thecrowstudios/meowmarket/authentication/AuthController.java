@@ -1,10 +1,6 @@
 package com.thecrowstudios.meowmarket.authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,7 +18,14 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
-    @Valid
+    @GetMapping("/login")
+    public String getLogin(Model model) {
+        User user = userService.getUser();
+        if (user != null) return "redirect:/";
+        model.addAttribute("userLoginDTO", new UserLoginDTO());
+        return "login";
+    }
+
     @PostMapping("/login")
     public String login(@Valid @ModelAttribute UserLoginDTO userLoginDTO, BindingResult bindingResult, Model model) {
         try {
@@ -33,6 +36,14 @@ public class AuthController {
             model.addAttribute("error", "Incorrect email or password");
             return "login";
         }
+    }
+
+    @GetMapping("/register")
+    public String getRegister(Model model) {
+        User user = userService.getUser();
+        if (user != null) return "redirect:/";
+        model.addAttribute("userRegistrationDTO", new UserRegistrationDTO());
+        return "register";
     }
 
     @Valid
@@ -57,6 +68,13 @@ public class AuthController {
     @PostMapping("/logout")
     public String logout() {
         userService.logout();
-        return "redirect:/";
+        return "redirect:/login?logout=true";
+    }
+
+    @GetMapping("/account")
+    public String account() {
+        User user = userService.getUser();
+        if (user == null) return "redirect:/login";
+        return "account";
     }
 }

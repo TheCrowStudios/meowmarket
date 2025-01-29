@@ -8,11 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class OrdersController {
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @GetMapping("/orders")
     public String orders(Model model) {
-        if (!userService.loggedIn()) return "redirect:/login";
+        User user = userService.getUser();
+        if (user == null) return "redirect:/login";
         return "orders";
     }
 }

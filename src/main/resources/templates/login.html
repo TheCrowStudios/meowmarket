@@ -18,7 +18,7 @@
 
             <div class="form-div">
                 <label>Email</label>
-                <input class="form-input" type="email" th:field="*{email}" required>
+                <input class="form-input" type="text" th:field="*{email}" required>
                 <span th:if="${emailError}" th:text="${emailError}" class="form-error"></span>
             </div>
 

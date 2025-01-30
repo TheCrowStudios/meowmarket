@@ -12,7 +12,7 @@ public class UserController {
     @GetMapping("/account")
     public String account() {
         User user = userService.getUser();
-        if (user == null) return "redirect:/login";
+        if (user == null) return "redirect:/api/auth/login";
         return "account";
     }
 }

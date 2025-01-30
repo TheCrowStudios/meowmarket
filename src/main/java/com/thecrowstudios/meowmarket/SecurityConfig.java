@@ -39,7 +39,13 @@ public class SecurityConfig {
                         .logoutUrl("/api/auth/logout")
                         .logoutSuccessUrl("/api/auth/login?logout=true")
                         .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID"));
+                        .deleteCookies("JSESSIONID"))
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            response.sendRedirect("/api/auth/login");
+                        })
+                        .accessDeniedHandler((request, response, accessDeniedException) -> response
+                                .sendRedirect("/api/auth/login")));
         return http.build();
     }
 

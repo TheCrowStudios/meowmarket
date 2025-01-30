@@ -13,7 +13,7 @@ public class OrdersController {
     @GetMapping("/orders")
     public String orders(Model model) {
         User user = userService.getUser();
-        if (user == null) return "redirect:/login";
+        if (user == null) return "redirect:/api/auth/login";
         return "orders";
     }
 }

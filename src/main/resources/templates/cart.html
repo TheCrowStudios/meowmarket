@@ -13,19 +13,39 @@
         <div th:replace="~{fragments/navbar :: navbar}"></div>
         <div class="flex flex-col gap-4">
             <div th:each="cartItem : ${cartItems}" class="flex flex-row gap-4">
-                <a th:href="'/listings/' + ${cartItem.id.listing.id}" class="w-2/12">
-                    <img th:src="'/upload-dir/' + ${cartItem.id.listing.images.get(0).imageUrl}"
-                        th:alt="${cartItem.id.listing.title}">
+                <a th:href="'/listings/' + ${cartItem.listing.id}" class="w-2/12">
+                    <img th:src="'/upload-dir/' + ${cartItem.listing.images.get(0).imageUrl}"
+                        th:alt="${cartItem.listing.title}">
                 </a>
-                <a th:href="'/listings/' + ${cartItem.id.listing.id}">
-                    <h3 th:text="${cartItem.id.listing.title}" class="text-primary text-xl">listing title</h3>
+                <a th:href="'/listings/' + ${cartItem.listing.id}">
+                    <h3 th:text="${cartItem.listing.title}" class="text-primary text-xl">listing title</h3>
                 </a>
                 <span class="flex-grow"></span>
-                <div class="flex flex-column">
-                    <button>Remove</button>
+                <div class="flex flex-col gap-4">
+                    <form th:action="'/purchase/create-checkout-session/' + ${cartItem.listing.id}" method="POST">
+                        <button type="submit" id="checkout-button" class="button-highlight w-auto px-4 py-2">
+                            <div class="flex flex-row items-center justify-center w-fit gap-x-4">
+                                <span class="text-nowrap">Buy Now</span>
+                                <img src="/images/stripe.svg" alt="" class="h-6 w-auto">
+                            </div>
+                        </button>
+                    </form>
+                    <form th:action="@{/cart/remove/} + ${cartItem.listing.id}">
+                        <button type="submit" id="checkout-button"
+                            class="button-highlight w-full px-4 py-2">Remove</button>
+                    </form>
                 </div>
             </div>
         </div>
+        <form th:if="${cartItems.size() > 0}" th:action="@{/purchase/create-checkout-session/} + ${cartItem.listing.id}" method="POST">
+            <button type="submit" id="checkout-button" class="button-highlight w-auto px-4 py-2">
+                <div class="flex flex-row items-center justify-center w-fit gap-x-4">
+                    <span class="text-nowrap">Check Out</span>
+                    <img src="/images/stripe.svg" alt="" class="h-6 w-auto">
+                </div>
+            </button>
+        </form>
+        <span class="flex-grow"></span>
         <div th:replace="~{/fragments/footer :: footer}"></div>
     </main>
 </body>

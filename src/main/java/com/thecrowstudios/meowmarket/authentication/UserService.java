@@ -37,7 +37,7 @@ public class UserService {
         user.setUsername(userRegistrationDTO.getUsername());
         user.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
         user.setEmail(userRegistrationDTO.getEmail());
-        user.setRole(UserRole.USER);
+        user.setAuthorities("ROLE_USER");
 
         return userRepository.save(user);
     }
@@ -68,10 +68,10 @@ public class UserService {
         return null;
     }
 
-    public boolean isAdmin() {
-        User user = getUser();
-        return user != null && user.getRole() == UserRole.ADMIN;
-    }
+    // public boolean isAdmin() {
+    //     User user = getUser();
+    //     return user != null && user.getRole() == UserRole.ADMIN;
+    // }
 
     public Collection<? extends GrantedAuthority> getCurrentUserAuthorities() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

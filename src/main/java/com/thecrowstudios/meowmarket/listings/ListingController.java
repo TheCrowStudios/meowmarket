@@ -10,6 +10,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,10 +44,9 @@ public class ListingController {
         return "listing";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/edit/{id}")
     public String getEditListing (@PathVariable String id, Model model) {
-        if (!userService.isAdmin()) return "redirect:/";
-
         Listing listing = listingRepository.findById(Integer.parseInt(id)).orElseThrow(() -> new RuntimeException("No listing with such id"));
         ListingDTO listingDTO = new ListingDTO();
         listingDTO.setId(listing.getId());
@@ -63,8 +63,6 @@ public class ListingController {
 
     @GetMapping("/new")
     public String showCreateForm(Model model) {
-        if (!userService.isAdmin())
-            return "redirect:/";
 
         model.addAttribute("listingDTO", new ListingDTO());
         model.addAttribute("endpoint", "create");
@@ -73,8 +71,6 @@ public class ListingController {
 
     @PostMapping(path = "/create")
     public String addNewListing(@ModelAttribute ListingDTO listingDTO) throws IOException {
-        if (!userService.isAdmin())
-            return "redirect:/login";
 
         Listing listing = listingService.dtoToListing(listingDTO);
 
@@ -84,8 +80,6 @@ public class ListingController {
 
     @PostMapping("/edit")
     public String editListing(@ModelAttribute ListingDTO listingDTO, Model model) throws IOException {
-        if (!userService.isAdmin())
-            return "redirect:/login";
 
         listingService.clearListingImages(listingDTO.getId());
         Listing listing = listingService.dtoToListing(listingDTO);

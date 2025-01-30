@@ -68,13 +68,6 @@ public class AuthController {
     @PostMapping("/logout")
     public String logout() {
         userService.logout();
-        return "redirect:/login?logout=true";
-    }
-
-    @GetMapping("/account")
-    public String account() {
-        User user = userService.getUser();
-        if (user == null) return "redirect:/login";
-        return "account";
+        return "redirect:/api/auth/login?logout=true";
     }
 }

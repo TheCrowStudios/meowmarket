@@ -18,7 +18,7 @@
 
             <div class="form-div">
                 <label>Email</label>
-                <input class="form-input" type="text" th:field="*{email}" required>
+                <input class="form-input" type="email" th:field="*{email}" required>
                 <span th:if="${emailError}" th:text="${emailError}" class="form-error"></span>
             </div>
 
@@ -44,6 +44,8 @@
         <div th:if="${error}">
             <span th:text="${error}" class="text-red-500"></span>
         </div>
+        <span class="flex-grow"></span>
+        <div th:replace="~{/fragments/footer :: footer}"></div>
     </main>
 </body>
 

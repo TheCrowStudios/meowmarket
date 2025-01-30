@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
-    <script defer src="verify-registration-form.js"></script>
+    <script defer src="/scripts/verify-registration-form.js"></script>
     <title>Document</title>
 </head>
 
@@ -23,37 +23,39 @@
 
             <div class="form-div">
                 <label>Email</label>
-                <input class="form-input" type="text" th:field="*{email}" required>
+                <input class="form-input" type="email" th:field="*{email}" required>
                 <span th:if="${emailError}" th:text="${emailError}" class="form-error"></span>
             </div>
 
             <div class="form-div">
                 <label>Password</label>
-                <input class="form-input" type="password" th:field="*{password}" onchange="verifyPassword()" required>
+                <input class="form-input" id="password" type="password" th:field="*{password}"
+                    onchange="verifyPassword()" required>
                 <span th:if="${passwordError}" th:text="${passwordError}" class="form-error"></span>
             </div>
 
             <div class="form-div">
                 <label>Confirm password</label>
-                <input class="form-input" type="password" required>
+                <input class="form-input" id="confirm-password" type="password" required>
             </div>
 
-            <span>Already have an account? Log in <a href="/api/auth/login" class="text-highlight hover:text-red-500 transition-all duration-300 underline">here</a>!</span>
+            <span>Already have an account? Log in <a href="/api/auth/login"
+                    class="text-highlight hover:text-red-500 transition-all duration-300 underline">here</a>!</span>
 
             <div>
-                <button type="submit" class="button-highlight">Sign Up</button>
+                <button type="submit" class="button-highlight" id="submit">Sign Up</button>
+            </div>
+
+            <div>
+                <span class="opacity-0 text-highlight transition-all duration-300" id="error"></span>
+            </div>
+
+            <div th:if="${error}">
+                <span th:text="${error}"></span>
             </div>
         </form>
-
-        <div th:if="${errors}">
-            <div th:each="error : ${errors}">
-                <span th:text="${error.field + ': ' + error.defaultMessage}"></span>
-            </div>
-        </div>
-
-        <div th:if="${error}">
-            <span th:text="${error}"></span>
-        </div>
+        <span class="flex-grow"></span>
+        <div th:replace="~{/fragments/footer :: footer}"></div>
     </main>
 </body>
 

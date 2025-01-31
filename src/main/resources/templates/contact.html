@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
-    <title>Thank You For Your Purchase! - UKAutoParts</title>
+    <title>Contact - UKAutoParts</title>
 </head>
 
 <body class="body">
@@ -13,11 +13,13 @@
         <div th:replace="~{fragments/navbar :: navbar}"></div>
         <div
             class="absolute flex flex-col w-full p-4 gap-4 justify-center items-center text-center h-screen top-0 left-0">
-            <h1 class="text-primary text-3xl">Purchase completed successfully</h1>
-            <h3 class="text-primary text-xl">Thank you for your purchase!</h3>
             <span>Got questions? Visit our <a class="underline hover:text-highlight transition-all duration-300"
-                    href="/faq">FAQ</a> or <a class="underline hover:text-highlight transition-all duration-300"
-                    href="/contact">contact us</a></span>
+                    href="/faq">FAQ</a> or contact us here.</span>
+            <ul>
+                <li><span>Email: <a href="mailto:thecrowstudios@protonmail.com"
+                            class="text-primary text-lg hover:text-highlight transition-all duration-300 underline">thecrowstudios@protonmail.com</a></span>
+                </li>
+            </ul>
             <a class="underline hover:text-highlight transition-all duration-300" href="/">Home Page</a>
         </div>
         <span class="flex-grow"></span>

@@ -41,20 +41,13 @@ public class WebController {
         return "cart";
     }
 
-    // @GetMapping("/createListing")
-    // public String showCreateListing() {
-    // return "createListing";
-    // }
+    @GetMapping("/faq")
+    public String faq() {
+        return "faq";
+    }
 
-    // @PostMapping("/createListing")
-    // public String createListing(@Valid CreateListingForm createListingForm,
-    // BindingResult bindingResult) {
-    // if (bindingResult.hasErrors()) {
-    // return "createListing";
-    // }
-
-    // int listingId = 0;
-
-    // return "redirect:/listings/" + listingId;
-    // }
+    @GetMapping("/contact")
+    public String contact() {
+        return "contact";
+    }
 }

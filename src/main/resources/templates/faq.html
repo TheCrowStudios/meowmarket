@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Contact - UKAutoParts</title>
+</head>
+
+<body class="body">
+    <main class="main">
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+        <div class="flex flex-col w-full p-4 gap-4 text-left h-screen">
+            <span class="text-3xl font-bold">Frequently Asked Questions</span>
+            <ul>
+                <li><span class="text-xl font-bold text-primary">How long will delivery take?</span>
+                    <br>
+                    <span class="text-lg text-secondary">Delivery can take from 3 to 7 days, each item will state how
+                        long it should
+                        take to arrive.</span>
+                </li>
+                <br>
+                <li><span class="text-xl font-bold text-primary">How can I track my orders?</span>
+                    <br>
+                    <span class="text-lg text-secondary">You should receive an email with the tracking number as soon as
+                        it becomes available.</span>
+                </li>
+                <br>
+                <li><span class="text-xl font-bold text-primary">I would like to to cancel an order that I have
+                        placed.</span>
+                    <br>
+                    <span class="text-lg text-secondary">Send us an email <a
+                            class="hover:text-highlight transition-all duration-300 underline" href="/contact">here</a>.
+                        If the item has
+                        not yet been shipped we will cancel your order and send you a full refund.</span>
+                </li>
+            </ul>
+        </div>
+        <span class="flex-grow"></span>
+        <div th:replace="~{/fragments/footer :: footer}"></div>
+    </main>
+</body>
+
+</html>

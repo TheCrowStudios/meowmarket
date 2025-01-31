@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
-    <title>Document</title>
+    <title th:text="${category} + ' - UKAutoParts'"></title>
 </head>
 
 <body class="body">
@@ -30,6 +30,7 @@
                 </div>
             </div>
         </div>
+        <span class="flex-grow"></span>
         <div th:replace="~{/fragments/footer :: footer}"></div>
     </main>
 </body>

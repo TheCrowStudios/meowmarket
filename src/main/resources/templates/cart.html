@@ -6,13 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
     <script defer src="/scripts/cart.js"></script>
-    <title>Document</title>
+    <title>Cart - UKAutoParts</title>
 </head>
 
 <body class="body">
     <main class="main">
         <div th:replace="~{fragments/navbar :: navbar}"></div>
-        <div class="flex flex-col gap-4">
+        <div th:if="${cartItems.size() == 0}"
+            class="absolute flex flex-col w-full p-4 gap-4 justify-center items-center text-center h-screen top-0 left-0">
+            <span class="mt-4 text-xl text-center">No items here yet!
+                <br>
+                Add items from our range of car products to the
+                cart to see them here.</span>
+        </div>
+        <div th:if="${cartItems.size() > 0}" class="flex flex-col gap-4">
             <div th:each="cartItem : ${cartItems}" class="flex flex-row gap-4"
                 th:attr="id=|cart-item-${cartItem.listing.id}|">
                 <a th:href="'/listings/' + ${cartItem.listing.id}" class="w-2/12 min-w-32">
@@ -30,8 +37,10 @@
                             class="text-secondary text-xl align-text-bottom">
                             listing price
                         </h3>
-                        <input type="number" step="1" min="1" max="10" value="1" class="px-1 py-0.5 border border-primary rounded text-tertiary"
-                            id="quantity" th:value="${cartItem.quantity}" th:attr="onchange=|updateQuantity(${cartItem.listing.id}, this.value)|">
+                        <input type="number" step="1" min="1" max="10" value="1"
+                            class="px-1 py-0.5 border border-primary rounded text-tertiary" id="quantity"
+                            th:value="${cartItem.quantity}"
+                            th:attr="onchange=|updateQuantity(${cartItem.listing.id}, this.value)|">
                     </div>
                 </div>
                 <span class="flex-grow"></span>

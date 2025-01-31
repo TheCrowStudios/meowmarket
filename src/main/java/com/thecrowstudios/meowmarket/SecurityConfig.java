@@ -45,7 +45,8 @@ public class SecurityConfig {
                             response.sendRedirect("/api/auth/login");
                         })
                         .accessDeniedHandler((request, response, accessDeniedException) -> response
-                                .sendRedirect("/api/auth/login")));
+                                .sendRedirect("/api/auth/login")))
+                .anonymous(anonymous -> anonymous.disable()); // breaks cart sometimes if we dont do this
         return http.build();
     }
 

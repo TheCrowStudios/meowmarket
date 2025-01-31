@@ -41,6 +41,14 @@ async function removeFromCart(listingId: Number) {
         if (response.ok) {
             showMessage('Item removed from cart');
             listingDiv?.remove();
+            const listingDivs = document.getElementsByClassName('cart-item');
+            if (listingDivs.length === 0) {
+                const checkoutButton = document.getElementById('checkout-form') as HTMLFormElement;
+                const noItemsMessage = document.getElementById('no-items-message') as HTMLDivElement;
+                checkoutButton.remove();
+                noItemsMessage.classList.remove('hidden');
+                noItemsMessage.classList.add('absolute');
+            }
         } else {
             showMessage('Could not remove item from cart :c')
         }

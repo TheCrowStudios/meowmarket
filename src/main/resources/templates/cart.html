@@ -12,15 +12,19 @@
 <body class="body">
     <main class="main">
         <div th:replace="~{fragments/navbar :: navbar}"></div>
-        <div th:if="${cartItems.size() == 0}"
-            class="absolute flex flex-col w-full p-4 gap-4 justify-center items-center text-center h-screen top-0 left-0">
+        <div th:classappend="${cartItems.size() == 0} ? absolute : hidden"
+            class="flex flex-col w-full p-4 gap-4 justify-center items-center text-center h-screen top-0 left-0"
+            id="no-items-message">
             <span class="mt-4 text-xl text-center">No items here yet!
                 <br>
                 Add items from our range of car products to the
-                cart to see them here.</span>
+                cart to see them here.
+                <br>
+                <a class="underline hover:text-highlight transition-all duration-300" href="/">Home Page</a>
+            </span>
         </div>
         <div th:if="${cartItems.size() > 0}" class="flex flex-col gap-4">
-            <div th:each="cartItem : ${cartItems}" class="flex flex-row gap-4"
+            <div th:each="cartItem : ${cartItems}" class="flex flex-row gap-4 cart-item"
                 th:attr="id=|cart-item-${cartItem.listing.id}|">
                 <a th:href="'/listings/' + ${cartItem.listing.id}" class="w-2/12 min-w-32">
                     <img th:src="'/upload-dir/' + ${cartItem.listing.images.get(0).imageUrl}"
@@ -58,7 +62,8 @@
                 </div>
             </div>
         </div>
-        <form th:if="${cartItems.size() > 0}" th:action="@{/api/create-checkout-session/cart}" method="POST">
+        <form th:if="${cartItems.size() > 0}" th:action="@{/api/create-checkout-session/cart}" method="POST"
+            id="checkout-form">
             <button type="submit" id="checkout-button" class="button-highlight w-auto px-4 py-2">
                 <div class="flex flex-row items-center justify-center w-fit gap-x-4">
                     <span class="text-nowrap">Check Out</span>

@@ -51,6 +51,14 @@ function removeFromCart(listingId) {
             if (response.ok) {
                 showMessage('Item removed from cart');
                 listingDiv === null || listingDiv === void 0 ? void 0 : listingDiv.remove();
+                const listingDivs = document.getElementsByClassName('cart-item');
+                if (listingDivs.length === 0) {
+                    const checkoutButton = document.getElementById('checkout-form');
+                    const noItemsMessage = document.getElementById('no-items-message');
+                    checkoutButton.remove();
+                    noItemsMessage.classList.remove('hidden');
+                    noItemsMessage.classList.add('absolute');
+                }
             }
             else {
                 showMessage('Could not remove item from cart :c');

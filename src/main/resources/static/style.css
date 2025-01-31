@@ -816,6 +816,14 @@ video {
   min-width: 2rem;
 }
 
+.min-w-72 {
+  min-width: 18rem;
+}
+
+.min-w-32 {
+  min-width: 8rem;
+}
+
 .max-w-fit {
   max-width: -moz-fit-content;
   max-width: fit-content;
@@ -905,6 +913,10 @@ video {
 
 .rounded-sm {
   border-radius: 0.125rem;
+}
+
+.rounded-xl {
+  border-radius: 0.75rem;
 }
 
 .border-x-2 {

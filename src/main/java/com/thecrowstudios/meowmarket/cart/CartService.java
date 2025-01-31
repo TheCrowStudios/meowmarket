@@ -65,7 +65,11 @@ public class CartService {
     }
 
     public void removeCartItem(Integer listingId) {
-        // TODO - this
+        User user = userService.getUser();
+        if (user != null)
+            cartItemRepository.removeByUser_IdAndListing_Id(user.getId(), listingId);
+
+        cartItemRepository.removeBySessionAndListing_Id(httpSession.getId(), listingId);
     }
 
     public void clearCart() {

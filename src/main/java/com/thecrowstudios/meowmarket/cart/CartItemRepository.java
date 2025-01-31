@@ -13,4 +13,10 @@ public interface CartItemRepository extends CrudRepository<CartItem, Integer> {
 
     @Transactional
     void deleteAllBySession(String sessionId);
+
+    @Transactional
+    void removeByUser_IdAndListing_Id(Integer userId, Integer listingId);
+
+    @Transactional
+    void removeBySessionAndListing_Id(String session, Integer listingId);
 }

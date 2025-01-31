@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
+    <script defer src="/scripts/cart.js"></script>
     <title>Document</title>
 </head>
 
@@ -12,14 +13,23 @@
     <main class="main">
         <div th:replace="~{fragments/navbar :: navbar}"></div>
         <div class="flex flex-col gap-4">
-            <div th:each="cartItem : ${cartItems}" class="flex flex-row gap-4">
-                <a th:href="'/listings/' + ${cartItem.listing.id}" class="w-2/12">
+            <div th:each="cartItem : ${cartItems}" class="flex flex-row gap-4" th:attr="id=|cart-item-${cartItem.listing.id}|">
+                <a th:href="'/listings/' + ${cartItem.listing.id}" class="w-2/12 min-w-32">
                     <img th:src="'/upload-dir/' + ${cartItem.listing.images.get(0).imageUrl}"
-                        th:alt="${cartItem.listing.title}">
+                        th:alt="${cartItem.listing.title}" class="rounded-lg">
                 </a>
-                <a th:href="'/listings/' + ${cartItem.listing.id}">
-                    <h3 th:text="${cartItem.listing.title}" class="text-primary text-xl">listing title</h3>
-                </a>
+                <div class="flex flex-col gap-4">
+                    <a th:href="'/listings/' + ${cartItem.listing.id}">
+                        <h3 th:text="${cartItem.listing.title}"
+                            class="text-primary text-xl hover:text-highlight transition-all duration-300">listing title
+                        </h3>
+                    </a>
+                    <h3 th:text="'£' + ${#numbers.formatDecimal(cartItem.listing.price, 2, 2)}"
+                        class="text-secondary text-xl">
+                        listing
+                        price
+                    </h3>
+                </div>
                 <span class="flex-grow"></span>
                 <div class="flex flex-col gap-4">
                     <form th:action="'/purchase/create-checkout-session/' + ${cartItem.listing.id}" method="POST">
@@ -30,14 +40,12 @@
                             </div>
                         </button>
                     </form>
-                    <form th:action="@{/cart/remove/} + ${cartItem.listing.id}">
-                        <button type="submit" id="checkout-button"
-                            class="button-highlight w-full px-4 py-2">Remove</button>
-                    </form>
+                    <button id="remove-button" class="button-highlight w-full px-4 py-2"
+                        th:attr="onclick=|removeFromCart(${cartItem.listing.id})|">Remove</button>
                 </div>
             </div>
         </div>
-        <form th:if="${cartItems.size() > 0}" th:action="@{/purchase/create-checkout-session/} + ${cartItem.listing.id}" method="POST">
+        <form th:if="${cartItems.size() > 0}" th:action="@{/api/create-checkout-session/cart}" method="POST">
             <button type="submit" id="checkout-button" class="button-highlight w-auto px-4 py-2">
                 <div class="flex flex-row items-center justify-center w-fit gap-x-4">
                     <span class="text-nowrap">Check Out</span>

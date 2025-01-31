@@ -61,6 +61,7 @@ public class UserService {
         if (authentication != null && authentication.isAuthenticated()) {
             String email = authentication.getName();
             System.out.println("Authenticated user email: " + email);
+            System.out.println("Authenticated user id: " + email);
             return userRepository.findByEmail(email).orElse(null);
         }
 

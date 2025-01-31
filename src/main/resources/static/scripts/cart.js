@@ -33,6 +33,32 @@ function addToCart(listingId) {
         }
     });
 }
+function removeFromCart(listingId) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const listingDiv = document.getElementById('cart-item-' + listingId);
+        try {
+            const response = yield fetch('/api/cart/remove/' + listingId, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    listingId: listingId,
+                })
+            });
+            if (response.ok) {
+                showMessage('Item removed from cart');
+                listingDiv === null || listingDiv === void 0 ? void 0 : listingDiv.remove();
+            }
+            else {
+                showMessage('Could not remove item from cart :c');
+            }
+        }
+        catch (_a) {
+            showMessage('Could not remove item from cart :c');
+        }
+    });
+}
 function showMessage(message) {
     const msg = document.createElement('div');
     msg.classList.add('self-center');

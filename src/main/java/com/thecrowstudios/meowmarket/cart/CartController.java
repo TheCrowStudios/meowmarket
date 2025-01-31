@@ -36,7 +36,7 @@ public class CartController {
         return ResponseEntity.ok(cartService.getCartItems());
     }
 
-    @DeleteMapping("/{listingId}")
+    @PostMapping("/remove/{listingId}")
     public ResponseEntity<String> removeItem(@PathVariable Integer listingId) {
         cartService.removeCartItem(listingId);
         return ResponseEntity.ok("Item removed from cart");

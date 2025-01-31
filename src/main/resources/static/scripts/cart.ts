@@ -1,4 +1,7 @@
 async function addToCart(listingId: Number) {
+    const quantityInput = document.getElementById('quantity') as HTMLInputElement;
+    const quantity = quantityInput.value;
+
     try {
         const response = await fetch('/api/cart/add-to-cart', {
             method: 'POST',
@@ -7,7 +10,7 @@ async function addToCart(listingId: Number) {
             },
             body: JSON.stringify({
                 listingId: listingId,
-                quantity: 1
+                quantity: quantity
             })
         });
 
@@ -43,6 +46,28 @@ async function removeFromCart(listingId: Number) {
         }
     } catch {
         showMessage('Could not remove item from cart :c')
+    }
+}
+
+async function updateQuantity(listingId: Number, quantity: Number) {
+    try {
+        const response = await fetch('/api/cart/update-quantity', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                listingId: listingId,
+                quantity: quantity
+            })
+        });
+
+        if (response.ok) {
+        } else {
+            showMessage('Could not update quantity')
+        }
+    } catch {
+        showMessage('Could not update quantity')
     }
 }
 

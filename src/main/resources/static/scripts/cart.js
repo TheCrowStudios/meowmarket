@@ -10,6 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 function addToCart(listingId) {
     return __awaiter(this, void 0, void 0, function* () {
+        const quantityInput = document.getElementById('quantity');
+        const quantity = quantityInput.value;
         try {
             const response = yield fetch('/api/cart/add-to-cart', {
                 method: 'POST',
@@ -18,7 +20,7 @@ function addToCart(listingId) {
                 },
                 body: JSON.stringify({
                     listingId: listingId,
-                    quantity: 1
+                    quantity: quantity
                 })
             });
             if (response.ok) {
@@ -56,6 +58,30 @@ function removeFromCart(listingId) {
         }
         catch (_a) {
             showMessage('Could not remove item from cart :c');
+        }
+    });
+}
+function updateQuantity(listingId, quantity) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const response = yield fetch('/api/cart/update-quantity', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    listingId: listingId,
+                    quantity: quantity
+                })
+            });
+            if (response.ok) {
+            }
+            else {
+                showMessage('Could not update quantity');
+            }
+        }
+        catch (_a) {
+            showMessage('Could not update quantity');
         }
     });
 }

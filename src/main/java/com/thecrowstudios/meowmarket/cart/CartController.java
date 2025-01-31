@@ -26,6 +26,12 @@ public class CartController {
         return ResponseEntity.ok("Item added/updated in cart");
     }
 
+    @PostMapping("/update-quantity")
+    public ResponseEntity<String> updateQuantity(@RequestBody CartRequestDTO request) {
+        cartService.addOrUpdateCartItem(request.getListingId(), request.getQuantity());
+        return ResponseEntity.ok("Item quantity updated in cart");
+    }
+
     @GetMapping("/check/{listingId}")
     public ResponseEntity<Boolean> checkItemInCart(@PathVariable Integer listingId) {
         return ResponseEntity.ok(cartService.isItemInCart(listingId));

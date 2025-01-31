@@ -13,7 +13,8 @@
     <main class="main">
         <div th:replace="~{fragments/navbar :: navbar}"></div>
         <div class="flex flex-col gap-4">
-            <div th:each="cartItem : ${cartItems}" class="flex flex-row gap-4" th:attr="id=|cart-item-${cartItem.listing.id}|">
+            <div th:each="cartItem : ${cartItems}" class="flex flex-row gap-4"
+                th:attr="id=|cart-item-${cartItem.listing.id}|">
                 <a th:href="'/listings/' + ${cartItem.listing.id}" class="w-2/12 min-w-32">
                     <img th:src="'/upload-dir/' + ${cartItem.listing.images.get(0).imageUrl}"
                         th:alt="${cartItem.listing.title}" class="rounded-lg">
@@ -24,11 +25,14 @@
                             class="text-primary text-xl hover:text-highlight transition-all duration-300">listing title
                         </h3>
                     </a>
-                    <h3 th:text="'£' + ${#numbers.formatDecimal(cartItem.listing.price, 2, 2)}"
-                        class="text-secondary text-xl">
-                        listing
-                        price
-                    </h3>
+                    <div class="flex flex-row gap-4">
+                        <h3 th:text="'£' + ${#numbers.formatDecimal(cartItem.listing.price, 2, 2)}"
+                            class="text-secondary text-xl align-text-bottom">
+                            listing price
+                        </h3>
+                        <input type="number" step="1" min="1" max="10" value="1" class="px-1 py-0.5 border border-primary rounded text-tertiary"
+                            id="quantity" th:value="${cartItem.quantity}" th:attr="onchange=|updateQuantity(${cartItem.listing.id}, this.value)|">
+                    </div>
                 </div>
                 <span class="flex-grow"></span>
                 <div class="flex flex-col gap-4">

@@ -91,20 +91,24 @@
                     Description</p>
                 <br>
                 <span class="flex-grow"></span>
-                <div class="flex flex-row gap-4">
-                    <span class="flex-grow"></span>
-                    <form th:action="@{/purchase/create-checkout-session/} + ${listing.id}" method="POST">
-                        <button type="submit" id="checkout-button" class="button-highlight w-auto px-4 py-2">
-                            <div class="flex flex-row items-center justify-center w-fit gap-x-4">
+                <div class="flex flex-col gap-4">
+                    <form th:action="@{/purchase/create-checkout-session/} + ${listing.id}" method="POST"
+                        class="flex flex-grow">
+                        <button type="submit" id="checkout-button" class="button-highlight flex-grow px-4 py-2">
+                            <div class="flex flex-row flex-grow items-center justify-center gap-x-4">
                                 <span class="text-nowrap">Buy Now</span>
                                 <img src="/images/stripe.svg" alt="" class="h-6 w-auto">
                             </div>
                         </button>
                     </form>
 
-                    <button id="checkout-button" th:attr="onclick=|addToCart(${listing.id})|"
-                        class="button-highlight px-4 py-2">
-                        <span class="text-nowrap">Add To Cart</span></button>
+                    <div class="flex flex-row gap-4 flex-grow">
+                        <input type="number" step="1" min="1" max="10" value="1" class="w-1/4 p-2 border border-primary rounded text-tertiary"
+                            id="quantity">
+                        <button id="checkout-button" th:attr="onclick=|addToCart(${listing.id})|"
+                            class="button-highlight flex-grow px-4 py-2">
+                            <span class="text-nowrap">Add To Cart</span></button>
+                    </div>
                 </div>
             </div>
         </div>

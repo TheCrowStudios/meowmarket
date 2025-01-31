@@ -34,15 +34,17 @@ public class CartService {
                 .orElseThrow(() -> new RuntimeException("No listing with id " + listingId));
 
         User user = userService.getUser();
+        CartItem cartItem = null;
+
         if (user != null) {
-            CartItem cartItem = new CartItem();
+            if (cartItem == null) cartItem = cartItemRepository.findByUser_IdAndListing_Id(user.getId(), listingId).orElse(new CartItem());
             cartItem.setListing(listing);
             cartItem.setUser(user);
             cartItem.setQuantity(quantity);
 
             cartItemRepository.save(cartItem);
         } else {
-            CartItem cartItem = new CartItem();
+            if (cartItem == null) cartItem = cartItemRepository.findBySessionAndListing_Id(httpSession.getId(), listingId).orElse(new CartItem());
             cartItem.setListing(listing);
             cartItem.setSession(httpSession.getId());
             

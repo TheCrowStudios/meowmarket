@@ -88,7 +88,7 @@ public class StripeController {
             builder
                     .addLineItem(
                             SessionCreateParams.LineItem.builder()
-                                    .setQuantity(1L)
+                                    .setQuantity(cartItem.getQuantity().longValue())
                                     .setPriceData(
                                             SessionCreateParams.LineItem.PriceData.builder().setCurrency("gbp")
                                                     .setUnitAmountDecimal(

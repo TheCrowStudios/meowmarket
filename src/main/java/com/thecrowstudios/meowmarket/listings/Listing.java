@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.thecrowstudios.meowmarket.cart.CartItem;
@@ -35,13 +36,17 @@ public class Listing {
     @Enumerated(EnumType.STRING)
     private ItemCategory category;
 
-    @Column(nullable=false, updatable = false)
+    @Column(nullable=false, updatable = true)
+    @ColumnDefault("3")
     private Double price;
 
-    @Column(nullable=true, updatable = false)
+    @Column(nullable=true, updatable = true)
     private Double originalPrice;
 
     private Integer quantityInStock;
+
+    @Column(nullable = false, updatable = true)
+    private String delivery;
 
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
@@ -124,6 +129,14 @@ public class Listing {
 
     public Integer getQuantityInStock() {
         return this.quantityInStock;
+    }
+
+    public String getDelivery() {
+        return this.delivery;
+    }
+
+    public void setDelivery(String delivery) {
+        this.delivery = delivery;
     }
 
     public void setQuantityInStock(Integer quantityInStock) {

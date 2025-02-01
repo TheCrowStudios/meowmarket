@@ -55,6 +55,7 @@ public class ListingController {
         listingDTO.setDescription(listing.getDescription());
         listingDTO.setPrice(listing.getPrice());
         listingDTO.setQuantityInStock(listing.getQuantityInStock());
+        listingDTO.setDelivery(listing.getDelivery());
         listingDTO.setLongDescription(listing.getLongDescription());
         model.addAttribute("listingDTO", listingDTO);
         model.addAttribute("endpoint", "edit");

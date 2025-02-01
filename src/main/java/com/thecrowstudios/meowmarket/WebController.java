@@ -55,4 +55,9 @@ public class WebController {
     public String checkout() {
         return "checkout";
     }
+
+    @GetMapping("/return")
+    public String returnPage() {
+        return "return";
+    }
 }

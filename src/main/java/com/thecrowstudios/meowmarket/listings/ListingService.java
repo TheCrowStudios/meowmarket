@@ -29,6 +29,7 @@ public class ListingService {
         listing.setCategory(listingDTO.getCategory());
         listing.setPrice(listingDTO.getPrice());
         listing.setQuantityInStock(listingDTO.getQuantityInStock());
+        listing.setDelivery(listingDTO.getDelivery());
 
         List<MultipartFile> images = listingDTO.getImages();
 

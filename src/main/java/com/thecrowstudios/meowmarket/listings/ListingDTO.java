@@ -14,6 +14,7 @@ public class ListingDTO {
     private ItemCategory category;
     private double price;
     private Integer quantityInStock;
+    private String delivery;
     private List<MultipartFile> images;
 
     public Integer getId() {
@@ -70,6 +71,14 @@ public class ListingDTO {
 
     public Integer getQuantityInStock() {
         return this.quantityInStock;
+    }
+
+    public String getDelivery() {
+        return this.delivery;
+    }
+
+    public void setDelivery(String delivery) {
+        this.delivery = delivery;
     }
 
     public void setQuantityInStock(Integer quantityInStock) {

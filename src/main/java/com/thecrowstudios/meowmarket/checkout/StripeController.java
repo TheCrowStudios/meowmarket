@@ -150,7 +150,7 @@ public class StripeController {
 
         Map<String, String> map = new HashMap();
         map.put("status", session.getStatus());
-        map.put("customer_email", session.getCustomerEmail());
+        map.put("customer_email", session.getCustomerDetails().getEmail());
 
         return ResponseEntity.ok(map);
     }
@@ -161,7 +161,7 @@ public class StripeController {
         SessionCreateParams.Builder params = SessionCreateParams.builder()
                 .setUiMode(SessionCreateParams.UiMode.EMBEDDED)
                 .setMode(SessionCreateParams.Mode.PAYMENT)
-                .setReturnUrl(domain + "purchase/return?session_id={CHECKOUT_SESSION_ID}")
+                .setReturnUrl(domain + "return?session_id={CHECKOUT_SESSION_ID}")
                 .setShippingAddressCollection(ShippingAddressCollection.builder().addAllowedCountry(AllowedCountry.GB)
                         .addAllowedCountry(AllowedCountry.IE).addAllowedCountry(AllowedCountry.IM).build());
 

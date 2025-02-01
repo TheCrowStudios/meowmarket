@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Thank You For Your Purchase! - UKAutoParts</title>
+    <script src="/scripts/return.js" defer></script>
+</head>
+
+<body class="body">
+    <main class="main">
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+        <div
+            class="absolute flex flex-col w-full p-4 gap-4 justify-center items-center text-center h-screen top-0 left-0" id="success" class="hidden">
+            <h1 class="text-primary text-3xl">Purchase completed successfully</h1>
+            <span class="text-primary text-xl">Thank you for your purchase! A confirmation email will be sent to <span id="customer-email"></span></span>
+            <span>Got questions? Visit our <a class="underline hover:text-highlight transition-all duration-300"
+                    href="/faq">FAQ</a> or <a class="underline hover:text-highlight transition-all duration-300"
+                    href="/contact">contact us</a></span>
+            <a class="underline hover:text-highlight transition-all duration-300" href="/">Home Page</a>
+        </div>
+        <span class="flex-grow"></span>
+        <div th:replace="~{/fragments/footer :: footer}"></div>
+    </main>
+</body>
+
+</html>

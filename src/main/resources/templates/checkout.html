@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="/style.css">
+  <title>Checkout - UKAutoParts</title>
+  <meta name="description" content="UKAutoParts Checkout" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="/scripts/checkout.js" defer></script>
+</head>
+
+<body>
+  <span th:text="${path}" id="path" class="hidden"></span>
+  <main class="main w-screen">
+    <!-- Display a payment form -->
+    <div id="checkout">
+      <!-- Checkout will insert the payment form here -->
+    </div>
+  </main>
+</body>
+
+</html>

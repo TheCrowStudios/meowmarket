@@ -50,4 +50,9 @@ public class WebController {
     public String contact() {
         return "contact";
     }
+
+    @GetMapping("/checkout")
+    public String checkout() {
+        return "checkout";
+    }
 }

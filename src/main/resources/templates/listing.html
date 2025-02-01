@@ -92,7 +92,7 @@
                 <br>
                 <span class="flex-grow"></span>
                 <div class="flex flex-col gap-4">
-                    <form th:action="@{/purchase/create-checkout-session/} + ${listing.id}" method="POST"
+                    <form th:action="@{/api/create-checkout-session/checkout/listing/} + ${listing.id}" method="POST"
                         class="flex flex-grow">
                         <button type="submit" id="checkout-button" class="button-highlight flex-grow px-4 py-2">
                             <div class="flex flex-row flex-grow items-center justify-center gap-x-4">

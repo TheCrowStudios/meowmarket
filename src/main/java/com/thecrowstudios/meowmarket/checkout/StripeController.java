@@ -30,7 +30,7 @@ import com.thecrowstudios.meowmarket.listings.Listing;
 import com.thecrowstudios.meowmarket.listings.ListingRepository;
 
 @Controller
-@RequestMapping("/api/create-checkout-session")
+@RequestMapping("/api/stripe")
 public class StripeController {
     @Autowired
     private ListingRepository listingRepository;
@@ -41,8 +41,8 @@ public class StripeController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/listing/{listingId}")
-    public ResponseEntity<Map<String, String>> createCheckoutSession(@PathVariable Integer listingId) {
+    @PostMapping("/create-checkout-session/listing/{listingId}")
+    public ResponseEntity<Map<String, String>> createCheckoutSessionListing(@PathVariable Integer listingId) {
         Listing listing;
 
         try {
@@ -102,8 +102,8 @@ public class StripeController {
         return ("checkout");
     }
 
-    @PostMapping("/cart")
-    public ResponseEntity<Map<String, String>> createCheckoutSession() {
+    @PostMapping("/create-checkout-session/cart")
+    public ResponseEntity<Map<String, String>> createCheckoutSessionCart() {
         List<CartItem> cartItems = cartService.getCartItems();
 
         if (cartItems.size() == 0) {

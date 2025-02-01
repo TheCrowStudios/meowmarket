@@ -62,7 +62,7 @@
                 </div>
             </div>
         </div>
-        <form th:if="${cartItems.size() > 0}" th:action="@{/api/create-checkout-session/checkout/cart}" method="POST"
+        <form th:if="${cartItems.size() > 0}" th:action="@{/api/stripe/checkout/cart}" method="POST"
             id="checkout-form">
             <button type="submit" id="checkout-button" class="button-highlight w-auto px-4 py-2">
                 <div class="flex flex-row items-center justify-center w-fit gap-x-4">

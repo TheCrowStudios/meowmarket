@@ -4,7 +4,7 @@ async function initialize() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const sessionId = urlParams.get('session_id');
-  const response = await fetch(`/api/create-checkout-session/session-status/${sessionId}`);
+  const response = await fetch(`/api/stripe/create-checkout-session/session-status/${sessionId}`);
   const session = await response.json();
 
   if (session.status == 'open') {

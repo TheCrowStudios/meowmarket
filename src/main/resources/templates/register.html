@@ -17,14 +17,16 @@
             class="flex flex-col w-full p-4 gap-4 justify-center self-center items-center text-center max-w-96">
             <div class="form-div">
                 <label>Username</label>
-                <input class="form-input" id="username" type="text" th:field="*{username}" onchange="validateUsername()" required>
+                <input class="form-input" id="username" type="text" th:field="*{username}" onchange="validateUsername()"
+                    required>
                 <span th:if="${usernameError}" th:text="${usernameError}" class="form-error"></span>
                 <span class="form-error hidden" id="error-username"></span>
             </div>
 
             <div class="form-div">
                 <label>Email</label>
-                <input class="form-input" id="email" type="email" th:field="*{email}" onchange="validateEmail()" required>
+                <input class="form-input" id="email" type="email" th:field="*{email}" onchange="validateEmail()"
+                    required>
                 <span th:if="${emailError}" th:text="${emailError}" class="form-error"></span>
                 <span class="form-error hidden" id="error-email"></span>
             </div>

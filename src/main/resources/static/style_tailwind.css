@@ -40,7 +40,7 @@
     }
 
     .form-error {
-        @apply text-left text-red-500;
+        @apply text-left text-red-500 break-words;
     }
 
     .button-highlight {

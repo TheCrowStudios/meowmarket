@@ -684,6 +684,7 @@ video {
 }
 
 .form-error {
+  overflow-wrap: break-word;
   text-align: left;
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity, 1));
@@ -837,6 +838,10 @@ video {
 .max-w-fit {
   max-width: -moz-fit-content;
   max-width: fit-content;
+}
+
+.max-w-96 {
+  max-width: 24rem;
 }
 
 .flex-shrink-0 {

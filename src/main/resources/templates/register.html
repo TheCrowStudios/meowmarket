@@ -14,29 +14,33 @@
         <div th:replace="~{fragments/navbar :: navbar}"></div>
 
         <form th:action="@{/api/auth/register}" th:object="${userRegistrationDTO}" method="POST"
-            class="flex flex-col w-full p-4 gap-4 justify-center items-center text-center">
+            class="flex flex-col w-full p-4 gap-4 justify-center self-center items-center text-center max-w-96">
             <div class="form-div">
                 <label>Username</label>
-                <input class="form-input" type="text" th:field="*{username}" required>
+                <input class="form-input" id="username" type="text" th:field="*{username}" onchange="validateUsername()" required>
                 <span th:if="${usernameError}" th:text="${usernameError}" class="form-error"></span>
+                <span class="form-error hidden" id="error-username"></span>
             </div>
 
             <div class="form-div">
                 <label>Email</label>
-                <input class="form-input" type="email" th:field="*{email}" required>
+                <input class="form-input" id="email" type="email" th:field="*{email}" onchange="validateEmail()" required>
                 <span th:if="${emailError}" th:text="${emailError}" class="form-error"></span>
+                <span class="form-error hidden" id="error-email"></span>
             </div>
 
             <div class="form-div">
                 <label>Password</label>
                 <input class="form-input" id="password" type="password" th:field="*{password}"
-                    onchange="verifyPassword()" required>
+                    onchange="validatePassword()" required>
                 <span th:if="${passwordError}" th:text="${passwordError}" class="form-error"></span>
+                <span class="form-error hidden" id="error-password"></span>
             </div>
 
             <div class="form-div">
                 <label>Confirm password</label>
-                <input class="form-input" id="confirm-password" type="password" required>
+                <input class="form-input" id="confirm-password" type="password" onchange="validatePassword()" required>
+                <span class="form-error hidden" id="error-password-confirm"></span>
             </div>
 
             <span>Already have an account? Log in <a href="/api/auth/login"

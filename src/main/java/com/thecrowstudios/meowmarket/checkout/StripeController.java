@@ -22,6 +22,8 @@ import com.stripe.model.terminal.Reader.Action.SetReaderDisplay.Cart;
 import com.stripe.param.checkout.SessionCreateParams;
 import com.stripe.param.checkout.SessionCreateParams.ShippingAddressCollection;
 import com.stripe.param.checkout.SessionCreateParams.ShippingAddressCollection.AllowedCountry;
+import com.thecrowstudios.meowmarket.authentication.User;
+import com.thecrowstudios.meowmarket.authentication.UserService;
 import com.thecrowstudios.meowmarket.cart.CartItem;
 import com.thecrowstudios.meowmarket.cart.CartService;
 import com.thecrowstudios.meowmarket.listings.Listing;
@@ -35,6 +37,9 @@ public class StripeController {
 
     @Autowired
     private CartService cartService;
+
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/listing/{listingId}")
     public ResponseEntity<Map<String, String>> createCheckoutSession(@PathVariable Integer listingId) {
@@ -66,6 +71,12 @@ public class StripeController {
                                                 .build())
                                 .build())
                 .build();
+
+        User user = userService.getUser();
+
+        if (user != null) {
+            builder.setCustomerEmail(user.getEmail());
+        }
 
         try {
             Session session = Session.create(params);
@@ -120,6 +131,12 @@ public class StripeController {
                                                                     .build())
                                                     .build())
                                     .build());
+        }
+
+        User user = userService.getUser();
+
+        if (user != null) {
+            builder.setCustomerEmail(user.getEmail());
         }
 
         SessionCreateParams params = builder.build();

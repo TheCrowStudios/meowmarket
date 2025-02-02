@@ -63,10 +63,9 @@ public class UserService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication != null && authentication.isAuthenticated()) {
-            String email = authentication.getName();
-            System.out.println("Authenticated user email: " + email);
-            System.out.println("Authenticated user id: " + email);
-            return userRepository.findByEmail(email).orElse(null);
+            String username = authentication.getName();
+            System.out.println("Authenticated user name: " + username);
+            return userRepository.findByUsername(username).orElse(null);
         }
 
         System.out.println("No authenticated user found");

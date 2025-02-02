@@ -1,7 +1,10 @@
 package com.thecrowstudios.meowmarket.authentication;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +44,9 @@ public class UserService {
         user.setUsername(userRegistrationDTO.getUsername());
         user.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
         user.setEmail(userRegistrationDTO.getEmail());
-        user.setAuthorities("ROLE_USER");
+        Set<String> auths = new HashSet<>();
+        auths.add("ROLE_USER");
+        user.setAuthorities(auths);
 
         return userRepository.save(user);
     }

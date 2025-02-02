@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.hibernate.annotations.ColumnDefault;
@@ -21,6 +22,7 @@ import com.thecrowstudios.meowmarket.orders.Order;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -34,8 +36,6 @@ import jakarta.persistence.TemporalType;
 
 @Entity
 public class User implements UserDetails {
-    private static final String AUTHORITIES_DELIMITER = "::";
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -49,11 +49,11 @@ public class User implements UserDetails {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @ColumnDefault("ROLE_USER")
-    private String authorities;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<String> roles;
 
-    @Enumerated(EnumType.STRING)
-    private UserRole role;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<String> authorities;
 
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
@@ -119,14 +119,6 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public UserRole getRole() {
-        return this.role;
-    }
-
-    public void setRole(UserRole role) {
-        this.role = role;
-    }
-
     public List<CartItem> getCartItems() {
         return this.cartItems;
     }
@@ -135,7 +127,7 @@ public class User implements UserDetails {
         this.cartItems = cartItems;
     }
 
-    public void setAuthorities(String authorities) {
+    public void setAuthorities(Set<String> authorities) {
         this.authorities = authorities;
     }
 
@@ -155,12 +147,19 @@ public class User implements UserDetails {
         this.orders = orders;
     }
 
+    public Set<String> getRoles() {
+        return this.roles;
+    }
+
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         System.out.println("Getting authorities for user: " + this.email);
-        Collection<? extends GrantedAuthority> auths = Arrays.stream(this.authorities.split(AUTHORITIES_DELIMITER))
-                .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
-        System.out.println("Returning authorities: " + auths);
+        Set<GrantedAuthority> auths = this.roles.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role)).collect(Collectors.toSet());
+        auths.addAll(this.authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toSet()));
         return auths;
     }
 }

@@ -34,6 +34,7 @@ dependencies {
 	implementation 'com.stripe:stripe-java:28.2.0'
 	implementation("org.springframework.session:spring-session-jdbc")
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'com.google.code.gson:gson:2.12.1'
 }
 
 tasks.named('test') {

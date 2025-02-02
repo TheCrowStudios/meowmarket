@@ -11,6 +11,56 @@
 <body class="body">
     <main class="main">
         <div th:replace="~{fragments/navbar :: navbar}"></div>
+        <div th:classappend="${orders.size() == 0} ? absolute : hidden"
+            class="flex flex-col w-full p-4 gap-4 justify-center items-center text-center h-screen top-0 left-0"
+            id="no-orders-message">
+            <span class="mt-4 text-xl text-center">No orders here yet!
+                <br>
+                Your orders will appear here.
+                <br>
+                <a class="underline hover:text-highlight transition-all duration-300" href="/">Home Page</a>
+            </span>
+        </div>
+        <div th:if="${orders.size() > 0}" class="flex flex-col gap-4">
+            <div th:each="order : ${orders}" class="flex flex-row gap-4 cart-item" th:attr="id=|order-${order.id}|">
+
+                <div th:each="listing : ${order.listings}" class="flex flex-row gap-4 cart-item">
+
+                    <a th:href="'/listings/' + ${listing.listing.id}" class="w-2/12 min-w-32">
+                        <img th:src="'/upload-dir/' + ${listing.listing.images.get(0).imageUrl}"
+                            th:alt="${listing.listing.title}" class="rounded-lg">
+                    </a>
+                    <div class="flex flex-col gap-4">
+                        <a th:href="'/listings/' + ${listing.listing.id}">
+                            <h3 th:text="${listing.listing.title}"
+                                class="text-primary text-xl hover:text-highlight transition-all duration-300">listing
+                                title
+                            </h3>
+                        </a>
+                        <div class="flex flex-row gap-4">
+                            <h3 th:text="'£' + ${#numbers.formatDecimal(listing.amountPaid, 2, 2)}"
+                                class="text-secondary text-xl">
+                                listing price
+                            </h3>
+                            <span class="text-secondary">x<span th:text="${listing.quantity}" class="text-secondary text-xl">quantity purchased</span></span>
+                            
+                        </div>
+                    </div>
+                    <span class="flex-grow"></span>
+                    <div class="flex flex-col gap-4">
+                        <form th:action="'/api/stripe/create-checkout-session/cart' + ${listing.listing.id}"
+                            method="POST">
+                            <button type="submit" id="checkout-button" class="button-highlight w-auto px-4 py-2">
+                                <div class="flex flex-row items-center justify-center w-fit gap-x-4">
+                                    <span class="text-nowrap">Buy Now</span>
+                                    <img src="/images/stripe.svg" alt="" class="h-6 w-auto">
+                                </div>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <span class="flex-grow"></span>
         <div th:replace="~{/fragments/footer :: footer}"></div>
     </main>

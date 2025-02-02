@@ -27,6 +27,10 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    public User getUserById(Integer id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
     public User registerNewUser(UserRegistrationDTO userRegistrationDTO) {
         if (userRepository.existsByUsername(userRegistrationDTO.getUsername()))
             throw new RuntimeException("Username is already in use");

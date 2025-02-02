@@ -2,12 +2,17 @@ package com.thecrowstudios.meowmarket.listings;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.thecrowstudios.meowmarket.cart.CartItem;
+import com.thecrowstudios.meowmarket.orders.Order;
+import com.thecrowstudios.meowmarket.orders.OrderListing;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -18,6 +23,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -59,6 +65,9 @@ public class Listing {
 
     @OneToMany(mappedBy = "listing", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<CartItem> cartItems = new ArrayList<>();
+
+    @OneToMany(mappedBy = "listing", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<OrderListing> ordersListings = new HashSet<>();
 
     public enum ItemCategory {
         OBD_READERS, STEERING_WHEELS
@@ -177,5 +186,13 @@ public class Listing {
 
     public void setCartItems(List<CartItem> cartItems) {
         this.cartItems = cartItems;
+    }
+
+    public Set<OrderListing> getOrdersListings() {
+        return this.ordersListings;
+    }
+
+    public void setOrdersListings(Set<OrderListing> ordersListings) {
+        this.ordersListings = ordersListings;
     }
 }

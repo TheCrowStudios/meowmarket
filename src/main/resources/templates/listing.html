@@ -47,7 +47,7 @@
                 <div class="w-full max-md:snap-center max-md:overflow-hidden max-md:overflow-x-auto max-md:snap-x max-md:snap-mandatory max-md:scroll-smooth flex flex-row"
                     id="carousel">
                     <div class="max-md:hidden w-full h-auto flex-shrink-0" id="img-main">
-                        <img th:src="@{'/upload-dir/' + ${listing.images[0].imageUrl}}" alt="${listing.title}">
+                        <img th:if="${listing.images.size() > 0}" th:src="@{'/upload-dir/' + ${listing.images.get(0).imageUrl}}" alt="${listing.title}">
                     </div>
                     <img th:each="image : ${listing.images}" th:src="@{'/upload-dir/' + ${image.imageUrl}}"
                         alt="${listing.title}" th:attr="onmouseover=|setActiveImage('/upload-dir/${image.imageUrl}')|"

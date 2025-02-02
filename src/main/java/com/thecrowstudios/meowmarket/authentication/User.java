@@ -18,6 +18,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.thecrowstudios.meowmarket.cart.CartItem;
+import com.thecrowstudios.meowmarket.listings.Listing;
 import com.thecrowstudios.meowmarket.orders.Order;
 
 import jakarta.persistence.CascadeType;
@@ -64,6 +65,9 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Order> orders = new ArrayList<>();
+
+    @OneToMany(mappedBy = "createdByUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Listing> createdListings = new ArrayList<>();
 
     public Integer getId() {
         return this.id;
@@ -153,6 +157,14 @@ public class User implements UserDetails {
 
     public void setRoles(Set<String> roles) {
         this.roles = roles;
+    }
+
+    public List<Listing> getCreatedListings() {
+        return this.createdListings;
+    }
+
+    public void setCreatedListings(List<Listing> createdListings) {
+        this.createdListings = createdListings;
     }
 
     @Override

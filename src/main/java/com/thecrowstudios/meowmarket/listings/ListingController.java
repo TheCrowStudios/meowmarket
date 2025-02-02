@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.thecrowstudios.meowmarket.authentication.User;
 import com.thecrowstudios.meowmarket.authentication.UserService;
 
 @Controller
@@ -46,8 +47,9 @@ public class ListingController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/edit/{id}")
-    public String getEditListing (@PathVariable String id, Model model) {
-        Listing listing = listingRepository.findById(Integer.parseInt(id)).orElseThrow(() -> new RuntimeException("No listing with such id"));
+    public String getEditListing(@PathVariable String id, Model model) {
+        Listing listing = listingRepository.findById(Integer.parseInt(id))
+                .orElseThrow(() -> new RuntimeException("No listing with such id"));
         ListingDTO listingDTO = new ListingDTO();
         listingDTO.setId(listing.getId());
         listingDTO.setTitle(listing.getTitle());
@@ -70,10 +72,19 @@ public class ListingController {
         return "create-listing";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(path = "/create")
-    public String addNewListing(@ModelAttribute ListingDTO listingDTO) throws IOException {
+    public String addNewListing(@ModelAttribute ListingDTO listingDTO, Model model) throws IOException {
+        User user = userService.getUser();
+
+        if (user == null) {
+            model.addAttribute("listingDTO", new ListingDTO());
+            model.addAttribute("endpoint", "create");
+            return "create-listing";
+        }
 
         Listing listing = listingService.dtoToListing(listingDTO);
+        listing.setCreatedByUser(user);
 
         listingRepository.save(listing);
         return "redirect:/";
@@ -83,7 +94,11 @@ public class ListingController {
     public String editListing(@ModelAttribute ListingDTO listingDTO, Model model) throws IOException {
 
         listingService.clearListingImages(listingDTO.getId());
-        Listing listing = listingService.dtoToListing(listingDTO);
+        Listing listing = listingRepository.findById(listingDTO.getId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Listing listingEdited = listingService.dtoToListing(listingDTO);
+
+        listingEdited.setCreatedByUser(listing.getCreatedByUser());
 
         listingRepository.save(listing);
         return "redirect:/listings/" + listing.getId();

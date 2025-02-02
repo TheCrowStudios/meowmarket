@@ -10,6 +10,7 @@ import java.util.Set;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.thecrowstudios.meowmarket.authentication.User;
 import com.thecrowstudios.meowmarket.cart.CartItem;
 import com.thecrowstudios.meowmarket.orders.Order;
 import com.thecrowstudios.meowmarket.orders.OrderListing;
@@ -23,7 +24,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -68,6 +71,10 @@ public class Listing {
 
     @OneToMany(mappedBy = "listing", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<OrderListing> ordersListings = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "created_by_user_id", nullable = true)
+    private User createdByUser;
 
     public enum ItemCategory {
         OBD_READERS, STEERING_WHEELS
@@ -194,5 +201,13 @@ public class Listing {
 
     public void setOrdersListings(Set<OrderListing> ordersListings) {
         this.ordersListings = ordersListings;
+    }
+
+    public User getCreatedByUser() {
+        return this.createdByUser;
+    }
+
+    public void setCreatedByUser(User createdByUser) {
+        this.createdByUser = createdByUser;
     }
 }

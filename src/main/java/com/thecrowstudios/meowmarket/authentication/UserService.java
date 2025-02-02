@@ -72,10 +72,11 @@ public class UserService {
         return null;
     }
 
-    // public boolean isAdmin() {
-    //     User user = getUser();
-    //     return user != null && user.getRole() == UserRole.ADMIN;
-    // }
+    public boolean isAdmin() {
+         User user = getUser();
+         return user != null && user.getAuthorities().stream()
+                 .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
+    }
 
     public Collection<? extends GrantedAuthority> getCurrentUserAuthorities() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

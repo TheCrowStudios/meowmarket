@@ -62,9 +62,9 @@ public class ListingController {
         return "create-listing";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/new")
     public String showCreateForm(Model model) {
-
         model.addAttribute("listingDTO", new ListingDTO());
         model.addAttribute("endpoint", "create");
         return "create-listing";

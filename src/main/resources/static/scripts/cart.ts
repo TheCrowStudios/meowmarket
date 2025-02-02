@@ -82,7 +82,7 @@ async function updateQuantity(listingId: Number, quantity: Number) {
 function showMessage(message: string) {
     const msg = document.createElement('div');
     msg.classList.add('self-center');
-    msg.classList.add('absolute');
+    msg.classList.add('fixed');
     msg.innerHTML = `<div class="opacity-100 max-w-fit transition-all duration-1000">
     <p class="p-4 pl-8 pr-8 bg-slate-100 text-tertiary rounded-sm">${message}</p>
     </div>`;
@@ -99,6 +99,7 @@ function showMessage(message: string) {
     })
 
     setTimeout(() => {
+        appendedMsgDiv.classList.remove('opacity-100');
         appendedMsgDiv.classList.add('opacity-0');
     }, 2000);
 }

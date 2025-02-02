@@ -11,9 +11,23 @@
 <body class="body">
     <main class="main">
         <div th:replace="~{fragments/navbar :: navbar}"></div>
+        <div class="flex flex-col w-full">
+            <div class="flex flex-row w-full">
+                <span>Username: </span>
+                <span class="flex-grow"></span>
+                <span th:text="${user.username}"></span>
+            </div>
+            <div class="flex flex-row w-full">
+                <span>Email:    </span>
+                <span class="flex-grow"></span>
+                <span th:text="${user.email}"></span>
+            </div>
+        </div>
         <div class="grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-2 gap-4 p-4 text-center">
-            <a href="/orders" class="p-8 w-full h-auto border-x-2 border-y-2 border-solid rounded border-slate-50">Orders</a>
-            <a href="/orders" class="p-8 w-full h-auto border-x-2 border-y-2 border-solid rounded border-slate-50">Orders</a>
+            <a href="/orders"
+                class="p-8 w-full h-auto border-x-2 border-y-2 border-solid rounded border-slate-50 hover:bg-highlight transition-all duration-300">Orders</a>
+            <a href="/orders"
+                class="p-8 w-full h-auto border-x-2 border-y-2 border-solid rounded border-slate-50 hover:bg-highlight transition-all duration-300">Orders</a>
         </div>
         <span class="flex-grow"></span>
         <div th:replace="~{/fragments/footer :: footer}"></div>

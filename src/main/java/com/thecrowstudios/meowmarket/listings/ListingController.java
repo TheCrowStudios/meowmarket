@@ -100,13 +100,16 @@ public class ListingController {
     public String editListing(@ModelAttribute ListingDTO listingDTO, Model model) throws IOException {
         System.out.println("post to edit listing");
 
-        if (!listingDTO.getImages().isEmpty()) listingService.clearListingImages(listingDTO.getId());
         Listing listing = listingRepository.findById(listingDTO.getId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        System.out.println("size of listing images: " + listingDTO.getImages().size());
+        if (listingDTO.getImages().size() > 1) // set to 1 by default for some reason?
+            listingService.clearListingImages(listingDTO.getId());
         Listing listingEdited = listingService.dtoToListing(listingDTO);
 
         listingEdited.setCreatedByUser(listing.getCreatedByUser());
-        if (listingDTO.getImages().isEmpty()) listingEdited.setImages(listing.getImages());
+        if (listingDTO.getImages().size() == 1)
+            listingEdited.setImages(listing.getImages());
 
         listingRepository.save(listingEdited);
         return "redirect:/listings/" + listing.getId();

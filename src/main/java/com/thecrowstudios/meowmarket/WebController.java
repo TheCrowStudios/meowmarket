@@ -25,10 +25,12 @@ public class WebController {
     public String home(Model model) {
         List<Listing> listings = new ArrayList<Listing>();
         List<Listing> newListings = new ArrayList<Listing>();
+        List<Listing> featuredListings = listingRepository.findByFeaturedTrueAndDateDeletedIsNull();
         listingRepository.findAllByDateCreatedAndDateDeletedIsNull().forEach(listings::add);
         listingRepository.findAllByDateCreatedAndDateDeletedIsNull().stream().limit(4).forEach(newListings::add);
         model.addAttribute("listings", listings);
-        model.addAttribute("newListings", listings);
+        model.addAttribute("newListings", newListings);
+        model.addAttribute("featuredListings", featuredListings);
 
         return "index";
     }

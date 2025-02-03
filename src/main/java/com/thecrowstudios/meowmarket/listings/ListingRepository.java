@@ -17,4 +17,6 @@ public interface ListingRepository extends CrudRepository<Listing, Integer> {
     List<Listing> findAllByDateCreatedAndDateDeletedIsNull();
 
     List<Listing> findByCategoryAndDateDeletedIsNull(Listing.ItemCategory category);
+
+    List<Listing> findByFeaturedTrueAndDateDeletedIsNull();
 }

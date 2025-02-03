@@ -11,6 +11,14 @@
         @apply 2xl:w-5/6 xl:w-11/12 sm:w-11/12 max-sm:w-screen flex flex-col content-center bg-zinc-900 min-h-screen p-4 text-xl text-primary h-fit gap-4;
     }
 
+    .bg-primary {
+        @apply bg-zinc-700;
+    }
+
+    .bg-secondary {
+        @apply bg-zinc-900;
+    }
+
     .text-primary {
         @apply text-slate-200;
     }
@@ -45,5 +53,13 @@
 
     .button-highlight {
         @apply bg-highlight text-primary font-bold hover:bg-red-200 transition-all duration-200 p-4 pl-6 pr-6 rounded;
+    }
+
+    .separator {
+        @apply flex-grow border-solid border-b-1 -translate-y-1/2;
+    }
+
+    .border-b-1 {
+        border-bottom-width: 1px;
     }
 }

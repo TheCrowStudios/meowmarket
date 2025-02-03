@@ -25,8 +25,8 @@ public class WebController {
     public String home(Model model) {
         List<Listing> listings = new ArrayList<Listing>();
         List<Listing> newListings = new ArrayList<Listing>();
-        listingRepository.findAllByDateCreated().forEach(listings::add);
-        listingRepository.findAllByDateCreated().stream().limit(4).forEach(newListings::add);
+        listingRepository.findAllByDateCreatedAndDateDeletedIsNull().forEach(listings::add);
+        listingRepository.findAllByDateCreatedAndDateDeletedIsNull().stream().limit(4).forEach(newListings::add);
         model.addAttribute("listings", listings);
         model.addAttribute("newListings", listings);
 

@@ -21,7 +21,7 @@ public class CategoryController {
 
     @GetMapping("/{category}")
     public String showCategory(@PathVariable String category, Model model) {
-        List<Listing> listings = listingRepository.findByCategory(ItemCategory.valueOf(category.toUpperCase()));
+        List<Listing> listings = listingRepository.findByCategoryAndDateDeletedIsNull(ItemCategory.valueOf(category.toUpperCase()));
         model.addAttribute("listings", listings);
         model.addAttribute("category", category.toString().replace("_", " ").toUpperCase());
         return "category";

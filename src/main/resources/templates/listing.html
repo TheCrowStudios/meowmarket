@@ -47,7 +47,9 @@
                 <div class="w-full max-md:snap-center max-md:overflow-hidden max-md:overflow-x-auto max-md:snap-x max-md:snap-mandatory max-md:scroll-smooth flex flex-row"
                     id="carousel">
                     <div class="max-md:hidden w-full h-auto flex-shrink-0">
-                        <img th:if="${listing.images.size() > 0}" th:src="@{'/upload-dir/' + ${listing.images.get(0).imageUrl}}" alt="${listing.title}" id="img-main">
+                        <img th:if="${listing.images.size() > 0}"
+                            th:src="@{'/upload-dir/' + ${listing.images.get(0).imageUrl}}" alt="${listing.title}"
+                            id="img-main">
                     </div>
                     <img th:each="image : ${listing.images}" th:src="@{'/upload-dir/' + ${image.imageUrl}}"
                         alt="${listing.title}" th:attr="onmouseover=|setActiveImage('/upload-dir/${image.imageUrl}')|"
@@ -97,8 +99,13 @@
                     <span class="separator"></span>
                 </div>
                 <div class="flex flex-col gap-4">
-                    <a th:if="${@userService.isAdmin()}" th:href="@{'/listings/edit/' + ${listing.id}}" class="button-highlight text-center flex-grow px-4 py-2">
+                    <a th:if="${@userService.isAdmin()}" th:href="@{'/listings/edit/' + ${listing.id}}"
+                        class="button-highlight text-center flex-grow px-4 py-2">
                         <span class="text-nowrap">Edit Listing</span></a>
+                    <form th:if="${@userService.isAdmin()}" th:action="@{'/listings/remove/' + ${listing.id}}" method="POST">
+                        <button
+                            class="button-highlight text-center flex-grow px-4 py-2 text-nowrap">Remove Listing</button>
+                    </form>
                     <form th:action="@{/api/stripe/checkout/listing/} + ${listing.id}" method="POST"
                         class="flex flex-grow">
                         <button type="submit" id="checkout-button" class="button-highlight flex-grow px-4 py-2">

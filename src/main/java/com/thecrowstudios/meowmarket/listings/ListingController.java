@@ -39,7 +39,7 @@ public class ListingController {
     @GetMapping("/{id}")
     public String listing(@PathVariable String id, Model model) {
         // TODO - retrieve listing from database
-        Listing listing = listingRepository.findByIdWithImages(Integer.parseInt(id))
+        Listing listing = listingRepository.findByIdWithImagesAndDateDeletedIsNull(Integer.parseInt(id))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         model.addAttribute("listing", listing);
         return "listing";
@@ -49,7 +49,12 @@ public class ListingController {
     @GetMapping("/edit/{id}")
     public String getEditListing(@PathVariable String id, Model model) {
         Listing listing = listingRepository.findById(Integer.parseInt(id))
-                .orElseThrow(() -> new RuntimeException("No listing with such id"));
+                .orElse(null);
+
+        if (listing == null) {
+            return "redirect:/";
+        }
+
         ListingDTO listingDTO = new ListingDTO();
         listingDTO.setId(listing.getId());
         listingDTO.setTitle(listing.getTitle());
@@ -90,6 +95,7 @@ public class ListingController {
         return "redirect:/";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/edit")
     public String editListing(@ModelAttribute ListingDTO listingDTO, Model model) throws IOException {
 
@@ -102,6 +108,16 @@ public class ListingController {
 
         listingRepository.save(listing);
         return "redirect:/listings/" + listing.getId();
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/remove/{listingId}")
+    public String removeListing(@PathVariable Integer listingId) {
+        Listing listing = listingRepository.findById(listingId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        listing.softDelete();
+        listingRepository.save(listing);
+        return "redirect:/";
     }
 
     // @PostMapping(path="/create")

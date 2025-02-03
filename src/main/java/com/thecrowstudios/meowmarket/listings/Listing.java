@@ -61,6 +61,7 @@ public class Listing {
     @CreationTimestamp
     private LocalDateTime dateCreated;
 
+    @Column(nullable = true, updatable = true)
     private LocalDateTime dateDeleted;
 
     @OneToMany(mappedBy = "listing", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -209,5 +210,9 @@ public class Listing {
 
     public void setCreatedByUser(User createdByUser) {
         this.createdByUser = createdByUser;
+    }
+
+    public void softDelete() {
+        this.dateDeleted = LocalDateTime.now();
     }
 }

@@ -42,6 +42,11 @@
             </div>
 
             <div class="form-div">
+                <label>Featured</label>
+                <input class="form-input" type="checkbox" th:field="*{feature}" required>
+            </div>
+
+            <div class="form-div">
                 <label>Description:</label>
                 <textarea class="form-input" type="text" th:field="*{description}" required></textarea>
             </div>

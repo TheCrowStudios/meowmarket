@@ -12,6 +12,7 @@ public class ListingDTO {
     private String description;
     private String longDescription;
     private ItemCategory category;
+    private Boolean featured;
     private double price;
     private Integer quantityInStock;
     private String delivery;
@@ -55,6 +56,18 @@ public class ListingDTO {
 
     public void setCategory(ItemCategory category) {
         this.category = category;
+    }
+
+    public Boolean isFeatured() {
+        return this.featured;
+    }
+
+    public Boolean getFeatured() {
+        return this.featured;
+    }
+
+    public void setFeatured(Boolean featured) {
+        this.featured = featured;
     }
 
     public double getPrice() {

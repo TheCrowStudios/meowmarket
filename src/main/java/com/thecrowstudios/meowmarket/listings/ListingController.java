@@ -98,15 +98,17 @@ public class ListingController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/edit")
     public String editListing(@ModelAttribute ListingDTO listingDTO, Model model) throws IOException {
+        System.out.println("post to edit listing");
 
-        listingService.clearListingImages(listingDTO.getId());
+        if (!listingDTO.getImages().isEmpty()) listingService.clearListingImages(listingDTO.getId());
         Listing listing = listingRepository.findById(listingDTO.getId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         Listing listingEdited = listingService.dtoToListing(listingDTO);
 
         listingEdited.setCreatedByUser(listing.getCreatedByUser());
+        if (listingDTO.getImages().isEmpty()) listingEdited.setImages(listing.getImages());
 
-        listingRepository.save(listing);
+        listingRepository.save(listingEdited);
         return "redirect:/listings/" + listing.getId();
     }
 

@@ -45,6 +45,8 @@ public class Listing {
     @Enumerated(EnumType.STRING)
     private ItemCategory category;
 
+    private boolean featured;
+
     @Column(nullable=false, updatable = true)
     @ColumnDefault("3")
     private Double price;
@@ -78,7 +80,7 @@ public class Listing {
     private User createdByUser;
 
     public enum ItemCategory {
-        OBD_READERS, STEERING_WHEELS
+        OBD_READERS, STEERING_WHEELS, DECALS
     }
 
     public Listing() {
@@ -126,6 +128,14 @@ public class Listing {
 
     public void setCategory(ItemCategory category) {
         this.category = category;
+    }
+
+    public boolean getFeatured() {
+        return this.featured;
+    }
+
+    public void setFeatured(boolean featured) {
+        this.featured = featured;
     }
 
     public Double getPrice() {

@@ -63,7 +63,9 @@
 
             <div id="image-container" class="form-div">
                 <div>
-                    <input class="form-input" type="file" name="images" accept="image/*" required multiple>
+                    <input th:if="${endpoint == 'create'}" class="form-input" type="file" name="images" accept="image/*" required multiple>
+                    <input th:if="${endpoint == 'edit'}" class="form-input" type="file" name="images" accept="image/*" multiple>
+                    <span th:if="${endpoint == 'edit'}">Leave images empty to keep the existing ones</span>
                 </div>
             </div>
 
@@ -78,6 +80,7 @@
             </div>
 
             <div>
+                <span>Robby is pookie btw :3</span>
                 <button type="submit">Create Listing</button>
             </div>
         </form>

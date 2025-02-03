@@ -24,7 +24,8 @@
             </span>
         </div>
         <div th:if="${cartItems.size() > 0}" class="flex flex-col gap-4">
-            <div th:each="cartItem : ${cartItems}" class="grid md:grid-cols-2 max-md:grid-cols-1 flex-row gap-4 cart-item"
+            <div th:each="cartItem : ${cartItems}"
+                class="grid md:grid-cols-2 max-md:grid-cols-1 flex-row gap-4 cart-item"
                 th:attr="id=|cart-item-${cartItem.listing.id}|">
                 <div class="flex flex-row gap-4">
                     <a th:href="'/listings/' + ${cartItem.listing.id}" class="w-4/12 min-w-32">
@@ -54,11 +55,9 @@
                     <div class="flex flex-col gap-4 md:items-end max-md:items-center">
                         <form th:action="'/api/stripe/create-checkout-session/listing/' + ${cartItem.listing.id}"
                             method="POST">
-                            <button type="submit" id="checkout-button" class="button-highlight px-4 py-2 max-w-full w-64">
-                                <div class="flex flex-row items-center justify-center w-full gap-x-4">
-                                    <span class="text-nowrap">Buy Now</span>
-                                    <img src="/images/stripe.svg" alt="" class="h-6 w-auto">
-                                </div>
+                            <button type="submit" id="checkout-button"
+                                class="button-highlight px-4 py-2 max-w-full w-64">
+                                Buy Now
                             </button>
                         </form>
                         <button id="remove-button" class="button-highlight px-4 py-2 max-w-full w-64"

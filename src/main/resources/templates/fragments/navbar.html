@@ -1,17 +1,16 @@
 <nav th:fragment="navbar" class="p-4 flex flex-col z-10">
     <script src="/scripts/auth.js"></script>
     <script src="/scripts/navbar.js"></script>
-    <a href="/">
-        <div class="text-center text-5xl font-bold flex flex-row w-fit">
-            <h1 class="text-highlight">UK</h1>
-            <h1 class="text-slate-100">
-                AutoParts
-            </h1>
-        </div>
-    </a>
-    <div class="md:hidden left-0 top-0 fixed w-16 transition-all duration-300" id="side-nav">
+    <div class="flex w-full justify-start max-md:justify-center">
+        <a href="/" class="text-center text-5xl font-bold w-fit">
+            <span class="text-highlight">UK<span class="text-slate-100">AutoParts</span>
+            </span>
+        </a>
+    </div>
+    <div class="md:hidden mt-2 ml-2 left-0 top-0 fixed w-16 transition-all duration-300" id="side-nav">
         <img src="/images/menu.svg" alt="" class="left-0 top-0 w-16 z-20 fixed" onclick="toggleNavbar()">
-        <div class="flex-col items-center justify-center text-center pl-4 gap-4 w-0 h-full left-0 top-0 fixed hidden transition-all duration-300" id="side-nav-links">
+        <div class="flex-col items-center justify-center text-center pl-4 gap-4 w-0 h-full left-0 top-0 fixed hidden transition-all duration-300"
+            id="side-nav-links">
             <a href="/category/obd_readers" class="hover:text-highlight transition-all duration-300">OBD Readers</a>
             <a href="/category/steering_wheels" class="hover:text-highlight transition-all duration-300">Steering
                 Wheels</a>
@@ -47,6 +46,13 @@
                 <span>Sign Up/Login</span>
             </a>
         </div>
+    </div>
+    <div class="md:hidden mt-2 mr-2 right-0 top-0 fixed w-16 h-16 transition-all duration-300" id="side-cart">
+        <a href="/cart" class="relative">
+            <img src="/images/shopping-cart.svg" alt="" class="w-full h-full">
+            <span th:if="${@cartService.getCartItemCount() > 0}" th:text="${@cartService.getCartItemCount()}"
+                class="absolute text-base rounded-full bg-highlight right-0 bottom-0 px-2 mb-1 mr-1"></span>
+        </a>
     </div>
     <div class="md:flex md:text-left max-md:hidden justify-between text-primary text-xl mt-2 text-center">
         <a href="/category/obd_readers" class="hover:text-highlight transition-all duration-300">OBD Readers</a>

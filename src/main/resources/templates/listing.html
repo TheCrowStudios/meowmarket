@@ -102,9 +102,10 @@
                     <a th:if="${@userService.isAdmin()}" th:href="@{'/listings/edit/' + ${listing.id}}"
                         class="button-highlight text-center flex-grow px-4 py-2">
                         <span class="text-nowrap">Edit Listing</span></a>
-                    <form th:if="${@userService.isAdmin()}" th:action="@{'/listings/remove/' + ${listing.id}}" method="POST">
-                        <button
-                            class="button-highlight text-center flex-grow px-4 py-2 text-nowrap">Remove Listing</button>
+                    <form th:if="${@userService.isAdmin()}" th:action="@{'/listings/remove/' + ${listing.id}}"
+                        method="POST">
+                        <button class="button-highlight text-center flex-grow px-4 py-2 text-nowrap">Remove
+                            Listing</button>
                     </form>
                     <form th:action="@{/api/stripe/checkout/listing/} + ${listing.id}" method="POST"
                         class="flex flex-grow">

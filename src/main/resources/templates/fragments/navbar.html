@@ -62,7 +62,7 @@
             <img src="/images/shopping-cart.svg" alt="" class="w-6">
             <span>Cart</span>
             <span th:text="${@cartService.getCartItemCount()} + ' '"
-                class="bg-highlight rounded-3xl min-w-8 text-center text-primary"></span>
+                class="bg-highlight rounded-full min-w-8 text-center text-primary"></span>
         </a>
         <div th:if="${@userService.getUser() != null}" class="w-fit group gap-4 hover:text-highlight text-primary">
             <div class="flex flex-row justify-center">

@@ -68,8 +68,12 @@
 
             <div id="image-container" class="form-div">
                 <div>
-                    <input th:if="${endpoint == 'create'}" class="form-input" type="file" name="images" accept="image/*" required multiple>
-                    <input th:if="${endpoint == 'edit'}" class="form-input" type="file" name="images" accept="image/*" multiple>
+                    <input th:if="${endpoint == 'create'}" class="form-input" id="image-input" type="file" name="images" accept="image/*" required multiple>
+                    <input th:if="${endpoint == 'edit'}" class="form-input" id="image-input" type="file" name="images" accept="image/*" multiple>
+                    <div class="border-2 border-dashed border-gray-300 p-6 text-center cursor-pointer hover:border-red-500 transition-all duration-300" id="image-drop-zone">
+                        <span class-text-primary>Drag and drop images here or click to select</span>
+                    </div>
+                    <div class="grid grid-cols-5 gap-4 mt-4" id="image-gallery"></div>
                     <span th:if="${endpoint == 'edit'}">Leave images empty to keep the existing ones</span>
                 </div>
             </div>

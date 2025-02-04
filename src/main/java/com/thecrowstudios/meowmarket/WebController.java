@@ -36,6 +36,14 @@ public class WebController {
         return "index";
     }
 
+    @GetMapping("featured")
+    public String featured(Model model) {
+        List<Listing> listings = listingRepository.findByFeaturedTrueAndDateDeletedIsNull(Sort.by("dateCreated").descending());
+        model.addAttribute("listings", listings);
+        model.addAttribute("category", "Featured");
+        return "category";
+    }
+
     @GetMapping("/cart")
     public String cart(Model model) {
         List<CartItem> cartItems = cartService.getCartItems();

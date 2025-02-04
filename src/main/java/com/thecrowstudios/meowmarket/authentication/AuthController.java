@@ -48,12 +48,7 @@ public class AuthController {
 
     @Valid
     @PostMapping("/register")
-    public String registerUser(@Valid @ModelAttribute UserRegistrationDTO userRegistrationDTO,
-            BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("errors", bindingResult.getFieldErrors());
-            return "register";
-        }
+    public String registerUser(@Valid @ModelAttribute UserRegistrationDTO userRegistrationDTO, Model model) {
         try {
             userService.registerNewUser(userRegistrationDTO);
             System.out.println("user registered");

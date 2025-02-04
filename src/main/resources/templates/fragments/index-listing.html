@@ -1,10 +1,10 @@
 <div th:fragment="index-listing">
     <a th:href="@{'/listings/' + ${listing.id}}"
-        class="hover:scale-105 hover:text-highlight transition-all duration-300">
-        <img th:if="${listing.images.size > 0}" th:src="@{'/upload-dir/' + ${listing.images.get(0).imageUrl}}" th:alt="${listing.title}"
-            class="hover:opacity-80 transition-all duration-300 cursor-pointer">
+        class="hover:scale-105 hover:text-highlight transition-all duration-300 group">
+        <img th:if="${listing.images.size > 0}" th:src="@{'/upload-dir/' + ${listing.images.get(0).imageUrl}}"
+            th:alt="${listing.title}" class="group-hover:opacity-80 transition-all duration-300 cursor-pointer">
         <div class="flex flex-row">
-            <h3 th:text="${listing.title}" class="text-primary text-xl text-left">listing title
+            <h3 th:text="${listing.title}" class="text-primary text-xl text-left group-hover:text-highlight transition-all duration-300">listing title
             </h3>
             <span class="flex-grow"></span>
             <div class="flex flex-col">
@@ -16,6 +16,11 @@
                     th:text="'£' + ${#numbers.formatDecimal(listing.originalPrice, 2, 2)}"
                     class="text-secondary text-base style line-through cursor-default"></h3>
             </div>
+        </div>
+        <div class="flex flex-row gap-2">
+            <img src="/images/delivery.svg" alt="" class="w-6">
+            <span class="text-slate-300 text-secondary text-base group-hover:text-highlight transition-all duration-300"><span th:text="${listing.delivery}"></span> Day Tracked
+                Delivery</span>
         </div>
     </a>
 </div>

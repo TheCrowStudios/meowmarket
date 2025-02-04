@@ -807,6 +807,22 @@ video {
   margin-top: 2rem;
 }
 
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-12 {
+  margin-bottom: 3rem;
+}
+
+.mt-36 {
+  margin-top: 9rem;
+}
+
+.mt-16 {
+  margin-top: 4rem;
+}
+
 .flex {
   display: flex;
 }

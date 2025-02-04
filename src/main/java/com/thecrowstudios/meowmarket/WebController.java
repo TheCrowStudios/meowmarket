@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +26,7 @@ public class WebController {
     public String home(Model model) {
         List<Listing> listings = new ArrayList<Listing>();
         List<Listing> newListings = new ArrayList<Listing>();
-        List<Listing> featuredListings = listingRepository.findByFeaturedTrueAndDateDeletedIsNull();
+        List<Listing> featuredListings = listingRepository.findByFeaturedTrueAndDateDeletedIsNull(Sort.by("dateCreated").descending());
         listingRepository.findAllByDateCreatedAndDateDeletedIsNull().forEach(listings::add);
         listingRepository.findAllByDateCreatedAndDateDeletedIsNull().stream().limit(4).forEach(newListings::add);
         model.addAttribute("listings", listings);

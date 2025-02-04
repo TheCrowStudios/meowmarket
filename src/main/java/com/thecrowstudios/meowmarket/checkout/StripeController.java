@@ -298,6 +298,9 @@ public class StripeController {
 
                 order.setEmail(session.getCustomerDetails().getEmail());
                 order.setAddress(session.getShippingDetails().getAddress().getLine1());
+                order.setAddress2(session.getShippingDetails().getAddress().getLine2());
+                order.setCity(session.getShippingDetails().getAddress().getCity());
+                order.setPostCode(session.getShippingDetails().getAddress().getPostalCode());
 
                 Order savedOrder = orderRepository.save(order);
                 System.out.println("listings in saved order: " + savedOrder.getListings().size());

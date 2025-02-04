@@ -3,6 +3,7 @@ package com.thecrowstudios.meowmarket.listings;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -18,5 +19,5 @@ public interface ListingRepository extends CrudRepository<Listing, Integer> {
 
     List<Listing> findByCategoryAndDateDeletedIsNull(Listing.ItemCategory category);
 
-    List<Listing> findByFeaturedTrueAndDateDeletedIsNull();
+    List<Listing> findByFeaturedTrueAndDateDeletedIsNull(Sort sort);
 }

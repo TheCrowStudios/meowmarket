@@ -35,6 +35,8 @@ dependencies {
 	implementation("org.springframework.session:spring-session-jdbc")
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'com.google.code.gson:gson:2.12.1'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'io.micrometer:micrometer-registry-prometheus:1.0.0-rc.1'
 }
 
 tasks.named('test') {

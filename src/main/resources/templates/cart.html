@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
     <script defer src="/scripts/cart.js"></script>
+    <script defer src="/scripts/checkout-sessions.js"></script>
     <title>Cart - UKAutoParts</title>
 </head>
 
@@ -44,17 +45,19 @@
                                 class="text-secondary text-xl align-text-bottom">
                                 listing price
                             </h3>
-                            <input type="number" step="1" min="1" max="10" value="1"
-                                class="px-1 py-0.5 border border-primary rounded text-tertiary" id="quantity"
+                            <input type="number" step="1" min="1" th:max="${cartItem.listing.quantityInStock}" value="1"
+                                class="px-1 py-0.5 border border-primary rounded text-tertiary" th:id="'quantity-' + ${cartItem.listing.id}"
                                 th:value="${cartItem.quantity}"
-                                th:attr="onchange=|updateQuantity(${cartItem.listing.id}, this.value)|">
+                                th:attr="onchange=|verifyAndUpdateCartQuantity(${cartItem.listing.id}); document.getElementById('checkout-quantity-${cartItem.listing.id}').value = this.value||">
                         </div>
                     </div>
                 </div>
                 <div>
                     <div class="flex flex-col gap-4 md:items-end max-md:items-center">
-                        <form th:action="'/api/stripe/create-checkout-session/listing/' + ${cartItem.listing.id}"
+                        <form action="/api/stripe/checkout/listing"
                             method="POST">
+                            <input type="hidden" name="listingId" th:value="${cartItem.listing.id}">
+                            <input type="hidden" name="quantity" th:id="'checkout-quantity-' + ${cartItem.listing.id}" th:value="${cartItem.quantity}">
                             <button type="submit" id="checkout-button"
                                 class="button-highlight px-4 py-2 max-w-full w-64">
                                 Buy Now

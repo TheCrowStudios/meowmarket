@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 function addToCart(listingId) {
     return __awaiter(this, void 0, void 0, function* () {
-        const quantityInput = document.getElementById('quantity');
+        const quantityInput = document.getElementById('quantity-' + listingId.toString());
         const quantity = quantityInput.value;
         try {
             const response = yield fetch('/api/cart/add-to-cart', {

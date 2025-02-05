@@ -33,6 +33,7 @@
         }
     </script>
     <script defer src="/scripts/cart.js"></script>
+    <script defer src="/scripts/checkout-sessions.js"></script>
 </head>
 
 <body class="body">
@@ -107,8 +108,10 @@
                         <button class="button-highlight text-center flex-grow px-4 py-2 text-nowrap">Remove
                             Listing</button>
                     </form>
-                    <form th:action="@{/api/stripe/checkout/listing/} + ${listing.id}" method="POST"
+                    <form action="/api/stripe/checkout/listing" method="POST"
                         class="flex flex-grow">
+                        <input type="hidden" name="listingId" th:value="${listing.id}">
+                        <input type="hidden" name="quantity" id="checkout-quantity" value="1">
                         <button type="submit" id="checkout-button" class="button-highlight flex-grow px-4 py-2">
                             <div class="flex flex-row flex-grow items-center justify-center gap-x-4">
                                 <span class="text-nowrap">Buy Now</span>
@@ -119,7 +122,7 @@
 
                     <div class="flex flex-row gap-4 flex-grow">
                         <input type="number" step="1" min="1" max="10" value="1"
-                            class="w-1/4 p-2 border border-primary rounded text-tertiary" id="quantity">
+                            class="w-1/4 p-2 border border-primary rounded text-tertiary" th:id="'quantity-' + ${listing.id}" th:attr="onchange=|verifyQuantity(${listing.id}); document.getElementById('checkout-quantity').value = this.value|">
                         <button id="checkout-button" th:attr="onclick=|addToCart(${listing.id})|"
                             class="button-highlight flex-grow px-4 py-2">
                             <span class="text-nowrap">Add To Cart</span></button>

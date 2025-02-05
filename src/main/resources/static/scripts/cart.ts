@@ -1,5 +1,5 @@
 async function addToCart(listingId: Number) {
-    const quantityInput = document.getElementById('quantity') as HTMLInputElement;
+    const quantityInput = document.getElementById('quantity-' + listingId.toString()) as HTMLInputElement;
     const quantity = quantityInput.value;
 
     try {

@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -58,16 +59,19 @@ public class StripeController {
     @Autowired
     private OrderRepository orderRepository;
 
-    @PostMapping("/create-checkout-session/listing/{listingId}")
-    public ResponseEntity<Map<String, String>> createCheckoutSessionListing(@PathVariable Integer listingId) {
+    @PostMapping("/create-checkout-session/listing")
+    public ResponseEntity<Map<String, String>> createCheckoutSessionListing(@RequestBody CreateCheckoutSessionDTO createCheckoutSessionDTO) {
         Listing listing;
 
         try {
-            listing = listingRepository.findById(listingId).orElseThrow();
+            listing = listingRepository.findById(createCheckoutSessionDTO.getListingId()).orElseThrow();
         } catch (Exception e) {
-            System.out.println("[ERROR] could not find listing");
+            System.out.println("[ERROR] could not find listing with id: " + createCheckoutSessionDTO.getListingId());
+            System.out.println("Quantity: " + createCheckoutSessionDTO.getQuantity());
             return ResponseEntity.badRequest().body(null);
         }
+
+        Long quantity = createCheckoutSessionDTO.getQuantity() != null ? createCheckoutSessionDTO.getQuantity().longValue() : 1L;
 
         Stripe.apiKey = stripeApiKey;
 
@@ -83,7 +87,7 @@ public class StripeController {
         SessionCreateParams params = builder
                 .addLineItem(
                         SessionCreateParams.LineItem.builder()
-                                .setQuantity(1L)
+                                .setQuantity(quantity)
                                 .setPriceData(
                                         SessionCreateParams.LineItem.PriceData.builder().setCurrency("gbp")
                                                 .setUnitAmountDecimal(new BigDecimal(listing.getPrice() * 100)
@@ -114,9 +118,11 @@ public class StripeController {
         }
     }
 
-    @PostMapping("/checkout/listing/{listingId}")
-    public String getListingCheckout(@PathVariable Integer listingId, Model model) {
-        model.addAttribute("path", "/api/stripe/create-checkout-session/listing/" + listingId);
+    @PostMapping("/checkout/listing")
+    public String getListingCheckout(@ModelAttribute CreateCheckoutSessionDTO createCheckoutSessionDTO, Model model) {
+        model.addAttribute("path", "/api/stripe/create-checkout-session/listing");
+        model.addAttribute("listingId", createCheckoutSessionDTO.getListingId());
+        model.addAttribute("quantity", createCheckoutSessionDTO.getQuantity());
         return ("checkout");
     }
 

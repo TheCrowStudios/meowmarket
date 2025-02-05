@@ -36,7 +36,7 @@ public class WebsiteMetricsService {
     }
 
     public boolean isBot(String userAgent) {
-        if (userAgent.isBlank())
+        if (userAgent == null || userAgent.isBlank())
             return true;
 
         String normalizedUserAgent = userAgent.toLowerCase();

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -46,6 +47,9 @@ import com.thecrowstudios.meowmarket.orders.OrderRepository;
 @Controller
 @RequestMapping("/api/stripe")
 public class StripeController {
+    @Value("${stripe.apikey}")
+    private String stripeApiKey;
+
     @Autowired
     private ListingRepository listingRepository;
 
@@ -69,7 +73,7 @@ public class StripeController {
             return ResponseEntity.badRequest().body(null);
         }
 
-        Stripe.apiKey = "sk_test_51QjVLQDHTVEuSG0oLYgw4BfQtSUDxoWcR66AZDTCs8CcvfdK7WikPEIuQyQnWL7MhkwXPA8j1P07CZwSJgG3PQZi00jKnTvJsA";
+        Stripe.apiKey = stripeApiKey;
 
         SessionCreateParams.Builder builder = createDefaultStripeParams();
 
@@ -134,7 +138,7 @@ public class StripeController {
             return ResponseEntity.badRequest().body(null);
         }
 
-        Stripe.apiKey = "sk_test_51QjVLQDHTVEuSG0oLYgw4BfQtSUDxoWcR66AZDTCs8CcvfdK7WikPEIuQyQnWL7MhkwXPA8j1P07CZwSJgG3PQZi00jKnTvJsA";
+        Stripe.apiKey = stripeApiKey;
 
         SessionCreateParams.Builder builder = createDefaultStripeParams();
 

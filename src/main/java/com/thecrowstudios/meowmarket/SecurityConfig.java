@@ -1,6 +1,7 @@
 package com.thecrowstudios.meowmarket;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,6 +25,9 @@ public class SecurityConfig {
     @Autowired
     private CustomUserDetailsService userService;
 
+    @Value("${app.remember-me.secret}")
+    private String rememberMeSecret;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable()) // TODO - not recommended for production?
@@ -35,6 +39,10 @@ public class SecurityConfig {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .securityContext(securityContext -> securityContext.requireExplicitSave(false))
+                .rememberMe(rememberMe -> rememberMe
+                .key(rememberMeSecret)
+                .tokenValiditySeconds(86400 * 30)
+                .userDetailsService(userService))
                 .logout(logout -> logout
                         .logoutUrl("/api/auth/logout")
                         .logoutSuccessUrl("/api/auth/login?logout=true")

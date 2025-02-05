@@ -17,20 +17,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.stripe.Stripe;
-import com.stripe.events.V1BillingMeterErrorReportTriggeredEvent.EventData;
 import com.stripe.model.Event;
 import com.stripe.model.EventDataObjectDeserializer;
 import com.stripe.model.LineItem;
 import com.stripe.model.PaymentIntent;
 import com.stripe.model.StripeObject;
 import com.stripe.model.checkout.Session;
-import com.stripe.model.terminal.Reader.Action.SetReaderDisplay.Cart;
 import com.stripe.param.checkout.SessionCreateParams;
-import com.stripe.param.checkout.SessionListLineItemsParams;
 import com.stripe.param.checkout.SessionRetrieveParams;
 import com.stripe.param.checkout.SessionCreateParams.ShippingAddressCollection;
 import com.stripe.param.checkout.SessionCreateParams.ShippingAddressCollection.AllowedCountry;
@@ -108,7 +104,7 @@ public class StripeController {
 
         try {
             Session session = Session.create(params);
-            Map<String, String> map = new HashMap();
+            Map<String, String> map = new HashMap<>();
             map.put("clientSecret", session.getClientSecret());
             return ResponseEntity.ok(map);
         } catch (Exception e) {
@@ -178,7 +174,7 @@ public class StripeController {
 
         try {
             Session session = Session.create(params);
-            Map<String, String> map = new HashMap();
+            Map<String, String> map = new HashMap<>();
             map.put("clientSecret", session.getClientSecret());
             return ResponseEntity.ok(map);
         } catch (Exception e) {
@@ -200,7 +196,7 @@ public class StripeController {
             return null;
         }
 
-        Map<String, String> map = new HashMap();
+        Map<String, String> map = new HashMap<>();
         map.put("status", session.getStatus());
         map.put("customer_email", session.getCustomerDetails().getEmail());
 

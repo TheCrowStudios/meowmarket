@@ -1,5 +1,7 @@
 package com.thecrowstudios.meowmarket;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -12,9 +14,14 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.RememberMeServices;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import com.thecrowstudios.meowmarket.authentication.CustomUserDetailsService;
 
@@ -24,6 +31,9 @@ import com.thecrowstudios.meowmarket.authentication.CustomUserDetailsService;
 public class SecurityConfig {
     @Autowired
     private CustomUserDetailsService userService;
+
+    @Autowired
+    private DataSource dataSource;
 
     @Value("${app.remember-me.secret}")
     private String rememberMeSecret;
@@ -40,9 +50,12 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .securityContext(securityContext -> securityContext.requireExplicitSave(false))
                 .rememberMe(rememberMe -> rememberMe
-                .key(rememberMeSecret)
-                .tokenValiditySeconds(86400 * 30)
-                .userDetailsService(userService))
+                        .key("nigger")
+                        .tokenValiditySeconds(86400 * 30)
+                        .userDetailsService(userService)
+                        .rememberMeParameter("remember-me")
+                        .alwaysRemember(true)
+                        .rememberMeServices(rememberMeServices()))
                 .logout(logout -> logout
                         .logoutUrl("/api/auth/logout")
                         .logoutSuccessUrl("/api/auth/login?logout=true")
@@ -75,5 +88,17 @@ public class SecurityConfig {
         provider.setPasswordEncoder(getPasswordEncoder());
         System.out.println("Configuring authentication provider");
         return provider;
+    }
+
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+        tokenRepository.setDataSource(dataSource);
+        return tokenRepository;
+    }
+
+    @Bean
+    public RememberMeServices rememberMeServices() {
+        return new PersistentTokenBasedRememberMeServices("nigger", userService, persistentTokenRepository());
     }
 }

@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,15 +23,17 @@ public class AuthController {
     @GetMapping("/login")
     public String getLogin(Model model) {
         User user = userService.getUser();
-        if (user != null) return "redirect:/";
+        if (user != null)
+            return "redirect:/";
         model.addAttribute("userLoginDTO", new UserLoginDTO());
         return "login";
     }
 
     @PostMapping("/login")
-    public String login(@Valid @ModelAttribute UserLoginDTO userLoginDTO, BindingResult bindingResult, Model model) {
+    public String login(@Valid @ModelAttribute UserLoginDTO userLoginDTO, BindingResult bindingResult,
+            HttpServletRequest request, HttpServletResponse response, Model model) {
         try {
-            userService.login(userLoginDTO);
+            userService.login(userLoginDTO, request, response);
             return "redirect:/";
         } catch (Exception e) {
             System.out.println("Login error: " + e.getMessage());
@@ -41,7 +45,8 @@ public class AuthController {
     @GetMapping("/register")
     public String getRegister(Model model) {
         User user = userService.getUser();
-        if (user != null) return "redirect:/";
+        if (user != null)
+            return "redirect:/";
         model.addAttribute("userRegistrationDTO", new UserRegistrationDTO());
         return "register";
     }

@@ -7,13 +7,18 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.RememberMeAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.stereotype.Service;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Service
 public class UserService {
@@ -25,6 +30,9 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private RememberMeServices rememberMeServices;
 
     public User getUserById(Integer id) {
         return userRepository.findById(id).orElse(null);
@@ -47,13 +55,16 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void login(UserLoginDTO userLoginDTO) {
+    public void login(UserLoginDTO userLoginDTO,HttpServletRequest request, HttpServletResponse response) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(userLoginDTO.getEmail(), userLoginDTO.getPassword()));
 
         SecurityContext context = SecurityContextHolder.createEmptyContext();
         context.setAuthentication(authentication);
         SecurityContextHolder.setContext(context);
+
+        RememberMeAuthenticationToken rememberMeToken = new RememberMeAuthenticationToken("nigger", authentication.getPrincipal(), authentication.getAuthorities());
+        rememberMeServices.loginSuccess(request, response, rememberMeToken);
     }
 
     public void logout() {

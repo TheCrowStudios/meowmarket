@@ -16,18 +16,25 @@
             class="flex flex-col w-full p-4 gap-4 justify-center items-center text-center">
 
             <div class="form-div">
-                <label>Email</label>
-                <input type="text" id="username" name="username" required />
+                <label>Username</label>
+                <input class="form-input" type="text" id="username" name="username" required />
                 <span th:if="${emailError}" th:text="${emailError}" class="form-error"></span>
             </div>
 
             <div class="form-div">
                 <label>Password</label>
-                <input type="password" id="password" name="password" required />
+                <input class="form-input" type="password" id="password" name="password" required />
                 <span th:if="${passwordError}" th:text="${passwordError}" class="form-error"></span>
             </div>
 
-            <input type="checkbox" name="remember-me" id="remember-me">
+            <div th:if="${param.error}" class="w-full text-center">
+                <span class="text-center text-red-500">Incorrect username or password.</span>
+            </div>
+
+            <div class="flex justify-center gap-2">
+                <label>Remember me</label>
+                <input type="checkbox" name="remember-me" id="remember-me">
+            </div>
 
             <span>Don't have an account? Register <a href="/api/auth/register"
                     class="text-highlight hover:text-red-500 transition-all duration-300 underline">here</a>!</span>
@@ -37,15 +44,6 @@
             </div>
         </form>
 
-        <div th:if="${errors}">
-            <div th:each="error : ${errors}">
-                <span th:text="${error.field + ': ' + error.defaultMessage}"></span>
-            </div>
-        </div>
-
-        <div th:if="${error}">
-            <span th:text="${error}" class="text-red-500"></span>
-        </div>
         <span class="flex-grow"></span>
         <div th:replace="~{/fragments/footer :: footer}"></div>
     </main>

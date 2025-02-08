@@ -57,7 +57,7 @@ public class SecurityConfig {
                 .formLogin(login -> login.loginPage("/api/auth/login")
                         .loginProcessingUrl("/api/auth/login")
                         .defaultSuccessUrl("/")
-                        .failureUrl("/login?error=true")
+                        .failureUrl("/api/auth/login?error=true")
                         .permitAll())
                 .rememberMe(rememberMe -> rememberMe
                         .key(rememberMeSecret)

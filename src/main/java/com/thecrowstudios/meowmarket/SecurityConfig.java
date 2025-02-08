@@ -60,7 +60,7 @@ public class SecurityConfig {
                         .failureUrl("/login?error=true")
                         .permitAll())
                 .rememberMe(rememberMe -> rememberMe
-                        .key("nigger")
+                        .key(rememberMeSecret)
                         .tokenRepository(persistentTokenRepository())
                         .tokenValiditySeconds(86400 * 30)
                         .userDetailsService(userService)

@@ -25,8 +25,8 @@
 
 <body class="body">
     <main class="main text-primary">
-        <form th:action="@{/listings/} + ${endpoint}" th:object="${listingDTO}" method="POST" enctype="multipart/form-data"
-            class="flex flex-col w-full p-4 gap-4">
+        <form th:action="@{/listings/} + ${endpoint}" th:object="${listingDTO}" method="POST"
+            enctype="multipart/form-data" class="flex flex-col w-full p-4 gap-4">
             <input type="hidden" th:field="*{id}">
             <div class="form-div">
                 <label>Title:</label>
@@ -36,7 +36,8 @@
             <div class="form-div">
                 <label>Category:</label>
                 <select class="form-input" th:field="*{category}">
-                    <option th:each="category : ${T(com.thecrowstudios.meowmarket.listings.Listing.ItemCategory).values()}"
+                    <option
+                        th:each="category : ${T(com.thecrowstudios.meowmarket.listings.Listing.ItemCategory).values()}"
                         th:value="${category}" th:text="${#strings.replace(category, '_', ' ')}"></option>
                 </select>
             </div>
@@ -68,9 +69,12 @@
 
             <div id="image-container" class="form-div">
                 <div>
-                    <input th:if="${endpoint == 'create'}" class="form-input" id="image-input" type="file" name="images" accept="image/*" required multiple>
-                    <input th:if="${endpoint == 'edit'}" class="form-input" id="image-input" type="file" name="images" accept="image/*" multiple>
-                    <div class="border-2 border-dashed border-gray-300 p-6 text-center cursor-pointer hover:border-red-500 transition-all duration-300" id="image-drop-zone">
+                    <input th:if="${endpoint == 'create'}" class="form-input" id="image-input" type="file" name="images"
+                        accept="image/*" required multiple>
+                    <input th:if="${endpoint == 'edit'}" class="form-input" id="image-input" type="file" name="images"
+                        accept="image/*" multiple>
+                    <div class="border-2 border-dashed border-gray-300 p-6 text-center cursor-pointer hover:border-red-500 transition-all duration-300"
+                        id="image-drop-zone">
                         <span class-text-primary>Drag and drop images here or click to select</span>
                     </div>
                     <div class="grid grid-cols-5 gap-4 mt-4" id="image-gallery"></div>
@@ -78,19 +82,23 @@
                 </div>
             </div>
 
-            <div class="flex flex-col h-screen">
-                <div class="flex flex-row g-4">
+            <div class="flex flex-col h-screen gap-4">
+                <div class="flex flex-row gap-4">
                     <label>Long description:</label>
-                    <button onclick="togglePreview()" class="bg-highlight text-primary pl-4 pr-4">toggle preview</button>
+                    <button type="button" onclick="togglePreview()" class="bg-highlight text-primary pl-4 pr-4 rounded">toggle
+                        preview</button>
                 </div>
-                <textarea id="longDescription" class="form-input w-full h-full" type="text" th:field="*{longDescription}"
-                    required></textarea>
-                    <div id="preview" class="hidden !text-primary bg-slate-50"></div>
+                <textarea id="longDescription" class="form-input w-full h-full" type="text"
+                    th:field="*{longDescription}" required></textarea>
+                <span>
+                    Preview:
+                </span>
+                <div id="preview" class="hidden !text-primary bg-secondary border-2 border-white"></div>
             </div>
 
-            <div class="flex flex-col">
+            <div class="flex flex-col gap-4">
                 <span>Robby is pookie btw :3</span>
-                <button type="submit" class="bg-highlight">Create Listing</button>
+                <button type="submit" class="bg-highlight rounded">Create Listing</button>
             </div>
         </form>
     </main>

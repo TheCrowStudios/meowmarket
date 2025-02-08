@@ -244,7 +244,7 @@ public class StripeController {
     }
 
     public SessionCreateParams.Builder createDefaultStripeParams() {
-        String domain = "http://localhost:8080/";
+        String domain = "https://thecrowstudios.com/";
 
         SessionCreateParams.Builder params = SessionCreateParams.builder()
                 .setUiMode(SessionCreateParams.UiMode.EMBEDDED)

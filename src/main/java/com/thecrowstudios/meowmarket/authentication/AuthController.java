@@ -29,18 +29,18 @@ public class AuthController {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String login(@Valid @ModelAttribute UserLoginDTO userLoginDTO, BindingResult bindingResult,
-            HttpServletRequest request, HttpServletResponse response, Model model) {
-        try {
-            userService.login(userLoginDTO, request, response);
-            return "redirect:/";
-        } catch (Exception e) {
-            System.out.println("Login error: " + e.getMessage());
-            model.addAttribute("error", "Incorrect email or password");
-            return "login";
-        }
-    }
+    // @PostMapping("/login")
+    // public String login(@Valid @ModelAttribute UserLoginDTO userLoginDTO, BindingResult bindingResult,
+    //         HttpServletRequest request, HttpServletResponse response, Model model) {
+    //     try {
+    //         userService.login(userLoginDTO, request, response);
+    //         return "redirect:/";
+    //     } catch (Exception e) {
+    //         System.out.println("Login error: " + e.getMessage());
+    //         model.addAttribute("error", "Incorrect email or password");
+    //         return "login";
+    //     }
+    // }
 
     @GetMapping("/register")
     public String getRegister(Model model) {

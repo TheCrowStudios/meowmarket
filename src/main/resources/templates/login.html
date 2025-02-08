@@ -17,19 +17,20 @@
 
             <div class="form-div">
                 <label>Email</label>
-                <input class="form-input" type="text" th:field="*{email}" required>
+                <input type="text" id="username" name="username" required />
                 <span th:if="${emailError}" th:text="${emailError}" class="form-error"></span>
             </div>
 
             <div class="form-div">
                 <label>Password</label>
-                <input class="form-input" type="password" th:field="*{password}" onchange="verifyPassword()" required>
+                <input type="password" id="password" name="password" required />
                 <span th:if="${passwordError}" th:text="${passwordError}" class="form-error"></span>
             </div>
 
             <input type="checkbox" name="remember-me" id="remember-me">
 
-            <span>Don't have an account? Register <a href="/api/auth/register" class="text-highlight hover:text-red-500 transition-all duration-300 underline">here</a>!</span>
+            <span>Don't have an account? Register <a href="/api/auth/register"
+                    class="text-highlight hover:text-red-500 transition-all duration-300 underline">here</a>!</span>
 
             <div>
                 <button type="submit" class="button-highlight">Log In</button>

@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.RememberMeServices;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,8 +32,8 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private RememberMeServices rememberMeServices;
+    // @Autowired
+    // private PersistentTokenBasedRememberMeServices rememberMeServices;
 
     public User getUserById(Integer id) {
         return userRepository.findById(id).orElse(null);
@@ -64,7 +65,7 @@ public class UserService {
         SecurityContextHolder.setContext(context);
 
         RememberMeAuthenticationToken rememberMeToken = new RememberMeAuthenticationToken("nigger", authentication.getPrincipal(), authentication.getAuthorities());
-        rememberMeServices.loginSuccess(request, response, rememberMeToken);
+        // rememberMeServices.loginSuccess(request, response, rememberMeToken);
     }
 
     public void logout() {

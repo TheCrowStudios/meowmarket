@@ -32,6 +32,9 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private RememberMeServices rememberMeServices;
+
     // @Autowired
     // private PersistentTokenBasedRememberMeServices rememberMeServices;
 
@@ -52,20 +55,19 @@ public class UserService {
         Set<String> auths = new HashSet<>();
         auths.add("ROLE_USER");
         user.setAuthorities(auths);
+        user.setRoles(auths);
 
         return userRepository.save(user);
     }
 
-    public void login(UserLoginDTO userLoginDTO,HttpServletRequest request, HttpServletResponse response) {
+    public void login(UserLoginDTO userLoginDTO, HttpServletRequest request, HttpServletResponse response) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(userLoginDTO.getEmail(), userLoginDTO.getPassword()));
+                new UsernamePasswordAuthenticationToken(userLoginDTO.getUsername(), userLoginDTO.getPassword()));
 
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
+        SecurityContext context = SecurityContextHolder.getContext();
         context.setAuthentication(authentication);
-        SecurityContextHolder.setContext(context);
 
-        RememberMeAuthenticationToken rememberMeToken = new RememberMeAuthenticationToken("nigger", authentication.getPrincipal(), authentication.getAuthorities());
-        // rememberMeServices.loginSuccess(request, response, rememberMeToken);
+        rememberMeServices.loginSuccess(request, response, authentication);
     }
 
     public void logout() {

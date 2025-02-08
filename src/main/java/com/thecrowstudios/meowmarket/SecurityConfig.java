@@ -31,77 +31,85 @@ import com.thecrowstudios.meowmarket.authentication.CustomUserDetailsService;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-    @Autowired
-    private CustomUserDetailsService userService;
+        @Autowired
+        private CustomUserDetailsService userService;
 
-    @Autowired
-    private DataSource dataSource;
+        @Autowired
+        private DataSource dataSource;
 
-    @Value("${app.remember-me.secret}")
-    private String rememberMeSecret;
+        @Value("${app.remember-me.secret}")
+        private String rememberMeSecret;
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-        return authConfig.getAuthenticationManager();
-    }
+        @Bean
+        public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+                return authConfig.getAuthenticationManager();
+        }
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http)
-            throws Exception {
-        http.csrf(csrf -> csrf.disable()) // TODO - not recommended for production?
-                .authorizeHttpRequests(
-                        auth -> auth
-                                .requestMatchers("/listings/new", "/listings/create", "/listings/edit")
-                                .hasRole("ADMIN")
-                                .anyRequest().permitAll())
-                .formLogin(login -> login.loginPage("/api/auth/login")
-                        .loginProcessingUrl("/api/auth/login")
-                        .defaultSuccessUrl("/")
-                        .failureUrl("/api/auth/login?error=true")
-                        .permitAll())
-                .rememberMe(rememberMe -> rememberMe
-                        .key(rememberMeSecret)
-                        .tokenRepository(persistentTokenRepository())
-                        .tokenValiditySeconds(86400 * 30)
-                        .userDetailsService(userService)
-                        .rememberMeParameter("remember-me")
-                        .rememberMeCookieName("remember-me"))
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-                        .invalidSessionUrl("/api/auth/login")
-                        .maximumSessions(1)
-                        .expiredUrl("/api/auth/login"))
-                .logout(logout -> logout
-                        .logoutUrl("/api/auth/logout")
-                        .logoutSuccessUrl("/api/auth/login?logout=true")
-                        .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID"))
-                .exceptionHandling(exception -> exception
-                        .authenticationEntryPoint((request, response, authException) -> {
-                            response.sendRedirect("/api/auth/login");
-                        })
-                        .accessDeniedHandler((request, response, accessDeniedException) -> response
-                                .sendRedirect("/api/auth/login")))
-                .anonymous(anonymous -> anonymous.disable()); // breaks cart sometimes if we dont do this
-        return http.build();
-    }
+        @Bean
+        public SecurityFilterChain filterChain(HttpSecurity http)
+                        throws Exception {
+                http.csrf(csrf -> csrf.disable()) // TODO - not recommended for production?
+                                .authorizeHttpRequests(
+                                                auth -> auth
+                                                                .requestMatchers("/listings/new", "/listings/create",
+                                                                                "/listings/edit")
+                                                                .hasRole("ADMIN")
+                                                                .anyRequest().permitAll())
+                                .formLogin(login -> login.loginPage("/api/auth/login")
+                                                .loginProcessingUrl("/api/auth/login")
+                                                .defaultSuccessUrl("/")
+                                                .failureUrl("/api/auth/login?error=true")
+                                                .permitAll())
+                                .rememberMe(rememberMe -> rememberMe
+                                .rememberMeServices(rememberMeServices()))
+                                .sessionManagement(session -> session
+                                                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                                                .invalidSessionUrl("/api/auth/login")
+                                                .maximumSessions(1)
+                                                .expiredUrl("/api/auth/login"))
+                                .logout(logout -> logout
+                                                .logoutUrl("/api/auth/logout")
+                                                .logoutSuccessUrl("/api/auth/login?logout=true")
+                                                .invalidateHttpSession(true)
+                                                .deleteCookies("JSESSIONID"))
+                                .exceptionHandling(exception -> exception
+                                                .authenticationEntryPoint((request, response, authException) -> {
+                                                        response.sendRedirect("/api/auth/login");
+                                                })
+                                                .accessDeniedHandler(
+                                                                (request, response, accessDeniedException) -> response
+                                                                                .sendRedirect("/api/auth/login")))
+                                .anonymous(anonymous -> anonymous.disable()); // breaks cart sometimes if we dont do
+                                                                              // this
+                return http.build();
+        }
 
-    @Bean
-    public PersistentTokenRepository persistentTokenRepository() {
-        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
-        tokenRepository.setDataSource(dataSource);
-        // Uncomment the line below if you want Spring to create the table automatically
-        // tokenRepository.setCreateTableOnStartup(true);
-        return tokenRepository;
-    }
+        @Bean
+        public PersistentTokenRepository persistentTokenRepository() {
+                JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+                tokenRepository.setDataSource(dataSource);
+                // Uncomment the line below if you want Spring to create the table automatically
+                // tokenRepository.setCreateTableOnStartup(true);
+                return tokenRepository;
+        }
 
-    @Bean
-    public PasswordEncoder getPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+        @Bean
+        public PasswordEncoder getPasswordEncoder() {
+                return new BCryptPasswordEncoder();
+        }
 
-    @Bean
-    public HttpSessionEventPublisher httpSessionEventPublisher() {
-        return new HttpSessionEventPublisher();
-    }
+        @Bean
+        public HttpSessionEventPublisher httpSessionEventPublisher() {
+                return new HttpSessionEventPublisher();
+        }
+
+        @Bean
+        public RememberMeServices rememberMeServices() {
+                PersistentTokenBasedRememberMeServices services = new PersistentTokenBasedRememberMeServices(
+                                rememberMeSecret, userService, persistentTokenRepository());
+                services.setParameter("remember-me");
+                services.setCookieName("remember-me");
+
+                return services;
+        }
 }

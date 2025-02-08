@@ -53,9 +53,13 @@ public class AuthController {
 
     @Valid
     @PostMapping("/register")
-    public String registerUser(@Valid @ModelAttribute UserRegistrationDTO userRegistrationDTO, Model model) {
+    public String registerUser(@Valid @ModelAttribute UserRegistrationDTO userRegistrationDTO, HttpServletRequest request, HttpServletResponse response, Model model) {
         try {
-            userService.registerNewUser(userRegistrationDTO);
+            userService.registerNewUser(userRegistrationDTO); // create user
+            UserLoginDTO userLoginDTO = new UserLoginDTO();
+            userLoginDTO.setUsername(userRegistrationDTO.getUsername());
+            userLoginDTO.setPassword(userRegistrationDTO.getPassword());
+            userService.login(userLoginDTO, request, response); // log user in
             System.out.println("user registered");
             return "redirect:/";
         } catch (Exception e) {

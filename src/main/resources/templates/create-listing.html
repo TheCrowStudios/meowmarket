@@ -82,13 +82,13 @@
                 </div>
             </div>
 
-            <div class="flex flex-col h-screen gap-4">
+            <div class="flex flex-col h-fit gap-4">
                 <div class="flex flex-row gap-4">
                     <label>Long description:</label>
                     <button type="button" onclick="togglePreview()" class="bg-highlight text-primary pl-4 pr-4 rounded">toggle
                         preview</button>
                 </div>
-                <textarea id="longDescription" class="form-input w-full h-full" type="text"
+                <textarea id="longDescription" class="form-input w-full h-screen" type="text"
                     th:field="*{longDescription}" required></textarea>
                 <span>
                     Preview:

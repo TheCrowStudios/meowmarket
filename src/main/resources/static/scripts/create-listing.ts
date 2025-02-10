@@ -4,7 +4,8 @@ const preview = document.getElementById('preview') as HTMLDivElement;
 
 function togglePreview() {
     previewVisible = !previewVisible;
-    preview?.classList.toggle('hidden');
+    preview.classList.toggle('hidden');
+    textarea.classList.toggle('hidden');
     if (previewVisible) updatePreview();
 }
 

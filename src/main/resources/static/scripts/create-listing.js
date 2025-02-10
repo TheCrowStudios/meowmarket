@@ -4,7 +4,8 @@ const textarea = document.getElementById('longDescription');
 const preview = document.getElementById('preview');
 function togglePreview() {
     previewVisible = !previewVisible;
-    preview === null || preview === void 0 ? void 0 : preview.classList.toggle('hidden');
+    preview.classList.toggle('hidden');
+    textarea.classList.toggle('hidden');
     if (previewVisible)
         updatePreview();
 }

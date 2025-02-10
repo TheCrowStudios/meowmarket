@@ -11,7 +11,20 @@
     <script>
         function setActiveImage(url) {
             const main = document.getElementById('img-main');
-            main.src = url;
+            main.src = '/upload-dir/' + url;
+            const sideImage = document.getElementById('side-image-' + url);
+            const sideImagesDiv = document.getElementById('side-images');
+
+            if (sideImage) {
+                console.log(sideImagesDiv.children)
+                for (const img of sideImagesDiv.children) {
+                    img.classList.remove('border-red-400');
+                    img.classList.remove('border-2');
+                    console.log(img)
+                }
+                sideImage.classList.add('border-red-400');
+                sideImage.classList.add('border-2');
+            }
         }
     </script>
     <script>
@@ -43,13 +56,13 @@
             <div class="flex flex-row gap-4 w-full">
                 <div class="max-md:hidden flex flex-col w-2/12 max-h-full gap-2 overflow-x-auto" id="side-images">
                     <img th:each="image : ${listing.images}" th:src="@{'/upload-dir/' + ${image.imageUrl}}"
-                        alt="${listing.title}" th:attr="onmouseover=|setActiveImage('/upload-dir/${image.imageUrl}')|">
+                        th:alt="'side image for ' + ${listing.title} + ' listing'" th:id="'side-image-' + ${image.imageUrl}" th:attr="onmouseover=|setActiveImage('${image.imageUrl}')|">
                 </div>
                 <div class="w-full max-md:snap-center max-md:overflow-hidden max-md:overflow-x-auto max-md:snap-x max-md:snap-mandatory max-md:scroll-smooth flex flex-row"
                     id="carousel">
                     <div class="max-md:hidden w-full h-auto flex-shrink-0">
                         <img th:if="${listing.images.size() > 0}"
-                            th:src="@{'/upload-dir/' + ${listing.images.get(0).imageUrl}}" alt="${listing.title}"
+                            th:src="@{'/upload-dir/' + ${listing.images.get(0).imageUrl}}" th:alt="${listing.title}"
                             id="img-main">
                     </div>
                     <img th:each="image : ${listing.images}" th:src="@{'/upload-dir/' + ${image.imageUrl}}"

@@ -77,7 +77,7 @@ public class Listing {
     private User createdByUser;
 
     public enum ItemCategory {
-        OBD_READERS, STEERING_WHEELS, DECALS
+        OBD_READERS, STEERING_WHEELS, DECALS, BOSS_KITS
     }
 
     public Listing() {

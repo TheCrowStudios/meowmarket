@@ -2,6 +2,7 @@ package com.thecrowstudios.meowmarket.metrics;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,6 +15,7 @@ public class VisitLog {
     private Integer id;
 
     private String ipAddress;
+    @Column(length = 10240)
     private String userAgent;
     private LocalDateTime timestamp;
     private boolean isBot;

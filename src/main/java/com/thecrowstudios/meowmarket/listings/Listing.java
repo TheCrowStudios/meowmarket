@@ -34,6 +34,7 @@ public class Listing {
 
     private String title;
     
+    @Column(length = 65555)
     private String description;
     
     @Column(length = 65555)

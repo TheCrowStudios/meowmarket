@@ -1,5 +1,7 @@
 package com.thecrowstudios.meowmarket;
 
+import java.io.File;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -29,8 +31,9 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        String absolutePath = new File(uploadPath).getAbsolutePath();
         registry.addResourceHandler("/upload-dir/**")
-                .addResourceLocations("file:" + uploadPath + "/")
+                .addResourceLocations("file:" + absolutePath + "/")
                 .setCachePeriod(86400)
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver());

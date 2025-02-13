@@ -2,7 +2,7 @@
     <a th:href="@{'/listings/' + ${listing.id}}"
         class="hover:scale-105 hover:text-highlight transition-all duration-300 group">
         <img th:if="${listing.images.size > 0}" th:src="@{'/upload-dir/' + ${listing.images.get(0).imageUrl}}"
-            th:alt="'main image of listing' + ${listing.title}" class="group-hover:opacity-80 transition-all duration-300 cursor-pointer">
+            th:alt="'main image of listing ' + ${listing.title}" class="group-hover:opacity-80 transition-all duration-300 cursor-pointer">
         <div class="flex flex-row">
             <h3 th:text="${listing.title}" class="text-primary text-xl text-left group-hover:text-highlight transition-all duration-300">listing title
             </h3>

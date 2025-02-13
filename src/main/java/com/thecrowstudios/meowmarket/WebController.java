@@ -23,7 +23,12 @@ public class WebController {
     private CartService cartService;
 
     @GetMapping("/")
-    public String home(Model model) {
+    public String home() {
+        return "index";
+    }
+
+    @GetMapping("/store")
+    public String store(Model model) {
         List<Listing> listings = new ArrayList<Listing>();
         List<Listing> newListings = new ArrayList<Listing>();
         List<Listing> featuredListings = listingRepository.findByFeaturedTrueAndDateDeletedIsNull(Sort.by("dateCreated").descending());
@@ -33,7 +38,7 @@ public class WebController {
         model.addAttribute("newListings", newListings);
         model.addAttribute("featuredListings", featuredListings);
 
-        return "index";
+        return "store";
     }
 
     @GetMapping("featured")

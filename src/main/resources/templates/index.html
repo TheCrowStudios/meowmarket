@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -11,46 +12,87 @@
 <body class="body">
     <main class="main">
         <div th:replace="~{fragments/navbar :: navbar}"></div>
-        <div class="mt-4">
-            <div class="flex flex-row gap-4">
-                <span class="flex-grow border-solid border-b-2 -translate-y-1/2"></span>
-                <a href="/featured" class="font-bold">Featured</a>
-                <span class="flex-grow border-solid border-b-2 -translate-y-1/2"></span>
+        <div class="flex flex-col gap-4">
+            <div class="relative w-full h-[80vh] bg-[url('/images/miata3.jpg')] bg-cover bg-[40%_15%]">
+                <div class="flex flex-col absolute inset-0 justify-center items-center text-center gap-4">
+                    <div class="flex flex-col w-fit h-fit px-2 py-4 bg-secondary bg-opacity-100 rounded-3xl gap-4">
+                        <span class="text-white text-5xl group-hover:text-highlight transition-all duration-300">Welcome
+                            to <span href="/" class="text-center text-5xl font-bold w-fit">
+                                <span class="text-highlight">UK<span class="text-slate-100">AutoParts</span>
+                                </span>
+                            </span></span>
+                        <div>
+                            <a href="/store" class="button-highlight text-secondary text-3xl px-4 py-2 rounded-xl">Shop
+                                Now</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 p-4">
-                <div th:each="listing : ${featuredListings}">
-                    <div th:replace="~{fragments/index-listing :: index-listing}"></div>
+            <div class="mt-4">
+                <span class="text-center text-primary text-3xl">Categories</span>
+                <div class="grid max-lg:grid-cols-2 lg:grid-cols-2 max-md:grid-cols-1 gap-4 mt-2">
+                    <div class="relative group">
+                        <a href="/category/obd_readers" class="min-w-full min-h-full absolute z-20"></a>
+                        <div role="img"
+                            class="bg-[url('/images/d1_lite_obd_reader.jpg')] bg-center bg-cover w-full aspect-square object-cover group-hover:bg-opacity-80 transition-all duration-300 rounded-xl z-10">
+                        </div>
+                        <div class="flex flex-col absolute inset-0 justify-center text-center items-center gap-2">
+                            <span
+                                class="text-primary text-5xl group-hover:text-highlight transition-all duration-300">OBD
+                                Readers</span>
+                            <a href="/category/obd_readers"
+                                class="button-highlight text-secondary text-3xl px-4 py-2 rounded-xl max-w-fit z-30">Shop
+                                Now</a>
+                        </div>
+                    </div>
+
+                    <div class="relative group">
+                        <a href="/category/steering_wheels" class="min-w-full min-h-full absolute z-20"></a>
+                        <div role="img"
+                            class="bg-[url('/images/omp_steering_wheel_in_bmw.jpg')] bg-center bg-cover w-full aspect-square object-cover group-hover:bg-opacity-80 transition-all duration-300 rounded-xl z-10"
+                            alt="Image of an OMP deep dish steering wheel in a BMW">
+                        </div>
+                        <div class="flex flex-col absolute inset-0 justify-center text-center items-center gap-2">
+                            <span
+                                class="text-primary text-5xl group-hover:text-highlight transition-all duration-300">Steering Wheels</span>
+                            <a href="/category/steering_wheels"
+                                class="button-highlight text-secondary text-3xl px-4 py-2 rounded-xl max-w-fit z-30">Shop
+                                Now</a>
+                        </div>
+                    </div>
+
+                    <div class="relative group">
+                        <a href="/category/decals" class="min-w-full min-h-full absolute z-20"></a>
+                        <div role="img"
+                            class="bg-[url('/images/car_decal.webp')] bg-center bg-cover w-full aspect-square object-cover group-hover:bg-opacity-80 transition-all duration-300 rounded-xl z-10"
+                            alt="Image of car decal Japanese on a window">
+                        </div>
+                        <div class="flex flex-col absolute inset-0 justify-center text-center items-center gap-2">
+                            <span
+                                class="text-tertiary text-5xl group-hover:text-highlight transition-all duration-300">Decals</span>
+                            <a href="/category/decals"
+                                class="button-highlight text-secondary text-3xl px-4 py-2 rounded-xl max-w-fit z-30">Shop
+                                Now</a>
+                        </div>
+                    </div>
+
+                    <div class="relative group">
+                        <a href="/category/boss_kits" class="min-w-full min-h-full absolute z-20"></a>
+                        <div role="img"
+                            class="bg-[url('/images/momo-steering-boss-kit.jpg')] bg-center bg-cover w-full aspect-square object-cover group-hover:bg-opacity-80 transition-all duration-300 rounded-xl z-10"
+                            alt="Image of a MOMO steering wheel boss kit">
+                        </div>
+                        <div class="flex flex-col absolute inset-0 justify-center text-center items-center gap-2">
+                            <span
+                                class="text-tertiary text-5xl group-hover:text-highlight transition-all duration-300">Boss Kits</span>
+                            <a href="/category/boss_kits"
+                                class="button-highlight text-secondary text-3xl px-4 py-2 rounded-xl max-w-fit z-30">Shop
+                                Now</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="mt-4">
-            <div class="flex flex-row gap-4">
-                <span class="flex-grow border-solid border-b-2 -translate-y-1/2"></span>
-                <a href="/category/obd_readers" class="font-bold">Newest In Stock</a>
-                <span class="flex-grow border-solid border-b-2 -translate-y-1/2"></span>
-            </div>
-            <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 p-4">
-                <div th:each="listing : ${newListings}">
-                    <div th:replace="~{fragments/index-listing :: index-listing}"></div>
-                </div>
-            </div>
-        </div>
-        <div class="mt-4">
-            <div class="flex flex-row gap-4">
-                <span class="flex-grow border-solid border-b-2 -translate-y-1/2"></span>
-                <a href="/category/obd_readers" class="font-bold">OBD Readers</a>
-                <span class="flex-grow border-solid border-b-2 -translate-y-1/2"></span>
-            </div>
-            <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 p-4">
-                <div th:each="listing : ${listings}">
-                    <div th:replace="~{fragments/index-listing :: index-listing}"></div>
-                </div>
-            </div>
-        </div>
-        <!--       _
-       .__(.)< (MEOW :3)
-        \___)   
- ~~~~~~~~~~~~~~~~~~-->
         <div th:replace="~{fragments/footer :: footer}"></div>
     </main>
 </body>

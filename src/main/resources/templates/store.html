@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>UKAutoParts Official Store - OBD Readers, Steering Wheels, Decals, And More.</title>
+</head>
+
+<body class="body">
+    <main class="main">
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
+        <div class="mt-4">
+            <div class="flex flex-row gap-4">
+                <span class="flex-grow border-solid border-b-[1px] -translate-y-1/2"></span>
+                <a href="/featured" class="font-bold">Featured</a>
+                <span class="flex-grow border-solid border-b-[1px] -translate-y-1/2"></span>
+            </div>
+            <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 max-sm:grid-cols-2 gap-4 p-4">
+                <div th:each="listing : ${featuredListings}">
+                    <div th:replace="~{fragments/index-listing :: index-listing}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <div class="flex flex-row gap-4">
+                <span class="flex-grow border-solid border-b-[1px] -translate-y-1/2"></span>
+                <a href="/category/obd_readers" class="font-bold">Newest In Stock</a>
+                <span class="flex-grow border-solid border-b-[1px] -translate-y-1/2"></span>
+            </div>
+            <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 max-sm:grid-cols-2 gap-4 p-4">
+                <div th:each="listing : ${newListings}">
+                    <div th:replace="~{fragments/index-listing :: index-listing}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <div class="flex flex-row gap-4">
+                <span class="flex-grow border-solid border-b-[1px] -translate-y-1/2"></span>
+                <a href="/category/obd_readers" class="font-bold">OBD Readers</a>
+                <span class="flex-grow border-solid border-b-[1px] -translate-y-1/2"></span>
+            </div>
+            <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 max-sm:grid-cols-2 gap-4 p-4">
+                <div th:each="listing : ${listings}">
+                    <div th:replace="~{fragments/index-listing :: index-listing}"></div>
+                </div>
+            </div>
+        </div>
+        <!--       _
+       .__(.)< (MEOW :3)
+        \___)   
+ ~~~~~~~~~~~~~~~~~~-->
+        <div th:replace="~{fragments/footer :: footer}"></div>
+    </main>
+</body>
+
+</html>

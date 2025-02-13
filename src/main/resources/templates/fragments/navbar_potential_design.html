@@ -1,0 +1,94 @@
+<nav th:fragment="navbar" class="fixed z-10 w-full bg-secondary">
+    <script src="/scripts/auth.js"></script>
+    <script src="/scripts/navbar.js"></script>
+    <div class="p-4 flex flex-col z-10">
+        <div class="flex w-full justify-start max-md:justify-center">
+            <a href="/" class="text-center text-5xl font-bold w-fit">
+                <span class="text-highlight">UK<span class="text-slate-100">AutoParts</span>
+                </span>
+            </a>
+        </div>
+        <div class="md:hidden left-0 top-0 fixed w-16 transition-all duration-300" id="side-nav">
+            <img src="/images/menu.svg" alt="" class="left-0 top-0 w-16 z-20 fixed" onclick="toggleNavbar()">
+            <div class="flex-col items-center justify-center text-center pl-4 gap-4 w-0 h-full left-0 top-0 fixed hidden transition-all duration-300"
+                id="side-nav-links">
+                <a href="/category/obd_readers" class="hover:text-highlight transition-all duration-300">OBD Readers</a>
+                <a href="/category/steering_wheels" class="hover:text-highlight transition-all duration-300">Steering
+                    Wheels</a>
+                <a href="/contact" class="hover:text-highlight transition-all duration-300">Contact</a>
+                <a href="/cart"
+                    class="flex flex-row gap-4 hover:text-highlight transition-all duration-300 text-primary">
+                    <img src="/images/shopping-cart.svg" alt="" class="w-6">
+                    <span>Cart</span>
+                    <span th:text="${@cartService.getCartItemCount()} + ' '"
+                        class="bg-highlight rounded-3xl min-w-8 text-center text-primary"></span>
+                </a>
+                <div th:if="${@userService.getUser() != null}" class="flex flex-col w-fit gap-4 text-primary">
+                    <div class="flex flex-row justify-center">
+                        <a href="/account" class="flex flex-row gap-4 hover:text-highlight">
+                            <img src="/images/account.svg" alt="" class="w-6">
+                            Account
+                        </a>
+                    </div>
+
+                    <ul class="flex flex-col gap-4">
+                        <li th:if="${@userService.isAdmin}"><a href="/listings/new"
+                                class="hover:rounded hover:text-highlight w-full">Create Listing</a></li>
+                        <li><a href="/orders" class="hover:rounded hover:text-highlight w-full">Orders</a></li>
+                        <li><a onclick="logout()" class="hover:rounded hover:text-highlight w-full cursor-pointer">Log
+                                out</a>
+                        </li>
+                    </ul>
+                </div>
+                <a th:if="${@userService.getUser() == null}" href="/api/auth/login"
+                    class="flex flex-row gap-4 hover:text-highlight transition-all duration-300 text-primary">
+                    <img src="/images/account.svg" alt="" class="w-6">
+                    <span>Sign Up/Login</span>
+                </a>
+            </div>
+        </div>
+        <div class="md:hidden mt-2 mr-2 right-0 top-0 fixed w-16 h-16 transition-all duration-300" id="side-cart">
+            <a href="/cart" class="relative">
+                <img src="/images/shopping-cart.svg" alt="" class="w-full h-full">
+                <span th:if="${@cartService.getCartItemCount() > 0}" th:text="${@cartService.getCartItemCount()}"
+                    class="absolute text-base rounded-full bg-highlight right-0 bottom-0 px-2 mb-1 mr-1"></span>
+            </a>
+        </div>
+        <div class="md:flex md:text-left max-md:hidden justify-between text-primary text-xl mt-2 text-center">
+            <a href="/category/obd_readers" class="hover:text-highlight transition-all duration-300">OBD Readers</a>
+            <a href="/category/steering_wheels" class="hover:text-highlight transition-all duration-300">Steering
+                Wheels</a>
+            <a href="/contact" class="hover:text-highlight transition-all duration-300">Contact</a>
+            <a href="/cart" class="flex flex-row gap-4 hover:text-highlight transition-all duration-300 text-primary">
+                <img src="/images/shopping-cart.svg" alt="" class="w-6">
+                <span>Cart</span>
+                <span th:text="${@cartService.getCartItemCount()} + ' '"
+                    class="bg-highlight rounded-full min-w-8 text-center text-primary"></span>
+            </a>
+            <div th:if="${@userService.getUser() != null}" class="w-fit group gap-4 hover:text-highlight text-primary">
+                <div class="flex flex-row justify-center">
+                    <a href="/account" class="flex flex-row gap-4">
+                        <img src="/images/account.svg" alt="" class="w-6">
+                        Account
+                    </a>
+                </div>
+
+                <div class="group-hover:block hidden absolute h-auto">
+                    <ul id="user-dropdown" class="bg-white text-tertiary text-left rounded shadow-xl top-0 px-6 py-8">
+                        <li th:if="${@userService.isAdmin}"><a href="/listings/new"
+                                class="hover:rounded hover:text-highlight w-full">Create Listing</a></li>
+                        <li><a href="/orders" class="hover:rounded hover:text-highlight w-full">Orders</a></li>
+                        <li><a onclick="logout()" class="hover:rounded hover:text-highlight w-full cursor-pointer">Log
+                                out</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <a th:if="${@userService.getUser() == null}" href="/api/auth/login"
+                class="flex flex-row gap-4 hover:text-highlight transition-all duration-300 text-primary">
+                <img src="/images/account.svg" alt="" class="w-6">
+                <span>Sign Up/Login</span>
+            </a>
+        </div>
+    </div>
+</nav>

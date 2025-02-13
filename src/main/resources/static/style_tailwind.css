@@ -56,7 +56,7 @@
     }
 
     .separator {
-        @apply flex-grow border-solid border-b-1 -translate-y-1/2;
+        @apply flex-grow border-solid border-b-[1px] -translate-y-1/2;
     }
 
     .border-b-1 {

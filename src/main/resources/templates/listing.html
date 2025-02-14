@@ -56,7 +56,9 @@
             <div class="flex flex-row gap-4 w-full">
                 <div class="max-md:hidden flex flex-col w-2/12 max-h-full gap-2 overflow-x-auto" id="side-images">
                     <img th:each="image : ${listing.images}" th:src="@{'/upload-dir/' + ${image.imageUrl}}"
-                        th:alt="'side image for ' + ${listing.title} + ' listing'" th:id="'side-image-' + ${image.imageUrl}" th:attr="onmouseover=|setActiveImage('${image.imageUrl}')|">
+                        th:alt="'side image for ' + ${listing.title} + ' listing'"
+                        th:id="'side-image-' + ${image.imageUrl}"
+                        th:attr="onmouseover=|setActiveImage('${image.imageUrl}')|">
                 </div>
                 <div class="w-full max-md:snap-center max-md:overflow-hidden max-md:overflow-x-auto max-md:snap-x max-md:snap-mandatory max-md:scroll-smooth flex flex-row"
                     id="carousel">
@@ -121,8 +123,7 @@
                         <button class="button-highlight text-center flex-grow px-4 py-2 text-nowrap">Remove
                             Listing</button>
                     </form>
-                    <form action="/api/stripe/checkout/listing" method="POST"
-                        class="flex flex-grow">
+                    <form action="/api/stripe/checkout/listing" method="POST" class="flex flex-grow">
                         <input type="hidden" name="listingId" th:value="${listing.id}">
                         <input type="hidden" name="quantity" id="checkout-quantity" value="1">
                         <button type="submit" id="checkout-button" class="button-highlight flex-grow px-4 py-2">
@@ -135,7 +136,9 @@
 
                     <div class="flex flex-row gap-4 flex-grow">
                         <input type="number" step="1" min="1" max="10" value="1"
-                            class="w-1/4 p-2 border border-primary rounded text-tertiary" th:id="'quantity-' + ${listing.id}" th:attr="onchange=|verifyQuantity(${listing.id}); document.getElementById('checkout-quantity').value = this.value|">
+                            class="w-1/4 p-2 border border-primary rounded text-tertiary"
+                            th:id="'quantity-' + ${listing.id}"
+                            th:attr="onchange=|verifyQuantity(${listing.id}); document.getElementById('checkout-quantity').value = this.value|">
                         <button id="checkout-button" th:attr="onclick=|addToCart(${listing.id})|"
                             class="button-highlight flex-grow px-4 py-2">
                             <span class="text-nowrap">Add To Cart</span></button>
@@ -146,7 +149,8 @@
                         <div class="flex gap-1">
                             <div class="w-16 h-10 bg-[url('/images/paypal.svg')] bg-cover"></div> <!-- paypal -->
                             <div class="w-16 h-10 bg-[url('/images/visa.svg')] bg-cover"></div> <!-- visa -->
-                            <div class="w-16 h-10 bg-[url('/images/mastercard.svg')] bg-cover"></div> <!-- mastercard -->
+                            <div class="w-16 h-10 bg-[url('/images/mastercard.svg')] bg-cover"></div>
+                            <!-- mastercard -->
                             <div class="w-16 h-10 bg-[url('/images/diners.svg')] bg-cover"></div> <!-- diners -->
                         </div>
                     </div>

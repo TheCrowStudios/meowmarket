@@ -744,26 +744,6 @@ video {
   inset: 0px;
 }
 
-.inset-x-10 {
-  left: 2.5rem;
-  right: 2.5rem;
-}
-
-.inset-y-10 {
-  top: 2.5rem;
-  bottom: 2.5rem;
-}
-
-.inset-x-20 {
-  left: 5rem;
-  right: 5rem;
-}
-
-.inset-y-20 {
-  top: 5rem;
-  bottom: 5rem;
-}
-
 .bottom-0 {
   bottom: 0px;
 }
@@ -838,10 +818,6 @@ video {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.block {
-  display: block;
 }
 
 .flex {
@@ -1172,24 +1148,20 @@ video {
   background-color: rgb(255 255 255 / 0.8);
 }
 
-.bg-opacity-80 {
-  --tw-bg-opacity: 0.8;
-}
-
-.bg-opacity-10 {
-  --tw-bg-opacity: 0.1;
-}
-
-.bg-opacity-15 {
-  --tw-bg-opacity: 0.15;
-}
-
-.bg-opacity-40 {
-  --tw-bg-opacity: 0.4;
+.bg-opacity-0 {
+  --tw-bg-opacity: 0;
 }
 
 .bg-opacity-100 {
   --tw-bg-opacity: 1;
+}
+
+.bg-\[url\(\'\/images\/car_decal\.webp\'\)\] {
+  background-image: url('/images/car_decal.webp');
+}
+
+.bg-\[url\(\'\/images\/d1_lite_obd_reader\.jpg\'\)\] {
+  background-image: url('/images/d1_lite_obd_reader.jpg');
 }
 
 .bg-\[url\(\'\/images\/diners\.svg\'\)\] {
@@ -1204,6 +1176,14 @@ video {
   background-image: url('/images/miata3.jpg');
 }
 
+.bg-\[url\(\'\/images\/momo-steering-boss-kit\.jpg\'\)\] {
+  background-image: url('/images/momo-steering-boss-kit.jpg');
+}
+
+.bg-\[url\(\'\/images\/omp_steering_wheel_in_bmw\.jpg\'\)\] {
+  background-image: url('/images/omp_steering_wheel_in_bmw.jpg');
+}
+
 .bg-\[url\(\'\/images\/paypal\.svg\'\)\] {
   background-image: url('/images/paypal.svg');
 }
@@ -1212,36 +1192,8 @@ video {
   background-image: url('/images/visa.svg');
 }
 
-.bg-\[url\(\/images\/1\.png\)\] {
-  background-image: url(/images/1.png);
-}
-
-.bg-\[url\(\'\/images\/1\.png\'\)\] {
-  background-image: url('/images/1.png');
-}
-
-.bg-\[url\(\'\/images\/omp_steering_wheel_in_bmw\.jpg\'\)\] {
-  background-image: url('/images/omp_steering_wheel_in_bmw.jpg');
-}
-
-.bg-\[url\(\'\/images\/d1_lite_obd_reader\.jpg\'\)\] {
-  background-image: url('/images/d1_lite_obd_reader.jpg');
-}
-
-.bg-\[url\(\'\/images\/car_decal\.webp\'\)\] {
-  background-image: url('/images/car_decal.webp');
-}
-
-.bg-\[url\(\'\/images\/momo-steering-boss-kit\.jpg\'\)\] {
-  background-image: url('/images/momo-steering-boss-kit.jpg');
-}
-
 .bg-cover {
   background-size: cover;
-}
-
-.bg-\[40\%_15\%\] {
-  background-position: 40% 15%;
 }
 
 .bg-center {
@@ -1304,14 +1256,14 @@ video {
   padding-bottom: 0.5rem;
 }
 
-.py-8 {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .pb-1 {
@@ -1448,6 +1400,12 @@ video {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.shadow-2xl {
+  --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
@@ -1576,11 +1534,27 @@ video {
   .max-md\:scroll-smooth {
     scroll-behavior: smooth;
   }
+
+  .max-md\:bg-\[60\%_15\%\] {
+    background-position: 60% 15%;
+  }
 }
 
 @media not all and (min-width: 640px) {
+  .max-sm\:h-\[60vh\] {
+    height: 60vh;
+  }
+
   .max-sm\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .max-sm\:bg-opacity-0 {
+    --tw-bg-opacity: 0;
+  }
+
+  .max-sm\:bg-\[60\%_15\%\] {
+    background-position: 60% 15%;
   }
 }
 
@@ -1613,6 +1587,10 @@ video {
 
   .md\:items-end {
     align-items: flex-end;
+  }
+
+  .md\:bg-\[40\%_15\%\] {
+    background-position: 40% 15%;
   }
 
   .md\:text-left {

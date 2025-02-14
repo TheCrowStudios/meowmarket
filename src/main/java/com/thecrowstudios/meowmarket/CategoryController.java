@@ -21,9 +21,17 @@ public class CategoryController {
 
     @GetMapping("/{category}")
     public String showCategory(@PathVariable String category, Model model) {
-        List<Listing> listings = listingRepository.findByCategoryAndDateDeletedIsNull(ItemCategory.valueOf(category.toUpperCase()));
+        List<Listing> listings = listingRepository
+                .findByCategoryAndDateDeletedIsNull(ItemCategory.valueOf(category.toUpperCase()));
         model.addAttribute("listings", listings);
-        model.addAttribute("category", category.toString().replace("_", " ").toUpperCase());
+
+        try {
+            model.addAttribute("category", ItemCategory.valueOf(category.toUpperCase()));
+        } catch (Exception e) {
+            System.out.println("[ERROR] could not find category with name: " + category);
+            return "redirect:/store";
+        }
+
         return "category";
     }
 }

@@ -29,14 +29,14 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Listing {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String title;
-    
+
     @Column(length = 65555)
     private String description;
-    
+
     @Column(length = 65555)
     private String longDescription;
 
@@ -45,11 +45,11 @@ public class Listing {
 
     private boolean featured;
 
-    @Column(nullable=false, updatable = true)
+    @Column(nullable = false, updatable = true)
     @ColumnDefault("3")
     private Double price;
 
-    @Column(nullable=true, updatable = true)
+    @Column(nullable = true, updatable = true)
     private Double originalPrice;
 
     private Integer quantityInStock;
@@ -78,7 +78,27 @@ public class Listing {
     private User createdByUser;
 
     public enum ItemCategory {
-        OBD_READERS, STEERING_WHEELS, DECALS, BOSS_KITS
+        OBD_READERS("OBD2 and Diagnostic Tools",
+                "Take control of your vehicle's health with our comprehensive selection of OBD (On-Board Diagnostics) scanners. These essential diagnostic tools connect directly to your car's computer system, giving you real-time insights into your vehicle's performance and helping you identify potential issues before they become costly repairs."),
+        STEERING_WHEELS("Deep Dish Steering Wheels", "View our range of aftermarket steering wheels, including brands such as OMP, MOMO, and others."),
+        DECALS("Vehicle Decals and Stickers", ""),
+        BOSS_KITS("Steering Wheel Boss Hub Adapters", "");
+
+        private final String description;
+        private final String longDescription;
+
+        public String getDescription() {
+            return this.description;
+        }
+
+        public String getLongDescription() {
+            return this.longDescription;
+        }
+
+        ItemCategory(String description, String longDescription) {
+            this.description = description;
+            this.longDescription = longDescription;
+        }
     }
 
     public Listing() {
@@ -183,7 +203,7 @@ public class Listing {
     public void setDateDeleted(LocalDateTime dateDeleted) {
         this.dateDeleted = dateDeleted;
     }
-    
+
     public Integer getId() {
         return id;
     }

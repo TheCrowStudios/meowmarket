@@ -13,10 +13,11 @@
     <main class="main">
         <div th:replace="~{fragments/navbar :: navbar}"></div>
         <div class="flex flex-col gap-4">
-            <div class="relative w-full h-[80vh] bg-[url('/images/miata3.jpg')] bg-cover bg-[40%_15%]">
+            <div></div>
+            <div class="relative w-full h-[80vh] bg-[url('/images/miata3.jpg')] bg-cover md:bg-[40%_15%] max-md:bg-[60%_15%] max-sm:bg-[60%_15%] max-sm:h-[60vh]">
                 <div class="flex flex-col absolute inset-0 justify-center items-center text-center gap-4">
-                    <div class="flex flex-col w-fit h-fit px-2 py-4 bg-secondary bg-opacity-100 rounded-3xl gap-4">
-                        <span class="text-white text-5xl group-hover:text-highlight transition-all duration-300">Welcome
+                    <div class="flex flex-col w-fit h-fit px-2 py-4 bg-secondary bg-opacity-0 max-sm:bg-opacity-0 rounded-3xl gap-4">
+                        <span class="text-white font-bold text-5xl group-hover:text-highlight transition-all duration-300">Welcome
                             to <span href="/" class="text-center text-5xl font-bold w-fit">
                                 <span class="text-highlight">UK<span class="text-slate-100">AutoParts</span>
                                 </span>
@@ -38,7 +39,7 @@
                         </div>
                         <div class="flex flex-col absolute inset-0 justify-center text-center items-center gap-2">
                             <span
-                                class="text-primary text-5xl group-hover:text-highlight transition-all duration-300">OBD
+                                class="text-primary font-bold text-5xl group-hover:text-highlight transition-all duration-300">OBD
                                 Readers</span>
                             <a href="/category/obd_readers"
                                 class="button-highlight text-secondary text-3xl px-4 py-2 rounded-xl max-w-fit z-30">Shop
@@ -54,7 +55,7 @@
                         </div>
                         <div class="flex flex-col absolute inset-0 justify-center text-center items-center gap-2">
                             <span
-                                class="text-primary text-5xl group-hover:text-highlight transition-all duration-300">Steering Wheels</span>
+                                class="text-primary font-bold text-5xl group-hover:text-highlight transition-all duration-300">Steering Wheels</span>
                             <a href="/category/steering_wheels"
                                 class="button-highlight text-secondary text-3xl px-4 py-2 rounded-xl max-w-fit z-30">Shop
                                 Now</a>
@@ -69,7 +70,7 @@
                         </div>
                         <div class="flex flex-col absolute inset-0 justify-center text-center items-center gap-2">
                             <span
-                                class="text-tertiary text-5xl group-hover:text-highlight transition-all duration-300">Decals</span>
+                                class="text-tertiary font-bold text-5xl group-hover:text-highlight transition-all duration-300">Decals</span>
                             <a href="/category/decals"
                                 class="button-highlight text-secondary text-3xl px-4 py-2 rounded-xl max-w-fit z-30">Shop
                                 Now</a>
@@ -84,7 +85,7 @@
                         </div>
                         <div class="flex flex-col absolute inset-0 justify-center text-center items-center gap-2">
                             <span
-                                class="text-tertiary text-5xl group-hover:text-highlight transition-all duration-300">Boss Kits</span>
+                                class="text-tertiary font-bold text-5xl group-hover:text-highlight transition-all duration-300">Boss Kits</span>
                             <a href="/category/boss_kits"
                                 class="button-highlight text-secondary text-3xl px-4 py-2 rounded-xl max-w-fit z-30">Shop
                                 Now</a>

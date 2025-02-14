@@ -244,7 +244,7 @@ public class StripeController {
     }
 
     public SessionCreateParams.Builder createDefaultStripeParams() {
-        String domain = "https://thecrowstudios.com/";
+        String domain = "https://ukauto.parts/";
 
         SessionCreateParams.Builder params = SessionCreateParams.builder()
                 .setUiMode(SessionCreateParams.UiMode.EMBEDDED)

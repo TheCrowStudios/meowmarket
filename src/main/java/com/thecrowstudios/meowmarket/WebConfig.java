@@ -34,9 +34,15 @@ public class WebConfig implements WebMvcConfigurer {
         String absolutePath = new File(uploadPath).getAbsolutePath();
         registry.addResourceHandler("/upload-dir/**")
                 .addResourceLocations("file:" + absolutePath + "/")
-                .setCachePeriod(86400)
+                .setCachePeriod(86400 * 30)
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver());
+
+        registry.addResourceHandler("/images/**")
+        .addResourceLocations("classpath:/static/images/")
+        .setCachePeriod(86400 * 30)
+        .resourceChain(false)
+        .addResolver(new PathResourceResolver());
     }
 
     @Override

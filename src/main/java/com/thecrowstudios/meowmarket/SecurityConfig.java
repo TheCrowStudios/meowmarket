@@ -52,7 +52,7 @@ public class SecurityConfig {
                                 .authorizeHttpRequests(
                                                 auth -> auth
                                                                 .requestMatchers("/listings/new", "/listings/create",
-                                                                                "/listings/edit")
+                                                                                "/listings/edit", "/actuator/**")
                                                                 .hasRole("ADMIN")
                                                                 .anyRequest().permitAll())
                                 .formLogin(login -> login.loginPage("/api/auth/login")

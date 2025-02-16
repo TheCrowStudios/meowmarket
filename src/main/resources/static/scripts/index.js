@@ -1,0 +1,66 @@
+"use strict";
+document.addEventListener("DOMContentLoaded", () => {
+    const slideshow = document.getElementById('slideshow');
+    const slider = document.getElementById('slideshow-container');
+    const dotsDiv = document.getElementById('dots');
+    let currentIndex = 0;
+    let resetTimer = false;
+    const slides = Array.from(document.querySelectorAll('#slideshow-container > div'));
+    const totalSlides = slides.length;
+    for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('w-3', 'h-3', 'rounded-full', 'bg-white', 'opacity-50', 'cursor-pointer');
+        dot.addEventListener('click', () => forceSlide(i));
+        dotsDiv === null || dotsDiv === void 0 ? void 0 : dotsDiv.appendChild(dot);
+    }
+    const dots = dotsDiv.querySelectorAll('div');
+    function forceSlide(index) {
+        resetTimer = true;
+        goToSlide(index);
+    }
+    function goToSlide(index) {
+        currentIndex = index;
+        slides.forEach((slide, index) => {
+            if (index === currentIndex) {
+                slide.style.transform = 'translateX(0)';
+                slide.style.opacity = '1';
+                slide.style.zIndex = '10';
+            }
+            else {
+                slide.style.transform = 'translateX(-100%)';
+                slide.style.opacity = '0';
+                slide.style.zIndex = '0';
+                setTimeout(() => { slide.style.transform = 'translateX(100%)'; console.log("move slide to the right"); }, 500);
+            }
+        });
+        dots.forEach((dot, i) => {
+            if (i === index) {
+                dot.classList.remove('opacity-50');
+                dot.classList.add('opacity-100');
+            }
+            else {
+                dot.classList.add('opacity-50');
+                dot.classList.remove('opacity-100');
+            }
+        });
+    }
+    function nextSlide() {
+        if (resetTimer) {
+            resetTimer = false;
+            return;
+        }
+        currentIndex = (currentIndex + 1) % totalSlides;
+        goToSlide(currentIndex);
+    }
+    function init() {
+        slides.forEach((slide, i) => {
+            if (i !== 0) {
+                slide.style.opacity = '0';
+                slide.style.zIndex = '0';
+            }
+        });
+        goToSlide(0);
+    }
+    init();
+    setInterval(nextSlide, 5000);
+});

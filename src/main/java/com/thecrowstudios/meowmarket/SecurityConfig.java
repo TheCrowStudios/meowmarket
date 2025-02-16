@@ -61,7 +61,7 @@ public class SecurityConfig {
                                                 .failureUrl("/api/auth/login?error=true")
                                                 .permitAll())
                                 .rememberMe(rememberMe -> rememberMe
-                                                .rememberMeServices(rememberMeServices()))
+                                .rememberMeServices(rememberMeServices()))
                                 .sessionManagement(session -> session
                                                 .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
                                                 .invalidSessionUrl("/api/auth/login")

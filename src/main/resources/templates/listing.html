@@ -60,16 +60,20 @@
                         th:id="'side-image-' + ${image.imageUrl}"
                         th:attr="onmouseover=|setActiveImage('${image.imageUrl}')|">
                 </div>
+
                 <div class="w-full max-md:snap-center max-md:overflow-hidden max-md:overflow-x-auto max-md:snap-x max-md:snap-mandatory max-md:scroll-smooth flex flex-row"
                     id="carousel">
+
                     <div class="max-md:hidden w-full h-auto flex-shrink-0">
                         <img th:if="${listing.images.size() > 0}"
                             th:src="@{'/upload-dir/' + ${listing.images.get(0).imageUrl}}" th:alt="${listing.title}"
                             id="img-main">
                     </div>
+
                     <img th:each="image : ${listing.images}" th:src="@{'/upload-dir/' + ${image.imageUrl}}"
                         alt="${listing.title}" th:attr="onmouseover=|setActiveImage('/upload-dir/${image.imageUrl}')|"
                         class="md:hidden flex-shrink-0 snap-center">
+
                     <button onclick="scrollCarousel('left')"
                         class="md:hidden absolute left-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p/2 rounded-lg shadow">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"

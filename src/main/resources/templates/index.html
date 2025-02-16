@@ -6,18 +6,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
+    <script src="/scripts/index.js"></script>
     <title>UKAutoParts Official Store - OBD Readers, Steering Wheels, Decals, And More.</title>
 </head>
 
-<body class="body">
+<body class="body overflow-x-hidden">
     <main class="main">
         <div th:replace="~{fragments/navbar :: navbar}"></div>
         <div class="flex flex-col gap-4">
-            <div></div>
-            <div class="relative w-full h-[80vh] bg-[url('/images/miata3.jpg')] bg-cover md:bg-[40%_15%] max-md:bg-[60%_15%] max-sm:bg-[60%_15%] max-sm:h-[60vh]">
-                <div class="flex flex-col absolute inset-0 justify-center items-center text-center gap-4">
-                    <div class="flex flex-col w-fit h-fit px-2 py-4 bg-secondary bg-opacity-0 max-sm:bg-opacity-0 rounded-3xl gap-4">
-                        <span class="text-white font-bold text-5xl group-hover:text-highlight transition-all duration-300">Welcome
+            <div id="slideshow"
+                class="relative w-full h-[80vh] max-md:h-[60vh] bg-cover">
+                <div id="slideshow-container" class="relative h-full w-full transition-all duration-500 overflow-hidden">
+                    <div class="absolute bg-[url('/images/miata3.jpg')] w-full h-full bg-cover bg-center md:bg-[40%_15%] max-md:bg-[60%_15%] max-sm:bg-[60%_15%] transition-all duration-500 overflow-hidden"></div>
+                    <div class="absolute bg-[url('/images/1.png')] w-full h-full bg-cover bg-center transition-all duration-500 overflow-hidden"></div>
+                </div>
+                <div class="flex flex-col absolute inset-0 justify-center items-center text-center gap-4 z-10">
+                    <div
+                        class="flex flex-col w-fit h-fit px-2 py-4 bg-secondary bg-opacity-0 max-sm:bg-opacity-0 rounded-3xl gap-4">
+                        <span
+                            class="text-white font-bold text-5xl group-hover:text-highlight transition-all duration-300">Welcome
                             to <span href="/" class="text-center text-5xl font-bold w-fit">
                                 <span class="text-highlight">UK<span class="text-slate-100">AutoParts</span>
                                 </span>
@@ -27,6 +34,9 @@
                                 Now</a>
                         </div>
                     </div>
+                </div>
+                <div class="absolute w-full flex items-center justify-center">
+                    <div id="dots" class="absolute flex flex-row mb-8 gap-2 z-10"></div>
                 </div>
             </div>
             <div class="mt-4">
@@ -55,7 +65,8 @@
                         </div>
                         <div class="flex flex-col absolute inset-0 justify-center text-center items-center gap-2">
                             <span
-                                class="text-primary font-bold text-5xl group-hover:text-highlight transition-all duration-300">Steering Wheels</span>
+                                class="text-primary font-bold text-5xl group-hover:text-highlight transition-all duration-300">Steering
+                                Wheels</span>
                             <a href="/category/steering_wheels"
                                 class="button-highlight text-secondary text-3xl px-4 py-2 rounded-xl max-w-fit z-30">Shop
                                 Now</a>
@@ -85,7 +96,8 @@
                         </div>
                         <div class="flex flex-col absolute inset-0 justify-center text-center items-center gap-2">
                             <span
-                                class="text-tertiary font-bold text-5xl group-hover:text-highlight transition-all duration-300">Boss Kits</span>
+                                class="text-tertiary font-bold text-5xl group-hover:text-highlight transition-all duration-300">Boss
+                                Kits</span>
                             <a href="/category/boss_kits"
                                 class="button-highlight text-secondary text-3xl px-4 py-2 rounded-xl max-w-fit z-30">Shop
                                 Now</a>

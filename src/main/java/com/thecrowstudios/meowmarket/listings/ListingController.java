@@ -86,7 +86,7 @@ public class ListingController {
         listing.setCreatedByUser(user);
 
         listingRepository.save(listing);
-        return "redirect:/";
+        return "redirect:/store";
     }
 
     @PreAuthorize("hasRole('ADMIN')")

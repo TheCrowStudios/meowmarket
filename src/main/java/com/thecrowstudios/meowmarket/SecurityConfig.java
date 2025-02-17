@@ -65,7 +65,7 @@ public class SecurityConfig {
                                 .sessionManagement(session -> session
                                                 .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
                                                 .invalidSessionUrl("/api/auth/login")
-                                                .maximumSessions(1)
+                                                .maximumSessions(5)
                                                 .expiredUrl("/api/auth/login"))
                                 .logout(logout -> logout
                                                 .logoutUrl("/api/auth/logout")

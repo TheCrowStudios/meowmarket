@@ -55,13 +55,13 @@ public class SecurityConfig {
                                                                                 "/listings/edit", "/actuator/**")
                                                                 .hasRole("ADMIN")
                                                                 .anyRequest().permitAll())
-                                .formLogin(login -> login.loginPage("https://www.ukauto.parts/api/auth/login")
+                                .formLogin(login -> login.loginPage("/api/auth/login")
                                                 .loginProcessingUrl("/api/auth/login")
-                                                .defaultSuccessUrl("https://www.ukauto.parts/")
-                                                .failureUrl("https://www.ukauto.parts/api/auth/login?error=true")
+                                                .defaultSuccessUrl("/")
+                                                .failureUrl("/api/auth/login?error=true")
                                                 .permitAll())
                                 .rememberMe(rememberMe -> rememberMe
-                                .rememberMeServices(rememberMeServices()))
+                                                .rememberMeServices(rememberMeServices()))
                                 .sessionManagement(session -> session
                                                 .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
                                                 .invalidSessionUrl("/api/auth/login")
@@ -74,13 +74,22 @@ public class SecurityConfig {
                                                 .deleteCookies("JSESSIONID"))
                                 .exceptionHandling(exception -> exception
                                                 .authenticationEntryPoint((request, response, authException) -> {
-                                                        response.sendRedirect("/api/auth/login");
+                                                        String requestUrl = request.getRequestURL().toString();
+                                                        String redirectUrl = requestUrl.replace("ukauto.partsapi",
+                                                                        "ukauto.parts/api");
+                                                        response.sendRedirect(redirectUrl);
                                                 })
                                                 .accessDeniedHandler(
-                                                                (request, response, accessDeniedException) -> response
-                                                                                .sendRedirect("/api/auth/login")))
+                                                                (request, response, accessDeniedException) -> {
+                                                                        String requestUrl = request.getRequestURL()
+                                                                                        .toString();
+                                                                        String redirectUrl = requestUrl.replace(
+                                                                                        "ukauto.partsapi",
+                                                                                        "ukauto.parts/api");
+                                                                        response.sendRedirect(redirectUrl);
+                                                                }))
                                 .anonymous(anonymous -> anonymous.disable()); // breaks cart sometimes if we dont do
-                                                                              // this
+                // this
                 return http.build();
         }
 

@@ -55,10 +55,10 @@ public class SecurityConfig {
                                                                                 "/listings/edit", "/actuator/**")
                                                                 .hasRole("ADMIN")
                                                                 .anyRequest().permitAll())
-                                .formLogin(login -> login.loginPage("/api/auth/login")
+                                .formLogin(login -> login.loginPage("https://www.ukauto.parts/api/auth/login")
                                                 .loginProcessingUrl("/api/auth/login")
-                                                .defaultSuccessUrl("/")
-                                                .failureUrl("/api/auth/login?error=true")
+                                                .defaultSuccessUrl("https://www.ukauto.parts/")
+                                                .failureUrl("https://www.ukauto.parts/api/auth/login?error=true")
                                                 .permitAll())
                                 .rememberMe(rememberMe -> rememberMe
                                 .rememberMeServices(rememberMeServices()))

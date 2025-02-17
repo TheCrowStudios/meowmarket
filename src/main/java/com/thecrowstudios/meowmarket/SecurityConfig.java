@@ -17,6 +17,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
@@ -63,7 +64,7 @@ public class SecurityConfig {
                                 .rememberMe(rememberMe -> rememberMe
                                                 .rememberMeServices(rememberMeServices()))
                                 .sessionManagement(session -> session
-                                                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                                                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                                                 .invalidSessionUrl("/api/auth/login")
                                                 .maximumSessions(5)
                                                 .expiredUrl("/api/auth/login"))
@@ -73,21 +74,9 @@ public class SecurityConfig {
                                                 .invalidateHttpSession(true)
                                                 .deleteCookies("JSESSIONID"))
                                 .exceptionHandling(exception -> exception
-                                                .authenticationEntryPoint((request, response, authException) -> {
-                                                        String requestUrl = request.getRequestURL().toString();
-                                                        String redirectUrl = requestUrl.replace("ukauto.partsapi",
-                                                                        "ukauto.parts/api");
-                                                        response.sendRedirect(redirectUrl);
-                                                })
-                                                .accessDeniedHandler(
-                                                                (request, response, accessDeniedException) -> {
-                                                                        String requestUrl = request.getRequestURL()
-                                                                                        .toString();
-                                                                        String redirectUrl = requestUrl.replace(
-                                                                                        "ukauto.partsapi",
-                                                                                        "ukauto.parts/api");
-                                                                        response.sendRedirect(redirectUrl);
-                                                                }))
+                                                .authenticationEntryPoint(
+                                                                new LoginUrlAuthenticationEntryPoint(
+                                                                                "/api/auth/login")))
                                 .anonymous(anonymous -> anonymous.disable()); // breaks cart sometimes if we dont do
                 // this
                 return http.build();

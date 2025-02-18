@@ -80,7 +80,7 @@ public class Listing {
     public enum ItemCategory {
         OBD_READERS("OBD2 and Diagnostic Tools",
                 "Take control of your vehicle's health with our comprehensive selection of OBD (On-Board Diagnostics) scanners. These essential diagnostic tools connect directly to your car's computer system, giving you real-time insights into your vehicle's performance and helping you identify potential issues before they become costly repairs."),
-        STEERING_WHEELS("Deep Dish Steering Wheels", "View our range of aftermarket steering wheels, including brands such as OMP, MOMO, and others."),
+        STEERING_WHEELS("Aftermarket Steering Wheels", "View our range of aftermarket steering wheels, including brands such as OMP, MOMO, and others."),
         DECALS("Vehicle Decals and Stickers", ""),
         BOSS_KITS("Steering Wheel Boss Hub Adapters", "");
 

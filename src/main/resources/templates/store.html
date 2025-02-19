@@ -43,8 +43,8 @@
                 <span class="flex-grow border-solid border-b-[1px] -translate-y-1/2"></span>
             </div>
             <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 max-sm:grid-cols-2 gap-4 p-4">
-                <div th:each="listing,i : ${listings}"
-                    th:if="${listing.getCategory().name() == 'OBD_READERS' && i.index <= 8}">
+                <div th:each="listing : ${listings}"
+                    th:if="${listing.getCategory().name() == 'OBD_READERS' && listingStat.index < 8}">
                     <div th:replace="~{fragments/index-listing :: index-listing}"></div>
                 </div>
             </div>
@@ -59,8 +59,8 @@
                 <span class="flex-grow border-solid border-b-[1px] -translate-y-1/2"></span>
             </div>
             <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 max-sm:grid-cols-2 gap-4 p-4">
-                <div th:each="listing,i : ${listings}"
-                    th:if="${listing.getCategory().name() == 'STEERING_WHEELS' && i.index <= 8}">
+                <div th:each="listing : ${listings}"
+                    th:if="${listing.getCategory().name() == 'STEERING_WHEELS' && listingStat.index < 8}">
                     <div th:replace="~{fragments/index-listing :: index-listing}"></div>
                 </div>
             </div>

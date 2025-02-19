@@ -56,7 +56,6 @@ function validateEmail() {
 }
 function validatePassword() {
     const errorPassword = document.getElementById('error-password');
-    const errorPasswordConfirm = document.getElementById('error-password-confirm');
     if (inpPassword.value.trim() === '') {
         errorPassword.classList.remove('hidden');
         errorPassword.textContent = 'A password is required';
@@ -64,16 +63,12 @@ function validatePassword() {
     }
     if (inpPassword.value != inpConfirmPassword.value) {
         errorPassword.classList.remove('hidden');
-        errorPasswordConfirm.classList.remove('hidden');
         errorPassword.textContent = 'Passwords do not match';
-        errorPasswordConfirm.textContent = 'Passwords do not match';
         return false;
     }
     else {
         errorPassword.classList.add('hidden');
-        errorPasswordConfirm.classList.add('hidden');
         errorPassword.textContent = '';
-        errorPasswordConfirm.textContent = '';
         return true;
     }
     return true;

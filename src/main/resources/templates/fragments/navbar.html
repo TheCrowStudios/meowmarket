@@ -23,7 +23,7 @@
             </a>
             <div th:if="${@userService.getUser() != null}" class="flex flex-col w-fit gap-4 text-primary">
                 <div class="flex flex-row justify-center">
-                    <a href="/account" class="flex flex-row gap-4 hover:text-highlight">
+                    <a class="flex flex-row gap-4 hover:text-highlight">
                         <img src="/images/account.svg" alt="" class="w-6">
                         Account
                     </a>
@@ -64,7 +64,7 @@
         </a>
         <div th:if="${@userService.getUser() != null}" class="w-fit group gap-4 hover:text-highlight text-primary">
             <div class="flex flex-row justify-center">
-                <a href="/account" class="flex flex-row gap-4">
+                <a class="flex flex-row gap-4">
                     <img src="/images/account.svg" alt="" class="w-6">
                     Account
                 </a>

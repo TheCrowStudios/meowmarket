@@ -7,9 +7,9 @@
             </span>
         </a>
     </div>
-    <div class="md:hidden left-0 top-0 fixed w-16 transition-all duration-300" id="side-nav">
+    <div class="md:hidden left-0 top-0 fixed transition-all duration-300 w-screen" id="side-nav">
         <img src="/images/menu.svg" alt="" class="left-0 top-0 w-16 z-20 fixed" onclick="toggleNavbar()">
-        <div class="flex-col items-center justify-center text-center pl-4 gap-4 w-0 h-full left-0 top-0 fixed hidden transition-all duration-300"
+        <div class="flex flex-col items-center justify-center text-center pl-4 gap-4 h-full left-0 top-0 fixed transition-all duration-300 opacity-0 w-screen -translate-x-full bg-primary"
             id="side-nav-links">
             <a href="/category/obd_readers" class="hover:text-highlight transition-all duration-300">OBD Readers</a>
             <a href="/category/steering_wheels" class="hover:text-highlight transition-all duration-300">Steering
@@ -53,24 +53,48 @@
         </a>
     </div>
     <div class="md:flex md:text-left max-md:hidden justify-between text-primary text-xl mt-2 text-center">
-        <a href="/category/obd_readers" class="hover:text-highlight transition-all duration-300">OBD Readers</a>
-        <a href="/category/steering_wheels" class="hover:text-highlight transition-all duration-300">Steering Wheels</a>
+        <div class="w-fit group gap-4 hover:text-highlight text-primary">
+            <div class="flex flex-row justify-center">
+                <img src="/images/arrow.svg" alt=""
+                    class="w-8 -translate-y-0.5 group-hover:rotate-90 transition-all duration-300">
+                <a class="flex flex-row gap-4 hover:cursor-default">
+                    Categories
+                </a>
+            </div>
+
+            <div
+                class="block group-hover:opacity-100 group-hover:h-auto opacity-0 absolute h-0 transition-all duration-300">
+                <ul id="user-dropdown" class="bg-white text-tertiary text-left rounded shadow-xl top-0 px-6 py-8">
+                    <li><a href="/category/obd_readers" class="hover:text-highlight transition-all duration-300">OBD
+                            Readers</a></li>
+                    <li><a href="/category/steering_wheels"
+                            class="hover:text-highlight transition-all duration-300">Steering Wheels</a></li>
+                    <li><a href="/category/boss_kits" class="hover:text-highlight transition-all duration-300">Boss
+                            Kits</a></li>
+                    <li><a href="/category/decals" class="hover:text-highlight transition-all duration-300">Decals</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
         <a href="/contact" class="hover:text-highlight transition-all duration-300">Contact</a>
+
         <a href="/cart" class="flex flex-row gap-4 hover:text-highlight transition-all duration-300 text-primary">
             <img src="/images/shopping-cart.svg" alt="" class="w-6">
             <span>Cart</span>
             <span th:text="${@cartService.getCartItemCount()} + ' '"
                 class="bg-highlight rounded-full min-w-8 text-center text-primary"></span>
         </a>
+
         <div th:if="${@userService.getUser() != null}" class="w-fit group gap-4 hover:text-highlight text-primary">
             <div class="flex flex-row justify-center">
-                <a class="flex flex-row gap-4">
+                <a class="flex flex-row gap-4 hover:cursor-default">
                     <img src="/images/account.svg" alt="" class="w-6">
                     Account
                 </a>
             </div>
 
-            <div class="group-hover:block hidden absolute h-auto">
+            <div class="block group-hover:opacity-100 opacity-0 absolute h-auto transition-all duration-300">
                 <ul id="user-dropdown" class="bg-white text-tertiary text-left rounded shadow-xl top-0 px-6 py-8">
                     <li th:if="${@userService.isAdmin}"><a href="/listings/new"
                             class="hover:rounded hover:text-highlight w-full">Create Listing</a></li>

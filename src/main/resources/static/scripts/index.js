@@ -10,9 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 document.addEventListener("DOMContentLoaded", () => {
     const gridItems = document.querySelectorAll('.grid-animated > div');
+    const categoriesText = document.querySelector('#span-categories');
     const isInViewport = (element) => {
         const rect = element.getBoundingClientRect();
-        return (rect.left >= 0 && rect.bottom <= ((window.innerHeight || document.documentElement.clientHeight) + element.clientHeight * 0.5) && rect.right <= (window.innerWidth || document.documentElement.clientWidth));
+        return (rect.left >= 0 && rect.bottom <= ((window.innerHeight || document.documentElement.clientHeight) + element.clientHeight * 0.6) && rect.right <= (window.innerWidth || document.documentElement.clientWidth));
     };
     const animateItems = () => __awaiter(void 0, void 0, void 0, function* () {
         for (let i = 0; i < gridItems.length; i++) {
@@ -20,9 +21,12 @@ document.addEventListener("DOMContentLoaded", () => {
             const item = gridItems[i];
             if (index === 0) {
                 const rect = item.getBoundingClientRect();
-                console.log(`top: ${rect.top} bottom: ${rect.bottom} formula: ${(window.innerHeight || document.documentElement.clientHeight) + item.clientHeight * 0.5}`);
+                // console.log(`top: ${rect.top} bottom: ${rect.bottom} formula: ${(window.innerHeight || document.documentElement.clientHeight) + item.clientHeight * 0.6}`)
             }
             if (isInViewport(item) && !item.classList.contains('animated')) {
+                if (!(categoriesText === null || categoriesText === void 0 ? void 0 : categoriesText.classList.contains('animated'))) {
+                    categoriesText === null || categoriesText === void 0 ? void 0 : categoriesText.classList.remove('opacity-0');
+                }
                 if (index % 2 === 0) {
                     item.classList.add('slide-from-left');
                 }

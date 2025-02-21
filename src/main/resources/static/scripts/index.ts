@@ -1,9 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
     const gridItems = document.querySelectorAll('.grid-animated > div');
+    const categoriesText = document.querySelector('#span-categories');
 
     const isInViewport = (element: HTMLElement) => {
         const rect = element.getBoundingClientRect();
-        return (rect.left >= 0 && rect.bottom <= ((window.innerHeight || document.documentElement.clientHeight) + element.clientHeight * 0.5) && rect.right <= (window.innerWidth || document.documentElement.clientWidth));
+        return (rect.left >= 0 && rect.bottom <= ((window.innerHeight || document.documentElement.clientHeight) + element.clientHeight * 0.6) && rect.right <= (window.innerWidth || document.documentElement.clientWidth));
     };
 
     const animateItems = async () => {
@@ -13,10 +14,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (index === 0) {
                 const rect = item.getBoundingClientRect();
-                console.log(`top: ${rect.top} bottom: ${rect.bottom} formula: ${(window.innerHeight || document.documentElement.clientHeight) + item.clientHeight * 0.5}`)
-
+                // console.log(`top: ${rect.top} bottom: ${rect.bottom} formula: ${(window.innerHeight || document.documentElement.clientHeight) + item.clientHeight * 0.6}`)
             }
+
             if (isInViewport(item as HTMLElement) && !item.classList.contains('animated')) {
+                if (!categoriesText?.classList.contains('animated')) {
+                    categoriesText?.classList.remove('opacity-0');
+                }
+
                 if (index % 2 === 0) {
                     item.classList.add('slide-from-left');
                 } else {

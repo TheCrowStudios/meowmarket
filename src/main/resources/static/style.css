@@ -1176,12 +1176,12 @@ video {
   --tw-bg-opacity: 0;
 }
 
-.bg-\[url\(\'\/images\/1\.png\'\)\] {
-  background-image: url('/images/1.png');
-}
-
 .bg-\[url\(\'\/images\/car_decal\.webp\'\)\] {
   background-image: url('/images/car_decal.webp');
+}
+
+.bg-\[url\(\'\/images\/d1_lite\.jpg\'\)\] {
+  background-image: url('/images/d1_lite.jpg');
 }
 
 .bg-\[url\(\'\/images\/d1_lite_obd_reader\.jpg\'\)\] {
@@ -1214,6 +1214,10 @@ video {
 
 .bg-\[url\(\'\/images\/visa\.svg\'\)\] {
   background-image: url('/images/visa.svg');
+}
+
+.bg-\[url\(\'\/images\/momo-steering-wheel-in-car\.jpg\'\)\] {
+  background-image: url('/images/momo-steering-wheel-in-car.jpg');
 }
 
 .bg-cover {

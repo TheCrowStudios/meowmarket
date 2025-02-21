@@ -1,4 +1,43 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const gridItems = document.querySelectorAll('.grid-animated > div');
+
+    const isInViewport = (element: HTMLElement) => {
+        const rect = element.getBoundingClientRect();
+        return (rect.left >= 0 && rect.bottom <= ((window.innerHeight || document.documentElement.clientHeight) + element.clientHeight * 0.5) && rect.right <= (window.innerWidth || document.documentElement.clientWidth));
+    };
+
+    const animateItems = async () => {
+        for (let i = 0; i < gridItems.length; i++) {
+            const index = i;
+            const item = gridItems[i];
+
+            if (index === 0) {
+                const rect = item.getBoundingClientRect();
+                console.log(`top: ${rect.top} bottom: ${rect.bottom} formula: ${(window.innerHeight || document.documentElement.clientHeight) + item.clientHeight * 0.5}`)
+
+            }
+            if (isInViewport(item as HTMLElement) && !item.classList.contains('animated')) {
+                if (index % 2 === 0) {
+                    item.classList.add('slide-from-left');
+                } else {
+                    item.classList.add('slide-from-right');
+                }
+
+                item.classList.add('animated');
+            }
+
+            if (index % 2 === 1) {
+                await new Promise(r => setTimeout(r, 200));
+            }
+        }
+    };
+
+    animateItems();
+
+    window.addEventListener('scroll', () => {
+        animateItems();
+    });
+
     const slideshow = document.getElementById('slideshow') as HTMLDivElement;
     const slider = document.getElementById('slideshow-container') as HTMLDivElement;
     const dotsDiv = document.getElementById('dots') as HTMLDivElement;
@@ -33,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 slide.style.transform = 'translateX(-100%)';
                 slide.style.opacity = '0';
                 slide.style.zIndex = '0';
-                setTimeout(() => { slide.style.transform = 'translateX(100%)'; console.log("move slide to the right") }, 500);
+                setTimeout(() => { slide.style.transform = 'translateX(100%)' }, 500);
             }
         })
 

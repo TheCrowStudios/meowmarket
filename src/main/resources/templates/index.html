@@ -8,6 +8,37 @@
     <link rel="stylesheet" href="/style.css">
     <script src="/scripts/index.js"></script>
     <title>UKAutoParts Official Store - OBD Readers, Steering Wheels, Decals, And More.</title>
+    <style>
+        @keyframes slideFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-from-left {
+            animation: slideFromLeft 1s forwards;
+        }
+
+        .slide-from-right {
+            animation: slideFromRight 1s forwards;
+        }
+    </style>
 </head>
 
 <body class="body overflow-x-hidden">
@@ -18,7 +49,8 @@
                 class="relative w-full h-[80vh] max-md:h-[60vh] bg-cover">
                 <div id="slideshow-container" class="relative h-full w-full transition-all duration-500 overflow-hidden">
                     <div class="absolute bg-[url('/images/miata3.jpg')] w-full h-full bg-cover bg-center md:bg-[40%_15%] max-md:bg-[60%_15%] max-sm:bg-[60%_15%] transition-all duration-500 overflow-hidden"></div>
-                    <div class="absolute bg-[url('/images/1.png')] w-full h-full bg-cover bg-center transition-all duration-500 overflow-hidden"></div>
+                    <div class="absolute bg-[url('/images/momo-steering-wheel-in-car.jpg')] w-full h-full bg-cover bg-center md:bg-[40%_15%] max-md:bg-[60%_15%] max-sm:bg-[60%_15%] transition-all duration-500 overflow-hidden"></div>
+                    <div class="absolute bg-[url('/images/d1_lite.jpg')] w-full h-full bg-cover bg-center md:bg-[40%_15%] max-md:bg-[60%_15%] max-sm:bg-[60%_15%] transition-all duration-500 overflow-hidden"></div>
                 </div>
                 <div class="flex flex-col absolute inset-0 justify-center items-center text-center gap-4 z-10">
                     <div
@@ -41,11 +73,12 @@
             </div>
             <div class="mt-4">
                 <span class="text-center text-primary text-3xl">Categories</span>
-                <div class="grid max-lg:grid-cols-2 lg:grid-cols-2 max-md:grid-cols-1 gap-4 mt-2">
-                    <div class="relative group">
+                <div class="grid grid-animated max-lg:grid-cols-2 lg:grid-cols-2 max-md:grid-cols-1 gap-4 mt-2">
+                    <div class="relative group opacity-0">
                         <a href="/category/obd_readers" class="min-w-full min-h-full absolute z-20"></a>
                         <div role="img"
-                            class="bg-[url('/images/d1_lite_obd_reader.jpg')] bg-center bg-cover w-full aspect-square object-cover group-hover:bg-opacity-80 transition-all duration-300 rounded-xl z-10">
+                            class="bg-[url('/images/d1_lite_obd_reader.jpg')] bg-center bg-cover w-full aspect-square object-cover group-hover:bg-opacity-80 transition-all duration-300 rounded-xl z-10"
+                            aria-label="image of an obd reader">
                         </div>
                         <div class="flex flex-col absolute inset-0 justify-center text-center items-center gap-2">
                             <span
@@ -57,11 +90,11 @@
                         </div>
                     </div>
 
-                    <div class="relative group">
+                    <div class="relative group opacity-0">
                         <a href="/category/steering_wheels" class="min-w-full min-h-full absolute z-20"></a>
                         <div role="img"
                             class="bg-[url('/images/omp_steering_wheel_in_bmw.jpg')] bg-center bg-cover w-full aspect-square object-cover group-hover:bg-opacity-80 transition-all duration-300 rounded-xl z-10"
-                            alt="Image of an OMP deep dish steering wheel in a BMW">
+                            aria-label="Image of an OMP deep dish steering wheel in a BMW">
                         </div>
                         <div class="flex flex-col absolute inset-0 justify-center text-center items-center gap-2">
                             <span
@@ -73,11 +106,11 @@
                         </div>
                     </div>
 
-                    <div class="relative group">
+                    <div class="relative group opacity-0">
                         <a href="/category/decals" class="min-w-full min-h-full absolute z-20"></a>
                         <div role="img"
                             class="bg-[url('/images/car_decal.webp')] bg-center bg-cover w-full aspect-square object-cover group-hover:bg-opacity-80 transition-all duration-300 rounded-xl z-10"
-                            alt="Image of car decal Japanese on a window">
+                            aria-label="Image of car decal Japanese on a window">
                         </div>
                         <div class="flex flex-col absolute inset-0 justify-center text-center items-center gap-2">
                             <span
@@ -88,11 +121,11 @@
                         </div>
                     </div>
 
-                    <div class="relative group">
+                    <div class="relative group opacity-0">
                         <a href="/category/boss_kits" class="min-w-full min-h-full absolute z-20"></a>
                         <div role="img"
                             class="bg-[url('/images/momo-steering-boss-kit.jpg')] bg-center bg-cover w-full aspect-square object-cover group-hover:bg-opacity-80 transition-all duration-300 rounded-xl z-10"
-                            alt="Image of a MOMO steering wheel boss kit">
+                            aria-label="Image of a MOMO steering wheel boss kit">
                         </div>
                         <div class="flex flex-col absolute inset-0 justify-center text-center items-center gap-2">
                             <span

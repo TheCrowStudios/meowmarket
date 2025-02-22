@@ -9,13 +9,13 @@
     </div>
     <div class="md:hidden left-0 top-0 fixed transition-all duration-300 w-screen" id="side-nav">
         <img src="/images/menu.svg" alt="" class="left-0 top-0 w-16 z-20 fixed" onclick="toggleNavbar()">
-        <div class="flex flex-col items-center justify-center text-center pl-4 gap-4 h-full left-0 top-0 fixed transition-all duration-300 opacity-0 w-screen -translate-x-full bg-primary"
+        <div class="flex flex-col items-center justify-center text-center pl-4 gap-4 h-full left-0 top-0 fixed transition-all duration-300 opacity-0 w-screen -translate-x-full bg-secondary"
             id="side-nav-links">
             <a href="/category/obd_readers" class="hover:text-highlight transition-all duration-300">OBD Readers</a>
             <a href="/category/steering_wheels" class="hover:text-highlight transition-all duration-300">Steering
                 Wheels</a>
             <a href="/contact" class="hover:text-highlight transition-all duration-300">Contact</a>
-            <a href="/cart" class="flex flex-row gap-4 hover:text-highlight transition-all duration-300 text-primary">
+            <a href="/cart" class="flex flex-row gap-4 hover:text-highlight transition-all duration-300 text-primary mt-4">
                 <img src="/images/shopping-cart.svg" alt="" class="w-6">
                 <span>Cart</span>
                 <span th:text="${@cartService.getCartItemCount()} + ' '"
@@ -25,11 +25,12 @@
                 <div class="flex flex-row justify-center">
                     <a class="flex flex-row gap-4 hover:text-highlight">
                         <img src="/images/account.svg" alt="" class="w-6">
-                        Account
+                        <span th:text="${@userService.getUser().getUsername()}"></span>
                     </a>
                 </div>
 
                 <ul class="flex flex-col gap-4">
+                    <p th:text="${@userService.getUser().getEmail()}" class="text-base text-secondary"></p>
                     <li th:if="${@userService.isAdmin}"><a href="/listings/new"
                             class="hover:rounded hover:text-highlight w-full">Create Listing</a></li>
                     <li><a href="/orders" class="hover:rounded hover:text-highlight w-full">Orders</a></li>
@@ -96,6 +97,10 @@
 
             <div class="block group-hover:opacity-100 opacity-0 absolute h-auto transition-all duration-300">
                 <ul id="user-dropdown" class="bg-white text-tertiary text-left rounded shadow-xl top-0 px-6 py-8">
+                    <li class="bg-zinc-100 rounded p-4 mb-4">
+                        <p th:text="${@userService.getUser().getUsername()}"></p>
+                        <p th:text="${@userService.getUser().getEmail()}" class="text-base text-zinc-500"></p>
+                    </li>
                     <li th:if="${@userService.isAdmin}"><a href="/listings/new"
                             class="hover:rounded hover:text-highlight w-full">Create Listing</a></li>
                     <li><a href="/orders" class="hover:rounded hover:text-highlight w-full">Orders</a></li>

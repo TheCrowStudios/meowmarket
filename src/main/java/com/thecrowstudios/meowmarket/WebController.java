@@ -34,9 +34,10 @@ public class WebController {
         List<Listing> featuredListings = listingRepository.findByFeaturedTrueAndDateDeletedIsNull(Sort.by("dateCreated").descending());
         listingRepository.findAllByDateCreatedAndDateDeletedIsNull().forEach(listings::add);
         listingRepository.findAllByDateCreatedAndDateDeletedIsNull().stream().limit(4).forEach(newListings::add);
-        model.addAttribute("listings", listings);
         model.addAttribute("newListings", newListings);
         model.addAttribute("featuredListings", featuredListings);
+        model.addAttribute("obdReaders", listings.stream().filter(entry -> entry.getCategory().name() == "OBD_READERS"));
+        model.addAttribute("steeringWheels", listings.stream().filter(entry -> entry.getCategory().name() == "STEERING_WHEELS"));
 
         return "store";
     }

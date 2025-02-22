@@ -66,6 +66,11 @@ public class WebController {
         return "contact";
     }
 
+    @GetMapping("/about")
+    public String about() {
+        return "about";
+    }
+
     @GetMapping("/checkout")
     public String checkout() {
         return "checkout";

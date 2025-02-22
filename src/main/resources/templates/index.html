@@ -7,14 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
     <script src="/scripts/index.js"></script>
-    
+
     <title>UKAutoParts Official Store - OBD Readers, Steering Wheels, Decals, And More.</title>
+
+    <link rel="icon" type="image/png" href="/favicon.svg">
+
     <style>
         @keyframes slideFromLeft {
             from {
                 opacity: 0;
                 transform: translateX(-100%);
             }
+
             to {
                 opacity: 1;
                 transform: translateX(0);
@@ -26,6 +30,7 @@
                 opacity: 0;
                 transform: translateX(100%);
             }
+
             to {
                 opacity: 1;
                 transform: translateX(0);
@@ -46,12 +51,18 @@
     <main class="main">
         <div th:replace="~{fragments/navbar :: navbar}"></div>
         <div class="flex flex-col gap-4">
-            <div id="slideshow"
-                class="relative w-full h-[80vh] max-md:h-[60vh] bg-cover">
-                <div id="slideshow-container" class="relative h-full w-full transition-all duration-500 overflow-hidden">
-                    <div class="absolute bg-[url('/images/miata3.jpg')] w-full h-full bg-cover bg-center md:bg-[40%_15%] max-md:bg-[60%_15%] max-sm:bg-[60%_15%] transition-all duration-500 overflow-hidden"></div>
-                    <div class="absolute bg-[url('/images/momo-steering-wheel-in-car.jpg')] w-full h-full bg-cover bg-center md:bg-[40%_15%] max-md:bg-[60%_15%] max-sm:bg-[60%_15%] transition-all duration-500 overflow-hidden"></div>
-                    <div class="absolute bg-[url('/images/d1_lite.jpg')] w-full h-full bg-cover bg-center md:bg-[40%_15%] max-md:bg-[60%_15%] max-sm:bg-[60%_15%] transition-all duration-500 overflow-hidden"></div>
+            <div id="slideshow" class="relative w-full h-[80vh] max-md:h-[60vh] bg-cover">
+                <div id="slideshow-container"
+                    class="relative h-full w-full transition-all duration-500 overflow-hidden">
+                    <div
+                        class="absolute bg-[url('/images/miata3.jpg')] w-full h-full bg-cover bg-center md:bg-[40%_15%] max-md:bg-[60%_15%] max-sm:bg-[60%_15%] transition-all duration-500 overflow-hidden">
+                    </div>
+                    <div
+                        class="absolute bg-[url('/images/momo-steering-wheel-in-car.jpg')] w-full h-full bg-cover bg-center md:bg-[40%_15%] max-md:bg-[60%_15%] max-sm:bg-[60%_15%] transition-all duration-500 overflow-hidden">
+                    </div>
+                    <div
+                        class="absolute bg-[url('/images/d1_lite.jpg')] w-full h-full bg-cover bg-center md:bg-[40%_15%] max-md:bg-[60%_15%] max-sm:bg-[60%_15%] transition-all duration-500 overflow-hidden">
+                    </div>
                 </div>
                 <div class="flex flex-col absolute inset-0 justify-center items-center text-center gap-4 z-10">
                     <div
@@ -73,7 +84,8 @@
                 </div>
             </div>
             <div class="mt-4">
-                <p class="text-center text-primary text-3xl opacity-0 transition-all duration-1000" id="span-categories">Categories</p>
+                <p class="text-center text-primary text-3xl opacity-0 transition-all duration-1000"
+                    id="span-categories">Categories</p>
                 <div class="grid grid-animated max-lg:grid-cols-2 lg:grid-cols-2 max-md:grid-cols-1 gap-4 mt-2">
                     <div class="relative group opacity-0">
                         <a href="/category/obd_readers" class="min-w-full min-h-full absolute z-20"></a>

@@ -19,7 +19,8 @@
                 <span class="flex-grow border-solid border-b-[1px] -translate-y-1/2"></span>
             </div>
             <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 max-sm:grid-cols-2 gap-4 p-4">
-                <div th:each="listing : ${featuredListings}">
+                <div th:each="listing : ${featuredListings}"
+                    th:if="${listingStat.index < 8}">
                     <div th:replace="~{fragments/index-listing :: index-listing}"></div>
                 </div>
             </div>

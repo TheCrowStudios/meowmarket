@@ -11,7 +11,7 @@
 </head>
 
 <body class="body">
-    <main class="main">
+    <main class="main h-[100vh]">
         <div th:replace="~{fragments/navbar :: navbar}"></div>
 
         <form th:action="@{/api/auth/register}" th:object="${userRegistrationDTO}" method="POST"
@@ -66,6 +66,7 @@
                 <span th:text="${error}"></span>
             </div>
         </form>
+
         <span class="flex-grow"></span>
         <div th:replace="~{fragments/footer :: footer}"></div>
     </main>

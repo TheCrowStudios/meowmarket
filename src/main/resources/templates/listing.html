@@ -55,11 +55,12 @@
         <div th:replace="~{fragments/navbar :: navbar}"></div>
         <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4 mt-4">
             <div class="flex flex-row gap-4 w-full">
-                <div class="max-md:hidden flex flex-col w-2/12 max-h-full gap-2 overflow-x-auto" id="side-images">
+                <div class="max-md:hidden flex flex-col w-2/12 max-h-full gap-2 z-10 overflow-x-auto" id="side-images">
                     <img th:each="image : ${listing.images}" th:src="@{'/upload-dir/' + ${image.imageUrl}}"
                         th:alt="'side image for ' + ${listing.title} + ' listing'"
                         th:id="'side-image-' + ${image.imageUrl}"
-                        th:attr="onmouseover=|setActiveImage('${image.imageUrl}')|">
+                        th:attr="onmouseover=|setActiveImage('${image.imageUrl}')|"
+                        class="z-10">
                 </div>
 
                 <div class="w-full max-md:snap-center max-md:overflow-hidden max-md:overflow-x-auto max-md:snap-x max-md:snap-mandatory max-md:scroll-smooth flex flex-row"

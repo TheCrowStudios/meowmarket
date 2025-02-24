@@ -64,8 +64,8 @@
             </div>
 
             <div
-                class="block group-hover:opacity-100 group-hover:h-auto opacity-0 absolute h-0 transition-all duration-300">
-                <ul id="user-dropdown" class="bg-white text-tertiary text-left rounded shadow-xl top-0 px-6 py-8">
+                class="block group-hover:opacity-100 group-hover:h-auto opacity-0 absolute h-0 group-hover:z-10 z-0 transition-all duration-300">
+                <ul id="user-dropdown" class="bg-white text-tertiary text-left rounded shadow-xl group-hover:z-10 group-hover:pointer-events-auto z-0 pointer-events-none top-0 px-6 py-8">
                     <li><a href="/category/obd_readers" class="hover:text-highlight transition-all duration-300">OBD
                             Readers</a></li>
                     <li><a href="/category/steering_wheels"
@@ -95,8 +95,8 @@
                 </a>
             </div>
 
-            <div class="block group-hover:opacity-100 opacity-0 absolute h-auto transition-all duration-300">
-                <ul id="user-dropdown" class="bg-white text-tertiary text-left rounded shadow-xl top-0 px-6 py-8">
+            <div class="block group-hover:opacity-100 opacity-0 absolute h-auto transition-all group-hover:pointer-events-auto pointer-events-none duration-300">
+                <ul id="user-dropdown" class="bg-white text-tertiary text-left rounded shadow-xl group-hover:pointer-events-auto pointer-events-none top-0 px-6 py-8">
                     <li class="bg-zinc-100 rounded p-4 mb-4">
                         <p th:text="${@userService.getUser().getUsername()}"></p>
                         <p th:text="${@userService.getUser().getEmail()}" class="text-base text-zinc-500"></p>

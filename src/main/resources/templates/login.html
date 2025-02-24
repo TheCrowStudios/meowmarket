@@ -10,11 +10,11 @@
 </head>
 
 <body class="body">
-    <main class="main">
+    <main class="main h-[100vh]">
         <div th:replace="~{fragments/navbar :: navbar}"></div>
 
         <form th:action="@{/api/auth/login}" th:object="${userLoginDTO}" method="POST"
-            class="flex flex-col w-full p-4 gap-4 justify-center items-center text-center">
+            class="flex flex-col w-full p-4 gap-4 justify-center items-center text-center h-full">
 
             <div class="form-div">
                 <label>Username</label>
@@ -45,7 +45,6 @@
             </div>
         </form>
 
-        <span class="flex-grow"></span>
         <div th:replace="~{fragments/footer :: footer}"></div>
     </main>
 </body>

@@ -14,6 +14,7 @@ public class ListingDTO {
     private ItemCategory category;
     private Boolean featured;
     private double price;
+    private double originalPrice;
     private Integer quantityInStock;
     private String delivery;
     private List<MultipartFile> images;
@@ -76,6 +77,14 @@ public class ListingDTO {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public double getOriginalPrice() {
+        return this.originalPrice;
+    }
+
+    public void setOriginalPrice(double originalPrice) {
+        this.originalPrice = originalPrice;
     }
 
     public List<MultipartFile> getImages() {

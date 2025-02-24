@@ -59,6 +59,11 @@
             </div>
 
             <div class="form-div">
+                <label>Original price</label>
+                <input class="form-input" type="number" th:field="*{originalPrice}" step="0.01" required>
+            </div>
+
+            <div class="form-div">
                 <label>Quantity in stock</label>
                 <input class="form-input" type="number" th:field="*{quantityInStock}" step="1" required>
             </div>

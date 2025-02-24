@@ -29,6 +29,7 @@ public class ListingService {
         listing.setCategory(listingDTO.getCategory());
         listing.setFeatured(listingDTO.getFeatured());
         listing.setPrice(listingDTO.getPrice());
+        listing.setOriginalPrice(listingDTO.getOriginalPrice());
         listing.setQuantityInStock(listingDTO.getQuantityInStock());
         listing.setDelivery(listingDTO.getDelivery());
 

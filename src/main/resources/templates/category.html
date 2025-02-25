@@ -16,6 +16,16 @@
             <p th:text="${category.getDescription()}" class="text-center text-primary font-bold">category name</p>
             <p th:text="${category.getLongDescription()}" class="text-center text-primary font-light"></p>
         </div>
+        <div th:classappend="${listings.size() == 0} ? absolute : hidden"
+            class="flex flex-col w-full p-4 gap-4 justify-center items-center text-center h-screen top-0 left-0"
+            id="no-items-message">
+            <span class="mt-4 text-xl text-center">Nothing here yet.
+                <br>
+                You must be pretty early here! We should have some items in this category pretty soon.
+                <br>
+                <a class="underline hover:text-highlight transition-all duration-300" href="/">Home Page</a>
+            </span>
+        </div>
         <div>
             <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mt-4">
                 <div th:each="listing : ${listings}">
